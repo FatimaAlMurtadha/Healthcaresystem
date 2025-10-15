@@ -46,7 +46,120 @@ As a patient, I need to be able to request an appointment.
 
 As a logged in user, I need to be able to view my schedule.
 */
+IUser? active_user = null;
+bool running = true;
 
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Hello, World!");
+List<IUser> users = new List<IUser>();
+
+users.Add(new Local_Admin("Lukas", "Eriksson"));
+
+
+
+while (running)
+{ // Skapa Main Admin meny så att de kan ha tillgång till allt i systemet
+  if (active_user == null)
+  {
+    System.Console.WriteLine("Log in firsta to open the system");
+    System.Console.WriteLine("Username: ");
+    string? username = Console.ReadLine();
+
+    System.Console.WriteLine("Password: ");
+    string? password = Console.ReadLine();
+    foreach (IUser user in users)
+    {
+      if (user.TryLogin(username, password))
+      {
+        active_user = user;
+        break;
+      }
+      if (active_user.IsRole(Role.Main_Admin))
+      {
+        System.Console.WriteLine("------------Welcom to Health Care System-------------");
+        System.Console.WriteLine("-----------------------------------------------------");
+        System.Console.WriteLine("1. Log in as a user.");
+
+
+
+        /*System.Console.WriteLine("4. ");
+        System.Console.WriteLine("5. ");
+        System.Console.WriteLine("6. ");
+        System.Console.WriteLine("7. ");
+        System.Console.WriteLine("8. ");
+        System.Console.WriteLine("9. ");
+        System.Console.WriteLine("10. ");
+        System.Console.WriteLine("11. ");
+        System.Console.WriteLine("5. ");
+        System.Console.WriteLine("5. ");*/
+        string? input = Console.ReadLine();
+
+        switch (input) // Kolla Vilken Role
+        {
+          case "1": // Role is User
+            if (active_user.IsRole(Role.User))
+            {
+              System.Console.WriteLine($"Welcom {user.GetRole} ");
+              System.Console.WriteLine();
+              System.Console.WriteLine("1. Request registration as a patient.");
+              System.Console.WriteLine("2. Log out user.");
+              string? userinput = Console.ReadLine();
+              if (active_user == null)
+              {
+                System.Console.WriteLine("You should first log in.");
+
+              }
+              else
+              {
+                // open en switch sats to check the user choice
+                switch (userinput)
+                {
+                  case "1":
+                    System.Console.WriteLine("Enter your Personal number: ");
+                    string? patientperssonalnumber = Console.ReadLine();
+                    System.Console.WriteLine("Enter your password:");
+                    string? patientpassword = Console.ReadLine();
+                    if (patientperssonalnumber != null && patientperssonalnumber != "" && patientpassword != null && patientpassword != "")
+                    {
+
+                    }
+                    else
+                    {
+                      System.Console.WriteLine("Invalid input. The name or the password is empty");
+                    }
+                    break;
+                  case "2":
+                    break;
+                }
+              }
+
+
+
+            }
+
+
+            break;
+          case "2": // Role is Local Admin
+
+            break;
+          case "3": // Role is 
+
+            break;
+
+        }
+
+      }
+    }
+
+
+
+
+  }
+  else
+  {
+    // Här ska Main Admin meny läggas
+
+  }
+
+
+
+}
+
