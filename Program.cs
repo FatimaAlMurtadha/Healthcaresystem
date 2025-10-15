@@ -52,27 +52,51 @@ IUser? active_user = null;
 bool running = true;
 
 List<IUser> users = new List<IUser>();
+users.Add(new User("Fatima", "123")); // Behövs en User Class 
+
 
 while (running)
 { // Skapa Welcom menu 
   if (active_user == null)
   {
-    System.Console.WriteLine("------------Welcom to Health Care System-------------");
+    System.Console.WriteLine("------------  Health Care System  -------------");
     System.Console.WriteLine("-----------------------------------------------------");
     System.Console.WriteLine("Log in firsta to open the system");
+    System.Console.WriteLine();
 
-else
-{
-      System.Console.WriteLine("Username: ");
-      string? username = Console.ReadLine();
+    // Loga in för att öpnna systemet
+    System.Console.WriteLine("Username: ");
+    string? username = Console.ReadLine();
 
-      System.Console.WriteLine("Password: ");
-      string? password = Console.ReadLine();
-      if (username != "" && password != null && password != "" && password != null)
+    Console.Clear();
+    System.Console.WriteLine("Password: ");
+    string? password = Console.ReadLine();
+
+    Console.Clear();
+
+    // foreach loop för att kolla om TryLogIns Info är korrekt
+    foreach (IUser user in users)
+    {
+      if (user.TryLogin(username, password))
       {
-        users.Add(new IUser(username, password));
-
+        active_user = user;
+        break;
       }
+    }
+
+  }
+// Else satsen Öppnar menyer beroende på Role "Vem som är inloggad"
+  else
+  {
+    Console.Clear();
+    System.Console.WriteLine("------------Welcom to Health Care System-------------");
+    System.Console.WriteLine("-----------------------------------------------------");
+    // Här Kollar vi Role för att öpnna meny beroende på role
+    if (active_user.IsRole(Role.User))
+    {
+      System.Console.WriteLine("------Welcome User ------");
+      System.Console.WriteLine("Choose one of the following: ");
+
       System.Console.WriteLine("1. Request registration: ");
       System.Console.WriteLine("2. log out");
       System.Console.WriteLine("3. Quit");
@@ -90,13 +114,35 @@ else
           break;
 
         default:
-        System.Console.WriteLine("Invalid input. Press Enter to continue");
-          
-           break;
+          System.Console.WriteLine("Invalid input. Press Enter to continue");
+
+          break;
       }
 
+    } // slut på user meny
+    if (active_user.IsRole(Role.Main_Admin))
+    {
+
+    } // slut på Main Admin meny
+    if (active_user.IsRole(Role.Local_Admin))
+    {
+
+    } // slut på Local Admin meny
+    if (active_user.IsRole(Role.Personnel))
+    {
+
+    } // slut på Personnel meny
+    if (active_user.IsRole(Role.Patient))
+    {
+
+    } // slut på patient meny
+
+
+  } // slut på else satsen som öppnar systemet
+
+} 
    
-   }
-  }
-}
+
+
+   
 
