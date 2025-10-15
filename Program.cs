@@ -127,7 +127,10 @@ while (running)
                     }
                     break;
                   case "2":
+
+                    active_user = null;
                     break;
+
                 }
               }
 
