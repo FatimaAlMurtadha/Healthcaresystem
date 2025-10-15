@@ -1,4 +1,6 @@
-﻿
+﻿using App;
+
+
 /*
 As a user, I need to be able to log in.
 
@@ -51,24 +53,24 @@ bool running = true;
 
 List<IUser> users = new List<IUser>();
 
-users.Add(new Local_Admin("Lukas", "Eriksson"));
-
-
-
 while (running)
-{ // Skapa Main Admin meny så att de kan ha tillgång till allt i systemet
+{ // Skapa Welcom menu 
   if (active_user == null)
   {
+    System.Console.WriteLine("------------Welcom to Health Care System-------------");
+    System.Console.WriteLine("-----------------------------------------------------");
     System.Console.WriteLine("Log in firsta to open the system");
-    System.Console.WriteLine("Username: ");
-    string? username = Console.ReadLine();
 
-    System.Console.WriteLine("Password: ");
-    string? password = Console.ReadLine();
-    foreach (IUser user in users)
-    {
-      if (user.TryLogin(username, password))
+else
+{
+      System.Console.WriteLine("Username: ");
+      string? username = Console.ReadLine();
+
+      System.Console.WriteLine("Password: ");
+      string? password = Console.ReadLine();
+      if (username != "" && password != null && password != "" && password != null)
       {
+<<<<<<< HEAD
         active_user = user;
         break;
       }
@@ -148,21 +150,35 @@ while (running)
             break;
 
         }
+=======
+        users.Add(new IUser(username, password));
+>>>>>>> 4208e4be48bda51d9b03fb032c8dd43e8524e4e7
 
       }
-    }
+      System.Console.WriteLine("1. Request registration: ");
+      System.Console.WriteLine("2. log out");
+      System.Console.WriteLine("3. Quit");
+      string? input = Console.ReadLine();
+      switch (input)
+      {
+        case "1": // request registration
+          break;
 
+        case "2": // log out
 
+          break;
 
+        case "3": // quit
+          break;
 
+        default:
+        System.Console.WriteLine("Invalid input. Press Enter to continue");
+          
+           break;
+      }
+
+   
+   }
   }
-  else
-  {
-    // Här ska Main Admin meny läggas
-
-  }
-
-
-
 }
 
