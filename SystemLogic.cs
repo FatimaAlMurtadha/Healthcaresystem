@@ -100,7 +100,11 @@ static void Make_account(List<IUser> users)
     System.Console.WriteLine("Please enter your password");
     string password = Console.ReadLine();
     users.Add(new User(username, password));
+<<<<<<< HEAD
     File.AppendAllText("./Users.txt","here is your username" + username + " " + password + "/n");
+=======
+    File.AppendAllText("./Users.txt","here is your username" + username + " " + password + "n/");
+>>>>>>> eb307a01cc228756d1e34905c109832fc9b73960
 
     }
 
