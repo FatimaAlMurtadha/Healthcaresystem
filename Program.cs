@@ -44,7 +44,7 @@ As a patient, I need to be able to view my own journal.
 
 As a patient, I need to be able to request an appointment.
 
-As a logged in user, I need to be able to view my schedule.
+As a logged in Patient, I need to be able to view my schedule.
 */
 
 // En lista på alla registration requests
@@ -53,6 +53,13 @@ SystemLogicMenu menu = new SystemLogicMenu();
 IUser? active_user = null;
 bool running = true;
 
+<<<<<<< HEAD
+List<IUser> users = new List<IUser>();
+users.Add(new User("Fatima", "123")); // Behövs en User Class 
+List<List<IUser>> listlocation = new List<List<IUser>>();
+
+=======
+>>>>>>> 3da81084e1abb0f355d0fd69e3781f8f62bc69f3
 
 while (running)
 { // Skapa Welcom menu 
@@ -62,12 +69,27 @@ while (running)
     System.Console.WriteLine("-----------------------------------------------------");
     System.Console.WriteLine("Log in As: ");
     System.Console.WriteLine();
+<<<<<<< HEAD
+
+    // Loga in för att öpnna systemet
+    System.Console.WriteLine("Username: ");
+    string? username = Console.ReadLine();
+
+    Console.Clear();
+    System.Console.WriteLine("Password: ");
+    string? password = Console.ReadLine();
+    Console.Clear();
+
+    // foreach loop för att kolla om TryLogIns Info är korrekt
+    foreach (IUser user in users)
+=======
     System.Console.WriteLine("1. User.");
     System.Console.WriteLine("2. Patient.");
     System.Console.WriteLine("3. Personnel.");
     System.Console.WriteLine("4. Admin");
     string? input = Console.ReadLine();
     switch(input)
+>>>>>>> 3da81084e1abb0f355d0fd69e3781f8f62bc69f3
     {
       case "1": // User
       if (active_user.IsRole(Role.User))
@@ -151,3 +173,23 @@ while (running)
 
 
 
+
+
+static void Make_Personnel(List<IUser> users)
+{
+  System.Console.WriteLine("Please enter the name of the account");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("Please enter the name of the account");
+  string password = Console.ReadLine()!;
+  users.Add(new Personnel(username, password));
+
+
+}
+
+
+static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
+{
+    
+
+
+}
