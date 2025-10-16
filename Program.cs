@@ -1,4 +1,5 @@
-﻿using App;
+﻿using System.Diagnostics;
+using App;
 
 
 /*
@@ -55,6 +56,7 @@ List<IUser> users = new List<IUser>();
 users.Add(new User("Fatima", "123")); // Behövs en User Class 
 
 
+
 while (running)
 { // Skapa Welcom menu 
   if (active_user == null)
@@ -104,7 +106,34 @@ while (running)
       switch (input)
       {
         case "1": // request registration
-          break;
+          try{ Console.Clear();}catch{}
+          System.Console.WriteLine("Your personal security number: ");
+          string? patientpersonalnumber = Console.ReadLine();
+          System.Console.WriteLine("Your name: ");
+          string? patientname = Console.ReadLine();
+          System.Console.WriteLine("Your email: ");
+          string? patientemail = Console.ReadLine();
+          System.Console.WriteLine("Your password: ");
+          string? patientpassword = Console.ReadLine();
+
+          if (patientpersonalnumber != null && patientpersonalnumber != "" && patientname != null && patientname != "" && patientemail != null && patientemail != "" && patientpassword != null && patientpassword != "")
+          {
+            // registration_requsts.// Here I should continue....Fatima
+
+
+            System.Console.WriteLine("Your request has been sent susseccfully");
+
+          }
+          else
+          {
+            System.Console.WriteLine("Invlid input. Nothing of the information can be null or empty");
+            System.Console.WriteLine("Press ENTER to continue......");
+            Console.ReadLine();
+          }
+
+          
+
+          break; // slut av request registration
 
         case "2": // log out
 
