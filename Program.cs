@@ -1,11 +1,11 @@
-﻿
+﻿using System.Diagnostics;
+using App;
+
+
 /*
-As a user, I need to be able to log in.
+
 
 As a user, I need to be able to log out.
-
-As a user, I need to be able to request registration as a patient.
-
 As an admin with sufficient permissions, I need to be able to give admins the permission to handle the permission system, in fine granularity.
 
 As an admin with sufficient permissions, I need to be able to assign admins to certain regions.
@@ -44,9 +44,130 @@ As a patient, I need to be able to view my own journal.
 
 As a patient, I need to be able to request an appointment.
 
-As a logged in user, I need to be able to view my schedule.
+As a logged in Patient, I need to be able to view my schedule.
 */
 
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Hello, World!");
+// En lista på alla registration requests
+
+SystemLogicMenu menu = new SystemLogicMenu();
+IUser? active_user = null;
+bool running = true;
+
+
+while (running)
+{ // Skapa Welcom menu 
+  if (active_user == null)
+  {
+    System.Console.WriteLine("------------  Health Care System  -------------");
+    System.Console.WriteLine("-----------------------------------------------------");
+    System.Console.WriteLine("Log in As: ");
+    System.Console.WriteLine();
+    System.Console.WriteLine("1. User.");
+    System.Console.WriteLine("2. Patient.");
+    System.Console.WriteLine("3. Personnel.");
+    System.Console.WriteLine("4. Admin");
+    string? input = Console.ReadLine();
+    switch(input)
+    {
+      case "1": // User
+      if (active_user.IsRole(Role.User))
+        {
+          System.Console.WriteLine("------Welcome User ------");
+          System.Console.WriteLine("Choose one of the following: ");
+
+          System.Console.WriteLine("1. Request registration: ");
+          System.Console.WriteLine("2. log out");
+          System.Console.WriteLine("3. Quit");
+          string? userinput = Console.ReadLine();
+          switch (input)
+          {
+            case "1": // request registration
+              menu.SendRegistrationRequest();
+              break; // slut av request registration
+
+            case "2": // log out
+              active_user = null;
+              break;
+
+            case "3": // quit
+              running = false;
+              break;
+
+            default:
+              System.Console.WriteLine("Invalid input. Press Enter to continue");
+
+              break;
+          }
+        }
+        break;
+      case "2": // Patient
+        if (active_user.IsRole(Role.Patient))
+        {
+
+        } // slut på patient meny
+        break;
+      case "3": // Personnel
+        if (active_user.IsRole(Role.Personnel))
+        {
+
+        } // slut på Personnel meny
+        break;
+      case "4": // Admin
+        if (active_user.IsRole(Role.Main_Admin))
+        {
+
+
+        } // slut på Main Admin meny
+        if (active_user.IsRole(Role.Local_Admin))
+        {
+
+        } // slut på Local Admin meny
+        break;
+
+    }
+  }
+  // Else satsen Öppnar menyer beroende på Role "Vem som är inloggad"
+  else
+  {
+    Console.Clear();
+    System.Console.WriteLine("------------Welcom to Health Care System-------------");
+    System.Console.WriteLine("-----------------------------------------------------");
+    // Här Kollar vi Role för att öpnna meny beroende på role
+
+    
+    
+   
+
+
+  } // slut på else satsen som öppnar systemet
+
+}
+
+
+
+
+
+
+
+
+
+
+
+static void Make_Personnel(List<IUser> users)
+{
+  System.Console.WriteLine("Please enter the name of the account");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("Please enter the name of the account");
+  string password = Console.ReadLine()!;
+  users.Add(new Personnel(username, password));
+
+
+}
+
+
+static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
+{
+    
+
+
+}
