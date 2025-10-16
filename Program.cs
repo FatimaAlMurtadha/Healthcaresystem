@@ -228,6 +228,15 @@ while (running)
 }
 
 
+<<<<<<< HEAD
+=======
+  } // slut på else satsen som öppnar systemet
+
+} 
+
+
+   
+>>>>>>> f9fadb0 (har lagt till alla menyer)
 
 
 
