@@ -1,5 +1,43 @@
 namespace App;
 
+    class Local_Admin: IUser
+{
+    private string admin_username;
+    private string _password;
+    private Role _role;
+
+    public Local_Admin(string username, string password, Role role = Role.Local_Admin)
+    {
+        admin_username = username;
+        _password = password;
+        _role = role;
+    }
+    public bool TryLogin(string username, string password)
+    {
+        return admin_username == username && _password == password;
+    }
+
+    public bool IsRole(Role role)
+    {
+        return _role == role;
+    }
+
+    public Role GetRole()
+    {
+        return _role;
+    }
+
+    public override string ToString()
+    {
+        return $"{admin_username} ({_role})";
+    }
+    
+
+
+}
+    
+    
+    
     class Location
     {
         public string Name;
@@ -45,13 +83,6 @@ namespace App;
         }
     }
 
-    // Status för registrering
-    public enum RegistrationStatus
-    {
-        Pending,
-        Accept,
-        Deny
-    }
 
    
     class Local_Admin_Permission
