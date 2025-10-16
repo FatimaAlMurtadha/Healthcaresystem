@@ -1,21 +1,65 @@
 namespace App;
 
+    class Local_Admin: IUser
+{
+    private string admin_username;
+    private string _password;
+    private Role _role;
+
+    public Local_Admin(string username, string password, Role role = Role.Local_Admin)
+    {
+        admin_username = username;
+        _password = password;
+        _role = role;
+    }
+    public bool TryLogin(string username, string password)
+    {
+        return admin_username == username && _password == password;
+    }
+
+    public bool IsRole(Role role)
+    {
+        return _role == role;
+    }
+
+    public Role GetRole()
+    {
+        return _role;
+    }
+
+    public override string ToString()
+    {
+        return $"{admin_username} ({_role})";
+    }
+    
+
+
+}
+    
+    
+    
     class Location
     {
         public string Name;
         public string Hospital;
 
-        public Location(string name, string hospital)
-        {
-            Name = name;
-            Hospital = hospital;
-        }
+//Locations
+class Location
+{
+    public string Name;
+    public string Hospital;
 
-        public override string ToString()
-        {
-            return Name + " (Sjukhus: " + Hospital + ")";
-        }
+    public Location(string name, string hospital)
+    {
+        Name = name;
+        Hospital = hospital;
     }
+
+    public override string ToString()
+    {
+        return Name + " (Sjukhus: " + Hospital + ")";
+    }
+}
 
     //Personal konto
     class PersonnelAccount
@@ -36,7 +80,7 @@ namespace App;
         public string UserEmail;
         public string Password;
         public RegistrationStatus Status;
-
+        
         public Registration(string useremail, string password, RegistrationStatus status)
         {
             UserEmail = useremail;
