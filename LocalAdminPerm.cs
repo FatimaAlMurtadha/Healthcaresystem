@@ -35,13 +35,7 @@ class Local_Admin: IUser
 
 
 }
-    
-    
-    
-    class Location
-    {
-        public string Name;
-        public string Hospital;
+
 
 //Locations
 class Location
