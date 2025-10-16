@@ -76,7 +76,7 @@ while (running)
     Console.Clear();
     System.Console.WriteLine("Password: ");
     string? password = Console.ReadLine();
-
+    users.Add(new User(username, password));
     Console.Clear();
 
     // foreach loop för att kolla om TryLogIns Info är korrekt
@@ -90,7 +90,7 @@ while (running)
     }
 
   }
-// Else satsen Öppnar menyer beroende på Role "Vem som är inloggad"
+  // Else satsen Öppnar menyer beroende på Role "Vem som är inloggad"
   else
   {
     Console.Clear();
@@ -137,10 +137,11 @@ while (running)
           break; // slut av request registration
 
         case "2": // log out
-
+          active_user = null;
           break;
 
         case "3": // quit
+          running = false;
           break;
 
         default:
@@ -152,6 +153,7 @@ while (running)
     } // slut på user meny
     if (active_user.IsRole(Role.Main_Admin))
     {
+
 
     } // slut på Main Admin meny
     if (active_user.IsRole(Role.Local_Admin))
@@ -170,9 +172,39 @@ while (running)
 
   } // slut på else satsen som öppnar systemet
 
-} 
-   
+}
 
 
-   
+
+
+
+
+static void Give_Local_Admin(List<IUser> users)// detta kontot finns men det blir en local_Admin
+{
+  System.Console.WriteLine("Please enter the name of the person who you wants to be a Local_Admin");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("please enter the password of that person");
+  string password = Console.ReadLine()!;
+  foreach (IUser user in users)
+  {
+    if (user.TryLogin(username, password))
+    {
+      user.IsRole(Role.Local_Admin);
+
+    }
+
+
+  }
+}
+
+static void Make_Local_Admin(List<IUser> users)
+{
+    System.Console.WriteLine("Please enter the name of the account");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("Please enter the name of the account");
+  string password = Console.ReadLine()!;
+  users.Add(new Local_Admin(username, password));
+}
+
+
 
