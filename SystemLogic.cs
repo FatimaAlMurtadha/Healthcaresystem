@@ -42,7 +42,7 @@ public class SystemLogicMenu
   public void SendRegistrationRequest()
   {
 
-    try { Console.Clear(); } catch { }
+    try { Console.Clear(); } catch {}
     System.Console.WriteLine("Your personal security number: ");
     string? patientpersonalnumber = Console.ReadLine();
     System.Console.WriteLine("Your name: ");
@@ -68,6 +68,7 @@ public class SystemLogicMenu
   }
   static void Give_Local_Admin(List<IUser> users)// detta kontot finns men det blir en local_Admin
   {
+    try { Console.Clear(); } catch {}
     System.Console.WriteLine("Please enter the name of the person who you wants to be a Local_Admin");
     string username = Console.ReadLine()!;
     System.Console.WriteLine("please enter the password of that person");
@@ -86,6 +87,7 @@ public class SystemLogicMenu
 
   static void Make_Local_Admin(List<IUser> users)
   {
+    try { Console.Clear(); } catch {}
     System.Console.WriteLine("Please enter the name of the account");
     string username = Console.ReadLine()!;
     System.Console.WriteLine("Please enter the name of the account");
