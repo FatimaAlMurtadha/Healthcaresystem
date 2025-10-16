@@ -49,6 +49,9 @@ As a patient, I need to be able to request an appointment.
 
 As a logged in user, I need to be able to view my schedule.
 */
+
+// En lista på alla registration requests
+List<RequestRegistration> request_registrations = new List<RequestRegistration>();
 IUser? active_user = null;
 bool running = true;
 
@@ -118,11 +121,9 @@ while (running)
 
           if (patientpersonalnumber != null && patientpersonalnumber != "" && patientname != null && patientname != "" && patientemail != null && patientemail != "" && patientpassword != null && patientpassword != "")
           {
-            // registration_requsts.// Here I should continue....Fatima
 
-
+            request_registrations.Add(new RequestRegistration(patientpersonalnumber, patientname, patientemail, patientpassword, RegistrationStatus.Pending));
             System.Console.WriteLine("Your request has been sent susseccfully");
-
           }
           else
           {
