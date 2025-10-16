@@ -64,4 +64,31 @@ public class SystemLogicMenu
     }
 
   }
+  static void Give_Local_Admin(List<IUser> users)// detta kontot finns men det blir en local_Admin
+  {
+    System.Console.WriteLine("Please enter the name of the person who you wants to be a Local_Admin");
+    string username = Console.ReadLine()!;
+    System.Console.WriteLine("please enter the password of that person");
+    string password = Console.ReadLine()!;
+    foreach (IUser user in users)
+    {
+      if (user.TryLogin(username, password))
+      {
+        user.IsRole(Role.Local_Admin);
+
+      }
+
+
+    }
+  }
+
+  static void Make_Local_Admin(List<IUser> users)
+  {
+    System.Console.WriteLine("Please enter the name of the account");
+    string username = Console.ReadLine()!;
+    System.Console.WriteLine("Please enter the name of the account");
+    string password = Console.ReadLine()!;
+    users.Add(new Local_Admin(username, password)); // need Local_Admin class
+  }
+
 }
