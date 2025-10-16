@@ -1,6 +1,6 @@
 namespace App;
 
-    class Local_Admin: IUser
+class Local_Admin: IUser
 {
     private string admin_username;
     private string _password;
@@ -35,13 +35,7 @@ namespace App;
 
 
 }
-    
-    
-    
-    class Location
-    {
-        public string Name;
-        public string Hospital;
+
 
 //Locations
 class Location
