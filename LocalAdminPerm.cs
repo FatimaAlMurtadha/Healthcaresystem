@@ -1,21 +1,23 @@
 namespace App;
 
-    class Location
+
+//Locations
+class Location
+{
+    public string Name;
+    public string Hospital;
+
+    public Location(string name, string hospital)
     {
-        public string Name;
-        public string Hospital;
-
-        public Location(string name, string hospital)
-        {
-            Name = name;
-            Hospital = hospital;
-        }
-
-        public override string ToString()
-        {
-            return Name + " (Sjukhus: " + Hospital + ")";
-        }
+        Name = name;
+        Hospital = hospital;
     }
+
+    public override string ToString()
+    {
+        return Name + " (Sjukhus: " + Hospital + ")";
+    }
+}
 
     //Personal konto
     class PersonnelAccount
@@ -36,21 +38,14 @@ namespace App;
         public string UserEmail;
         public string Password;
         public RegistrationStatus Status;
-
+        
         public Registration(string useremail, string password, RegistrationStatus status)
         {
             UserEmail = useremail;
             Password = password;
             Status = status;
         }
-    }
 
-    // Status för registrering
-    public enum RegistrationStatus
-    {
-        Pending,
-        Accept,
-        Deny
     }
 
    
