@@ -83,10 +83,11 @@ else
           break;
 
         case "2": // log out
-
+          active_user = null;
           break;
 
         case "3": // quit
+          running = false;
           break;
 
         default:
