@@ -44,15 +44,6 @@ namespace App;
             Status = status;
         }
     }
-
-    // Status för registrering
-    public enum RegistrationStatus
-    {
-        Pending,
-        Accept,
-        Deny
-    }
-
    
     class Local_Admin_Permission
     {
