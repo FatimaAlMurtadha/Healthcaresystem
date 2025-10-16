@@ -90,7 +90,7 @@ public class SystemLogicMenu
     string username = Console.ReadLine()!;
     System.Console.WriteLine("Please enter the name of the account");
     string password = Console.ReadLine()!;
-    users.Add(new Local_Admin(username, password)); // need Local_Admin class
+    users.Add(new User(username, password)); // need Local_Admin class
   }
 
 static void Make_account(List<IUser> users)
@@ -100,7 +100,7 @@ static void Make_account(List<IUser> users)
     System.Console.WriteLine("Please enter your password");
     string password = Console.ReadLine();
     users.Add(new User(username, password));
-    File.AppendAllText("./Users.txt","here is your username" + username + " " + password );
+    File.AppendAllText("./Users.txt","here is your username" + username + " " + password + "/n");
 
     }
 
