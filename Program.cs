@@ -67,9 +67,11 @@ while (running)
     string? input = Console.ReadLine();
     switch (input)
     {
-      case "1": // User
-        if (active_user.IsRole(Role.User))
-        {
+      case "1":
+      menu.LogInAsUser();                    //frågar efter username/password
+      active_user = menu.ActiveUser;         // resultat
+       if (active_user?.IsRole(Role.User) == true)
+  {
           try { Console.Clear(); } catch {}
           System.Console.WriteLine("------Welcome User ------");
           System.Console.WriteLine("Choose one of the following: ");
@@ -101,7 +103,9 @@ while (running)
         }
         break;
       case "2": // Patient
-        if (active_user.IsRole(Role.Patient))
+      menu.LogInAsUser();                    //frågar efter username/password
+      active_user = menu.ActiveUser;         // resultat
+      if (active_user?.IsRole(Role.Patient) == true)
         {
           try{ Console.Clear(); } catch{}
           System.Console.WriteLine("------Welcome Patient ------");
@@ -138,7 +142,9 @@ while (running)
         } // slut på patient meny
         break;
       case "3": // Personnel
-        if (active_user.IsRole(Role.Personnel))
+      menu.LogInAsUser();                    //frågar efter username/password
+      active_user = menu.ActiveUser;         // resultat
+       if (active_user?.IsRole(Role.Personnel) == true)
         {
           try { Console.Clear(); } catch {}
           System.Console.WriteLine("1. View a patient's journal entries.");
@@ -178,12 +184,14 @@ while (running)
         } // slut på Personnel meny
         break;
       case "4": // Admin
-        if (active_user.IsRole(Role.Main_Admin))
+      menu.LogInAsUser();                    //frågar efter username/password
+      active_user = menu.ActiveUser;         // resultat
+        if (active_user?.IsRole(Role.Main_Admin) == true)
         {
-          try { Console.Clear(); } catch {}
+          try { Console.Clear(); } catch { }
           System.Console.WriteLine("MainAdmin menue");
           string? mainadmininput = Console.ReadLine();
-          switch(mainadmininput)
+          switch (mainadmininput)
           {
             case "1":
               break;
@@ -194,7 +202,8 @@ while (running)
               break;
           }
 
-        } // slut på Main Admin meny
+        } // slut på Main Admin meny 
+        //Fixa case för Local Admin pls :D
         if (active_user.IsRole(Role.Local_Admin))
         {
           try { Console.Clear(); } catch {}
@@ -228,12 +237,6 @@ while (running)
 }
 
 
-
-
-
-
-
-
 static void Make_Personnel(List<IUser> users)
 {
   System.Console.WriteLine("Please enter the name of the account");
@@ -244,7 +247,6 @@ static void Make_Personnel(List<IUser> users)
 
 
 }
-
 
 static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
 {
