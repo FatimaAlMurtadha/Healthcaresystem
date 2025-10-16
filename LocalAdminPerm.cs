@@ -1,6 +1,6 @@
 namespace App;
 
-    class Local_Admin: IUser
+class Local_Admin: IUser
 {
     private string admin_username;
     private string _password;
