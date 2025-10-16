@@ -1,3 +1,5 @@
+using System.Reflection.Metadata;
+
 namespace App;
 
 public class SystemLogicMenu
@@ -92,5 +94,16 @@ public class SystemLogicMenu
     string password = Console.ReadLine()!;
     users.Add(new Local_Admin(username, password)); // need Local_Admin class
   }
+
+static void Make_account(List<IUser> users)
+  {
+    System.Console.WriteLine("Please Enter your name");
+    string username = Console.ReadLine();
+    System.Console.WriteLine("Please enter your password");
+    string password = Console.ReadLine();
+    users.Add(new User(username, password));
+    File.AppendAllText("./Users.txt","here is your username" + username + " " + password + "n/");
+
+    }
 
 }

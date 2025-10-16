@@ -41,7 +41,7 @@ As a patient, I need to be able to view my own journal.
 
 As a patient, I need to be able to request an appointment.
 
-As a logged in user, I need to be able to view my schedule.
+As a logged in Patient, I need to be able to view my schedule.
 */
 
 // En lista på alla registration requests
@@ -235,3 +235,23 @@ while (running)
 
 
 
+
+
+static void Make_Personnel(List<IUser> users)
+{
+  System.Console.WriteLine("Please enter the name of the account");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("Please enter the name of the account");
+  string password = Console.ReadLine()!;
+  users.Add(new Personnel(username, password));
+
+
+}
+
+
+static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
+{
+    
+
+
+}
