@@ -78,7 +78,7 @@ class Local_Admin: IUser
         
         public static List<Location> Locations = new List<Location>();
         public static List<PersonnelAccount> Personnels = new List<PersonnelAccount>();
-        public static List<Registration> Registrations = new List<Registration>();
+    
 
         public static bool NewLocation(string LocationName, string HospitalName)
         {
@@ -114,56 +114,7 @@ class Local_Admin: IUser
             Console.WriteLine("Nytt konto för personalen: " + personnelemail);
             return true;
         }
+      
 
-        //Skapar en registreringsförfrågan
-        public static bool CreateRegistration(string userEmail, string password)
-        {
-
-
-            Registrations.Add(new Registration(userEmail, password, RegistrationStatus.Pending));
-            Console.WriteLine("Registreringsförfrågan skapad för: " + userEmail);
-            return true;
-        }
-
-   
-
-        //Godkänn en registrering
-        public static bool AcceptNewPatient(string userEmail)
-        {
-            int i = 0;
-      while (i < Registrations.Count)
-      {
-        Registration reg = Registrations[i];
-        if (reg.UserEmail == userEmail && reg.Status == RegistrationStatus.Pending)
-        {
-          reg.Status = RegistrationStatus.Accept;
-          Console.WriteLine("Registrering godkänd: " + reg.UserEmail);
-          return true;
-        }
-        i = i + 1;
-      }
-
-      return false;
-
-           
-        }
-
-        // Deny registration.
-        public static bool DenyNewPatient(string userEmail)
-        {
-            int i = 0;
-            while (i < Registrations.Count)
-            {
-                Registration reg = Registrations[i];
-                if (reg.UserEmail == userEmail && reg.Status == RegistrationStatus.Pending)
-                {
-                    reg.Status = RegistrationStatus.Deny;
-                    Console.WriteLine("Registrering avslagen: " + reg.UserEmail);
-                    return true;
-                }
-                i = i + 1;
-            }
-
-            return false;
-        }
+       
     }
