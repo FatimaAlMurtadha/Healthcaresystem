@@ -46,7 +46,7 @@ As a patient, I need to be able to view my own journal.
 
 As a patient, I need to be able to request an appointment.
 
-As a logged in user, I need to be able to view my schedule.
+As a logged in Patient, I need to be able to view my schedule.
 */
 IUser? active_user = null;
 bool running = true;
@@ -71,7 +71,6 @@ while (running)
     Console.Clear();
     System.Console.WriteLine("Password: ");
     string? password = Console.ReadLine();
-    users.Add(new User(username, password));
     Console.Clear();
 
     // foreach loop för att kolla om TryLogIns Info är korrekt
@@ -176,5 +175,21 @@ static void Make_Local_Admin(List<IUser> users)
   users.Add(new Local_Admin(username, password));
 }
 
+static void Make_Personnel(List<IUser> users)
+{
+        System.Console.WriteLine("Please enter the name of the account");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("Please enter the name of the account");
+  string password = Console.ReadLine()!;
+  users.Add(new Personnel(username, password));
 
 
+}
+
+
+static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
+{
+    
+
+
+}
