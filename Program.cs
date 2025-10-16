@@ -53,6 +53,7 @@ bool running = true;
 
 List<IUser> users = new List<IUser>();
 users.Add(new User("Fatima", "123")); // Behövs en User Class 
+List<List<IUser>> listlocation = new List<List<IUser>>();
 
 
 while (running)
@@ -175,9 +176,13 @@ static void Make_Local_Admin(List<IUser> users)
   users.Add(new Local_Admin(username, password));
 }
 
+
+
+
+
 static void Make_Personnel(List<IUser> users)
 {
-        System.Console.WriteLine("Please enter the name of the account");
+  System.Console.WriteLine("Please enter the name of the account");
   string username = Console.ReadLine()!;
   System.Console.WriteLine("Please enter the name of the account");
   string password = Console.ReadLine()!;
