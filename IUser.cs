@@ -10,7 +10,7 @@ interface IUser
 
 }
 
-enum Role
+public enum Role
 {
     None,
     User,
