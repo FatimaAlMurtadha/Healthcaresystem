@@ -27,20 +27,20 @@ The system supports multiple user roles — including users, patients, personnel
 - Add locations and create personnel accounts.
 - View permissions overview.
 
-##  Requirements
+## Requirements
 - Visual Studio Code (v1.104.2 or later)
 - .NET SDK 8.0.414
 - Git (installed and configured)
 
 ##  Run the Application
-```bash
+bash
 git clone https://github.com/FatimaAlMurtadha/Healthcaresystem".
 cd Healthcaresystem
 dotnet run
 
 
 
-####### How to use:
+## How to use:
 If you are using Windows you need to:
 Clone the repository:
 Open "git bash" or "Windows PowerShell".
@@ -56,8 +56,8 @@ There will be a choice at the end of the program allowing you to close it.
 ## Contribution Guide
 1. Fork the repository.
 2. Clone it locally:
-   bash 
-   git clone https://github.com/FatimaAlMurtadha/Healthcaresystem".
+bash 
+git clone https://github.com/FatimaAlMurtadha/Healthcaresystem".
 
 Create a new branch using this command: "git checkout -b your-new-branch-name".
 
@@ -69,7 +69,7 @@ Commit and push using following command on orderd:
 "git commit -m "Your commit message" ".
 git push origin your-new-branch-name.
 
-##### Authors
+## Authors
 
 This project was created collaboratively by a student team as part of an OOP practice assignment.
 Main repository: https://github.com/FatimaAlMurtadha/Healthcaresystem".
