@@ -1,6 +1,6 @@
 ------------## Health Care System ##------------------
 
-######About:
+
 ## About
 This project is a simple console-based application developed collaboratively to practice Object-Oriented Programming (OOP) concepts in C# and .NET.  
 The system supports multiple user roles — including users, patients, personnel, and administrators — each with distinct permissions and capabilities.
@@ -56,7 +56,7 @@ There will be a choice at the end of the program allowing you to close it.
 ## Contribution Guide
 1. Fork the repository.
 2. Clone it locally:
-   ```bash 
+   bash 
    git clone https://github.com/FatimaAlMurtadha/Healthcaresystem".
 
 Create a new branch using this command: "git checkout -b your-new-branch-name".
