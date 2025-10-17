@@ -1,5 +1,24 @@
 namespace App;
 
+
+    class Location
+    {
+        public string Name;
+        public string Hospital;
+
+        public Location(string name, string hospital)
+        {
+            Name = name;
+            Hospital = hospital;
+        }
+
+        public override string ToString()
+        {
+            return Name + " (Sjukhus: " + Hospital + ")";
+        }
+    }
+
+=======
 class Local_Admin: IUser
 {
     private string admin_username;
@@ -37,23 +56,6 @@ class Local_Admin: IUser
 }
 
 
-//Locations
-class Location
-{
-    public string Name;
-    public string Hospital;
-
-    public Location(string name, string hospital)
-    {
-        Name = name;
-        Hospital = hospital;
-    }
-
-    public override string ToString()
-    {
-        return Name + " (Sjukhus: " + Hospital + ")";
-    }
-}
 
     //Personal konto
     class PersonnelAccount
@@ -68,20 +70,8 @@ class Location
         }
     }
 
-    // Registrering
-    class Registration
-    {
-        public string UserEmail;
-        public string Password;
-        public RegistrationStatus Status;
-        
-        public Registration(string useremail, string password, RegistrationStatus status)
-        {
-            UserEmail = useremail;
-            Password = password;
-            Status = status;
-        }
-    }
+
+
    
     class Local_Admin_Permission
     {
