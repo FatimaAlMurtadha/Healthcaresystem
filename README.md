@@ -1,81 +1,63 @@
---------------- Health Care System ------------------
+------------## Health Care System ##------------------
 
-About:
-This simple console project is a grupp colloberation project to practice OOP.
+######About:
+## About
+This project is a simple console-based application developed collaboratively to practice Object-Oriented Programming (OOP) concepts in C# and .NET.  
+The system supports multiple user roles — including users, patients, personnel, and administrators — each with distinct permissions and capabilities.
 
-Properties:
-This System is writen by C# language and .NET with the strategy OOP "Objects Oriented Program". The system handle many users and admin with deffirent permessions as the following: 
+## Features
 
-- As a user, I am able to log in.
+### User
+- Log in and log out.
+- Request registration as a patient.
 
-- As a user, I am able to log out.
+### Patient
+- View personal medical journals.
+- Request appointments.
 
-- As a user, I am able to request registration as a patient.
+### Personnel
+- View patient journals (with permission levels).
+- Manage appointments (register, modify, approve).
+- View schedules by location.
 
-- As an admin with sufficient permissions, I am able to give admins the permission to handle the permission system, in fine granularity.
+### Admin
+- Manage user permissions.
+- Assign admins to regions.
+- Handle registration requests.
+- Add locations and create personnel accounts.
+- View permissions overview.
 
-- As an admin with sufficient permissions, I am able to assign admins to certain regions.
+##  Requirements
+- Visual Studio Code (v1.104.2 or later)
+- .NET SDK 8.0.414
+- Git (installed and configured)
 
-- As an admin with sufficient permissions, I am able to give admins the permission to handle registrations.
+##  Run the Application
+```bash
+git clone https://github.com/FatimaAlMurtadha/Healthcaresystem".
+cd Healthcaresystem
+dotnet run
 
-- As an admin with sufficient permissions, I am able to give admins the permission to add locations.
 
-- As an admin with sufficient permissions, I am able to give admins the permission to create accounts for personnel.
 
-- As an admin with sufficient permissions, I am able to give admins the permission to view a list of who has permission to what.
-
-- As an admin with sufficient permissions, I am able to add locations.
-
-- As an admin with sufficient permissions, I am able to accept user registration as patients.
-
-- As an admin with sufficient permissions, I am be able to deny user registration as patients.
-
-- As an admin with sufficient permissions, I am able to create accounts for personnel.
-
-- As an admin with sufficient permissions, I am able to view a list of who has permission to what.
-
-- As personnel with sufficient permissions, I am able to view a patients journal entries.
-
-- As personnel with sufficient permissions, I am able to mark journal entries with different levels of read permissions.
-
-- As personnel with sufficient permissions, I am able to register appointments.
-
-- As personnel with sufficient permissions, I am able to modify appointments.
-
-- As personnel with sufficient permissions, I am able to approve appointment requests.
-
-- As personnel with sufficient permissions, I am able to view the schedule of a location.
-
-- As a patient, I am able to view my own journal.
-
-- As a patient, I am able to request an appointment.
-
-- As a logged in user, I am able to view my schedule.
-
-Requierments to use this package:
-In order to use this system you need the following:
-
-Visual Stadio Code "1.104.2".
-.NET "8.0.414".
-Git installed and configured.
-How to use:
+####### How to use:
 If you are using Windows you need to:
-
 Clone the repository:
-Open "git bash" or "WindowsPowerShell".
-Write this command : " git clone https://github.com/FatimaAlMurtadha/Healthcaresystem".
-Go in the application by this command : cd Healthcaresystem
+Open "git bash" or "Windows PowerShell".
+Write this command : "git clone https:the link of the project on GitHub".
+Go in the application by this command : cd TradeSystem
 
-Run the application using this command : dotnet run  
+Run the application using this command : dotnet run
 
-Once the application is run: you will find all the instruction about what to do as you run the previous command.
+Once the application is run: you will find all the instruction about what to do as you run the previous command
 
-There will be a choice at the end of the program letting you to close it
+There will be a choice at the end of the program allowing you to close it.
 
-Contribution Guide
-Fork the repository.
-
-Clone the repository: on Git bash or WindowsPoerShell and write "git clone https://github.com/FatimaAlMurtadha/Healthcaresystem".
+## Contribution Guide
+1. Fork the repository.
+2. Clone it locally:
+   ```bash 
+   git clone https://github.com/FatimaAlMurtadha/Healthcaresystem".
 
 Create a new branch using this command: "git checkout -b your-new-branch-name".
 
@@ -86,3 +68,8 @@ Commit and push using following command on orderd:
 "git add .".
 "git commit -m "Your commit message" ".
 git push origin your-new-branch-name.
+
+##### Authors
+
+This project was created collaboratively by a student team as part of an OOP practice assignment.
+Main repository: https://github.com/FatimaAlMurtadha/Healthcaresystem".
