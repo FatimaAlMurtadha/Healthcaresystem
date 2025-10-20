@@ -140,14 +140,14 @@ internal IUser? ActiveUser => active_user;
   {
     System.Console.WriteLine("Please enter the name of the account");
     string username = Console.ReadLine()!;
-    System.Console.WriteLine("Please enter the name of the account");
+    System.Console.WriteLine("Please enter the Password of the account");
     string password = Console.ReadLine()!;
     users.Add(new User(username, password));
 
     UserDataManager.SaveUser(username, password, Role.Personnel);
 
     File.AppendAllText("Users_log.txt",
-    $"New user created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
+    $"New Personnel created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
 
     Console.WriteLine("Account created successfully!");
   }

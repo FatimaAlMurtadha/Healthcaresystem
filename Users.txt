@@ -3,5 +3,3 @@ Lukas,Eriksson,Local_Admin
 
 Ni kan testa med att bara inputta login details.r
 sigge,von,User
-
-abc,123,Personnel
