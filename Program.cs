@@ -54,7 +54,7 @@ while (running)
   {
     System.Console.WriteLine("------------  Health Care System  -------------");
     System.Console.WriteLine("-----------------------------------------------------");
-    System.Console.WriteLine("Log in firsta to open the system");
+    System.Console.WriteLine("Log in as :   ---  or create an account ");
     System.Console.WriteLine();
     System.Console.WriteLine("1. User.");
     System.Console.WriteLine("2. Patient.");
