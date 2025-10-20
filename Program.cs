@@ -198,12 +198,31 @@ while (running)
           System.Console.WriteLine("3. Assign admins to certain regions");
           System.Console.WriteLine("4. Give admins the permission to to handle the permission system");
           System.Console.WriteLine("5. Give admins the permission to create personell accounts");
-          System.Console.WriteLine("6. Log out");
+          System.Console.WriteLine("e. Log out");
+          System.Console.WriteLine("f. Close");
           string? mainadmininput = Console.ReadLine();
           switch (mainadmininput)
           {
             case "1": // Give admins the permission to handle registrations
               break;
+
+            case "2": //  Give admins the permission to add locations
+            break;
+
+            case "3": // Assign admins to certain regions
+            break;
+
+            case "4": // Give admins the permission to to handle the permission system
+            break;
+
+            case "5": // Give admins the permission to create personell accounts
+            break;
+
+             case "e": // Log out
+            active_user = null;
+
+            case "f": // close
+            running = false;
             
             
             default:
@@ -228,7 +247,8 @@ while (running)
           System.Console.WriteLine("1. Handle patient registration");
           System.Console.WriteLine("2. Create accounts for personell");
           System.Console.WriteLine("3. Add locations");
-          System.Console.WriteLine("4. Log out");
+          System.Console.WriteLine("e. Log out");
+          System.Console.WriteLine("f. Close ");
           string? mainadmininput = Console.ReadLine();
           switch (mainadmininput)
           {
@@ -243,6 +263,14 @@ while (running)
             case "2":
               menu.Make_Personnel();
               break;
+
+            case "e": // Log out
+            active_user = null;
+
+            case "f": // close
+            running = false;
+
+
           }
 
         } // slut på Local Admin meny
