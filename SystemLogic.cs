@@ -81,10 +81,34 @@ internal IUser? ActiveUser => active_user;
     }
 
   }
-  
 
-  
-  public void Give_Local_Admin()// detta kontot finns men det blir en local_Admin
+  // function för att "As a patient, I need to be able to view my own journal."
+  // Lista på alla Journaler
+  List<Patient_Journal> journals = new List<Patient_Journal>();
+  public void ShowJournal() // vissa min egen journal som patient
+  {
+    try { Console.Clear(); } catch {};
+    if (active_user == null)
+    {
+      System.Console.WriteLine("You should first log in");
+    }
+    else
+    {
+      if (active_user.IsRole(Role.Patient))
+      {
+        foreach (Patient_Journal journal in journals)
+        {
+          if (journal.ToString() == active_user.ToString())
+          {
+            System.Console.WriteLine("----------Your Own Journal--------");
+
+          }
+        }
+      }
+    }
+  }
+
+        public void Give_Local_Admin()// detta kontot finns men det blir en local_Admin
   {
     try { Console.Clear(); } catch {}
     System.Console.WriteLine("Please enter the name of the person who you wants to be a Local_Admin");
