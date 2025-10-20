@@ -24,6 +24,7 @@ while (running)
     System.Console.WriteLine("Password:");
     string? password = Console.ReadLine();
     // 
+    
 
     string? input = Console.ReadLine();
     switch (input)
