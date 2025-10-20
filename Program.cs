@@ -203,7 +203,7 @@ while (running)
 
         } // slut på Main Admin meny 
         //Fixa case för Local Admin pls :D
-        if (active_user.IsRole(Role.Local_Admin))
+        if (active_user!.IsRole(Role.Local_Admin))
         {
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("LocalAdmin menue");
