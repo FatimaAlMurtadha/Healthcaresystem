@@ -123,8 +123,10 @@ while (running)
             case "1": // view journal
               break;
             case "2": // request an appointment
+              AppointmentMenu.Patient_RequestAppointment();
               break;
             case "3": // view sechdule
+              AppointmentMenu.Patient_ViewSchedule();
               break;
             case "e": // Log out
               active_user = null;
@@ -152,7 +154,7 @@ while (running)
           System.Console.WriteLine("3. Register appointments.");
           System.Console.WriteLine("4. Modify appointments.");
           System.Console.WriteLine("5. Approve appointment requests.");
-          System.Console.WriteLine("6. View the schedule of a location.");
+          System.Console.WriteLine("6. View the schedule.");
           System.Console.WriteLine("7. Log out");
           System.Console.WriteLine("f. Close");
           string? personnelinput = Console.ReadLine();
@@ -167,8 +169,10 @@ while (running)
             case "4": // Modify appointment
               break;
             case "5": // Approve appointment request
+              AppointmentMenu.Personnel_ApproveRequests();
               break;
-            case "6": // View schedule of location
+            case "6": // View schedule
+              AppointmentMenu.Personnel_ViewSchedule();
               break;
             case "7": // Log out
               break;

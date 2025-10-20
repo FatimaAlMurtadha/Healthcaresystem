@@ -52,6 +52,7 @@ class User : IUser
         return _role;
     }
 
+
     // Kontrollera om användaren har en viss permission
     public bool HasPermission(Permission permission)
     {

@@ -1,4 +1,5 @@
 Oskar,UNLEASHED,Personnel
-
-
+Fatima,123,Local_Admin
+User,123,Patient
+King,Boss,Admin
 Ni kan testa med att bara inputta login details. User/Password/Role
