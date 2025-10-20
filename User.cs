@@ -28,17 +28,15 @@ namespace App;
         return _role;
     }
 
-}
 
-/*
     // Kontrollera om användaren har en viss permission
     /*public bool HasPermission(Permission permission)
-    
+    {
         return (_permissions & permission) == permission;
-    }
+    }*/
 
     public override string ToString()
     {
         return $"{_username} ({_role})";
     }
-*/
+}
