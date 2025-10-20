@@ -4,45 +4,60 @@ namespace App;
 
 public class SystemLogicMenu
 {
+internal IUser? ActiveUser => active_user;
   IUser? active_user = null;
   bool running = true;
 
-  List<IUser> users = new List<IUser>();
+  List<IUser> users = UserDataManager.LoadUsers();
 
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
 
 
-
+  //As a user, I need to be able to log in.
   public void LogInAsUser()
-  { // As a user, I need to be able to log in.
-    users.Add(new User("Fatima", "123")); // Default user
-    // Loga in för att öpnna systemet
-    System.Console.WriteLine("Username: ");
+  {
+    if (users.Count == 0)
+      users.Add(new User("Fatima", "123")); // För testing. Annars kan ni gå in i User.txt och skapa ett konto där
+
+    Console.Write("Username: ");
     string? username = Console.ReadLine();
 
     Console.Clear();
-    System.Console.WriteLine("Password: ");
+    Console.Write("Password: ");
     string? password = Console.ReadLine();
-    users.Add(new User(username, password));
     Console.Clear();
 
-    // foreach loop för att kolla om TryLogIns Info är korrekt
+    // Checkar efter tom användarnamn eller lösenord
+    if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+    {
+      Console.WriteLine("Login failed. Username or password was empty.");
+      return;
+    }
+
+    // Efter checken så kan vi vara säkra på att username och password inte är null eller whitespace
+    string u = username;
+    string p = password;
+
+    bool success = false;
     foreach (IUser user in users)
     {
-      if (user.TryLogin(username, password))
+      if (user.TryLogin(u, p))
       {
         active_user = user;
+        success = true;
         break;
       }
     }
 
-
+    if (!success)
+      Console.WriteLine("Login failed. Wrong username or password.");
   }
+
   // As a user, I need to be able to request registration as a patient.
   public void SendRegistrationRequest()
   {
 
-    try { Console.Clear(); } catch { }
+    try { Console.Clear(); } catch {}
     System.Console.WriteLine("Your personal security number: ");
     string? patientpersonalnumber = Console.ReadLine();
     System.Console.WriteLine("Your name: ");
@@ -68,6 +83,7 @@ public class SystemLogicMenu
   }
   static void Give_Local_Admin(List<IUser> users)// detta kontot finns men det blir en local_Admin
   {
+    try { Console.Clear(); } catch {}
     System.Console.WriteLine("Please enter the name of the person who you wants to be a Local_Admin");
     string username = Console.ReadLine()!;
     System.Console.WriteLine("please enter the password of that person");
@@ -86,6 +102,7 @@ public class SystemLogicMenu
 
   static void Make_Local_Admin(List<IUser> users)
   {
+    try { Console.Clear(); } catch {}
     System.Console.WriteLine("Please enter the name of the account");
     string username = Console.ReadLine()!;
     System.Console.WriteLine("Please enter the name of the account");
@@ -94,14 +111,28 @@ public class SystemLogicMenu
   }
 
 static void Make_account(List<IUser> users)
-  {
-    System.Console.WriteLine("Please Enter your name");
-    string username = Console.ReadLine();
-    System.Console.WriteLine("Please enter your password");
-    string password = Console.ReadLine();
-    users.Add(new User(username, password));
-    File.AppendAllText("./Users.txt","here is your username" + username + " " + password + "/n");
+{
+    System.Console.WriteLine("Please enter your name:");
+    string? username = Console.ReadLine();
 
+    System.Console.WriteLine("Please enter your password:");
+    string? password = Console.ReadLine();
+
+    if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+    {
+        Console.WriteLine("Invalid input. Try again.");
+        return;
     }
 
+    var newUser = new User(username, password);
+    users.Add(newUser);
+
+    // Save to file
+    UserDataManager.SaveUser(username, password, Role.User);
+
+    File.AppendAllText("Users_log.txt",
+    $"New user created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
+
+    Console.WriteLine("Account created successfully!");
+  }
 }
