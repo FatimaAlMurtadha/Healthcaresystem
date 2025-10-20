@@ -2,66 +2,29 @@
 using App;
 
 
-/*
-As an admin with sufficient permissions, I need to be able to give admins the permission to handle the permission system, in fine granularity.
 
-As an admin with sufficient permissions, I need to be able to assign admins to certain regions.
 
-As an admin with sufficient permissions, I need to be able to give admins the permission to handle registrations.
+// En lista på alla registration requests
 
-As an admin with sufficient permissions, I need to be able to give admins the permission to add locations.
 
-As an admin with sufficient permissions, I need to be able to give admins the permission to create accounts for personnel.
-
-As an admin with sufficient permissions, I need to be able to give admins the permission to view a list of who has permission to what.
-
-As an admin with sufficient permissions, I need to be able to add locations.
-
-As an admin with sufficient permissions, I need to be able to accept user registration as patients.
-
-As an admin with sufficient permissions, I need to be able to deny user registration as patients.
-
-As an admin with sufficient permissions, I need to be able to create accounts for personnel.
-
-As an admin with sufficient permissions, I need to be able to view a list of who has permission to what.
-
-As personnel with sufficient permissions, I need to be able to view a patients journal entries.
-
-As personnel with sufficient permissions, I need to be able to mark journal entries with different levels of read permissions.
-
-As personnel with sufficient permissions, I need to be able to register appointments.
-
-As personnel with sufficient permissions, I need to be able to modify appointments.
-
-As personnel with sufficient permissions, I need to be able to approve appointment requests.
-
-As personnel with sufficient permissions, I need to be able to view the schedule of a location.
-
-As a patient, I need to be able to view my own journal.
-
-As a patient, I need to be able to request an appointment.
-
-As a logged in Patient, I need to be able to view my schedule.
-*/
 SystemLogicMenu menu = new SystemLogicMenu();
 IUser? active_user = null;
 bool running = true;
 
 
 while (running)
-{ // Skapa Welcom menu 
+{ // Create Welcome menu 
   if (active_user == null)
   {
     System.Console.WriteLine("------------  Health Care System  -------------");
     System.Console.WriteLine("-----------------------------------------------------");
-    System.Console.WriteLine("Log in firsta to open the system");
-    System.Console.WriteLine();
-    System.Console.WriteLine("1. User.");
-    System.Console.WriteLine("2. Patient.");
-    System.Console.WriteLine("3. Personnel.");
-    System.Console.WriteLine("4. Admin");
-    System.Console.WriteLine("f. Close");
-    System.Console.WriteLine("C. Create account");
+    System.Console.WriteLine("-----Log in ---------");
+    System.Console.WriteLine("Username: ");
+    string? username = Console.ReadLine();
+    System.Console.WriteLine("Password:");
+    string? password = Console.ReadLine();
+    // 
+
     string? input = Console.ReadLine();
     switch (input)
     {
@@ -73,7 +36,10 @@ while (running)
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("------Welcome User ------");
           System.Console.WriteLine("Choose one of the following: ");
+
           System.Console.WriteLine("1. Request registration: ");
+
+          System.Console.WriteLine("1. Request registration as patient: ");
           System.Console.WriteLine("e. log out");
           System.Console.WriteLine("f. Close");
           string? userinput = Console.ReadLine();
@@ -182,39 +148,69 @@ while (running)
 
         } // slut på Personnel meny
         break;
-      case "4": // Admin
+      case "4": // Main Admin
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
         if (active_user?.IsRole(Role.Main_Admin) == true)
         {
           try { Console.Clear(); } catch { }
-          System.Console.WriteLine("MainAdmin menue");
-          System.Console.WriteLine("2. Accept Requests");
+          System.Console.WriteLine("Main Admin menu");
+          System.Console.WriteLine("1. Give admins the permission to handle registrations");
+          System.Console.WriteLine("2. Give admins the permission to add locations");
+          System.Console.WriteLine("3. Assign admins to certain regions");
+          System.Console.WriteLine("4. Give admins the permission to to handle the permission system");
+          System.Console.WriteLine("5. Give admins the permission to create personell accounts");
+          System.Console.WriteLine("e. Log out");
+          System.Console.WriteLine("f. Close");
           string? mainadmininput = Console.ReadLine();
           switch (mainadmininput)
           {
-            case "1":
+            case "1": // Give admins the permission to handle registrations
               break;
+
+            case "2": //  Give admins the permission to add locations
+            break;
+
+            case "3": // Assign admins to certain regions
+            break;
+
+            case "4": // Give admins the permission to to handle the permission system
+            break;
+
+            case "5": // Give admins the permission to create personell accounts
+            break;
+
+             case "e": // Log out
+            active_user = null;
+
+            case "f": // close
+            running = false;
+            
+            
             default:
               System.Console.WriteLine("Invalid choice.");
               System.Console.WriteLine("Press ENTER to continue.....");
               Console.ReadLine();
               break;
-
-
-
-
-
-              break;
-
           }
+          
 
         } // slut på Main Admin meny 
-        //Fixa case för Local Admin pls :D
-        if (active_user!.IsRole(Role.Local_Admin))
+
+        break;
+        case "5": // Local admin
+        menu.LogInAsUser();
+        active_user = menu.ActiveUser;
+        if (active_user?.IsRole(Role.Local_Admin) == true)
+
         {
           try { Console.Clear(); } catch { }
-          System.Console.WriteLine("LocalAdmin menue");
+          System.Console.WriteLine("LocalAdmin menu");
+          System.Console.WriteLine("1. Handle patient registration");
+          System.Console.WriteLine("2. Create accounts for personell");
+          System.Console.WriteLine("3. Add locations");
+          System.Console.WriteLine("e. Log out");
+          System.Console.WriteLine("f. Close ");
           string? mainadmininput = Console.ReadLine();
           switch (mainadmininput)
           {
@@ -229,6 +225,14 @@ while (running)
             case "2":
               menu.Make_Personnel();
               break;
+
+            case "e": // Log out
+            active_user = null;
+
+            case "f": // close
+            running = false;
+
+
           }
 
         } // slut på Local Admin meny
@@ -260,6 +264,32 @@ while (running)
 }
 
 
+
+ // slut på else satsen som öppnar systemet
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+static void Make_Personnel(List<IUser> users)
+{
+  System.Console.WriteLine("Please enter the name of the account");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("Please enter the name of the account");
+  string password = Console.ReadLine()!;
+  //users.Add(new Personnel(username, password));
+
+
+}
 
 
 static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
