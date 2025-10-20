@@ -7,10 +7,9 @@ interface IUser
     public bool IsRole(Role role);
 
     public Role GetRole();
-
 }
 
-enum Role
+public enum Role
 {
     None,
     User,
