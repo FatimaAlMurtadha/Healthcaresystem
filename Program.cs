@@ -215,10 +215,11 @@ while (running)
 
              case "e": // Log out
             active_user = null;
-              break;
+            break;
+
             case "f": // close
             running = false;
-              break;
+            break;
             
             default:
               System.Console.WriteLine("Invalid choice.");
@@ -254,6 +255,16 @@ while (running)
             case "2":
               menu.Make_Personnel();
               break;
+
+            case "e": // Log out
+            active_user = null;
+            break;
+
+            case "f": // close
+            running = false;
+            break;
+
+
           }
 
         } // slut på Local Admin meny
