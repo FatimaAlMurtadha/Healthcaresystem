@@ -52,8 +52,6 @@ public class GiveAccessToLocalAdmin
     LocalAdmins.Add(new LocalAdmin(LocalAdminEmail));
     
   }
- 
-   
 
 }
 
