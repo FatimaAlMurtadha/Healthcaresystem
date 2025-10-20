@@ -22,5 +22,41 @@ public class Main_Admin: IUser
     return Role.Main_Admin;
   }
 
+
+public enum perms
+{
+  HandleRegistration,
+  AddLocation,
   
+}  
 }
+
+public class GiveAccessToLocalAdmin
+{
+  /*
+  string ToBeAbleHandleRegistration;
+  string ToBeAbleToAddLocation;
+
+  public GiveAccessToLocalAdmin(string tba_handleregistration, string tba_addlocation)
+  {
+    ToBeAbleHandleRegistration = tba_handleregistration;
+    ToBeAbleToAddLocation = tba_addlocation;
+  }
+  */
+
+  public static list <LocalAdmins> LocalAdmin= new list <LocalAdmins>();
+
+
+  static bool GivePermToAdmin (string LocalAdminEmail)
+  {
+    LocalAdmins.Add(new LocalAdmin(LocalAdminEmail));
+    
+  }
+ 
+   
+
+}
+
+
+
+
