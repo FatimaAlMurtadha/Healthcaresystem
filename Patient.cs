@@ -3,7 +3,7 @@ namespace App;
 class Patient
 {
   string? PatientPersonalNumber { get; set; }
-  string? PatientPassword { get; set; };
+  string? PatientPassword { get; set; }
 
   public Patient( string? patientpersonalnumber,string? patientpassword)
   {
@@ -27,6 +27,10 @@ class Patient
   {
     return Role.Patient;
 
+  }
+  public string? GetPatientPersonalNumber()
+  {
+    return PatientPersonalNumber;
   }
 
 
