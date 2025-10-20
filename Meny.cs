@@ -1,12 +1,9 @@
 /*
 using App;
-<<<<<<< HEAD
 
 #if false 
-=======
 */
 
->>>>>>> 41ecda3 (sparar ändringar innan pull)
 /*
 As a user, I need to be able to log in.
 
@@ -53,9 +50,8 @@ As a patient, I need to be able to view my own journal.
 As a patient, I need to be able to request an appointment.
 
 As a logged in user, I need to be able to view my schedule.
-*/
 
-/*
+
 IUser? active_user = null;
 
 List<IUser> users = new List<IUser>();
@@ -179,9 +175,4 @@ users.Add(new User("Fatima", "123")); // Behövs en User Class
 }
 
    
-
-<<<<<<< HEAD
-#endif
-=======
 */
->>>>>>> 41ecda3 (sparar ändringar innan pull)

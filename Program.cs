@@ -59,7 +59,8 @@ while (running)
     System.Console.WriteLine("1. User.");
     System.Console.WriteLine("2. Patient.");
     System.Console.WriteLine("3. Personnel.");
-    System.Console.WriteLine("4. Admin");
+    System.Console.WriteLine("4. Main admin");
+    System.Console.WriteLine("5. Local admin");
     System.Console.WriteLine("f. Close");
     System.Console.WriteLine("C. Create account");
     string? input = Console.ReadLine();
@@ -73,12 +74,10 @@ while (running)
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("------Welcome User ------");
           System.Console.WriteLine("Choose one of the following: ");
-<<<<<<< HEAD
+
           System.Console.WriteLine("1. Request registration: ");
-=======
 
           System.Console.WriteLine("1. Request registration as patient: ");
->>>>>>> 41ecda3 (sparar ändringar innan pull)
           System.Console.WriteLine("e. log out");
           System.Console.WriteLine("f. Close");
           string? userinput = Console.ReadLine();
@@ -187,31 +186,49 @@ while (running)
 
         } // slut på Personnel meny
         break;
-      case "4": // Admin
+      case "4": // Main Admin
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
         if (active_user?.IsRole(Role.Main_Admin) == true)
         {
           try { Console.Clear(); } catch { }
-          System.Console.WriteLine("MainAdmin menue");
+          System.Console.WriteLine("Main Admin menu");
+          System.Console.WriteLine("1. Give admins the permission to handle registrations");
+          System.Console.WriteLine("2. Give admins the permission to add locations");
+          System.Console.WriteLine("3. Assign admins to certain regions");
+          System.Console.WriteLine("4. Give admins the permission to to handle the permission system");
+          System.Console.WriteLine("5. Give admins the permission to create personell accounts");
+          System.Console.WriteLine("6. Log out");
           string? mainadmininput = Console.ReadLine();
           switch (mainadmininput)
           {
-            case "1":
+            case "1": // Give admins the permission to handle registrations
               break;
+            
+            
             default:
               System.Console.WriteLine("Invalid choice.");
               System.Console.WriteLine("Press ENTER to continue.....");
               Console.ReadLine();
               break;
           }
+          
 
         } // slut på Main Admin meny 
-        //Fixa case för Local Admin pls :D
-        if (active_user!.IsRole(Role.Local_Admin))
+
+        break;
+        case "5": // Local admin
+        menu.LogInAsUser();
+        active_user = menu.ActiveUser;
+        if (active_user?.IsRole(Role.Local_Admin) == true)
+
         {
           try { Console.Clear(); } catch { }
-          System.Console.WriteLine("LocalAdmin menue");
+          System.Console.WriteLine("LocalAdmin menu");
+          System.Console.WriteLine("1. Handle patient registration");
+          System.Console.WriteLine("2. Create accounts for personell");
+          System.Console.WriteLine("3. Add locations");
+          System.Console.WriteLine("4. Log out");
           string? mainadmininput = Console.ReadLine();
           switch (mainadmininput)
           {
@@ -257,8 +274,7 @@ while (running)
 }
 
 
-<<<<<<< HEAD
-=======
+
  // slut på else satsen som öppnar systemet
 
 
@@ -284,7 +300,6 @@ static void Make_Personnel(List<IUser> users)
 
 
 }
->>>>>>> 41ecda3 (sparar ändringar innan pull)
 
 
 static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
