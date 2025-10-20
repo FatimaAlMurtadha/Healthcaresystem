@@ -36,10 +36,9 @@ namespace App;
     
         return (_permissions & permission) == permission;
     }
-*/
+
     public override string ToString()
     {
         return $"{_username} ({_role})";
     }
-}
 */

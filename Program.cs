@@ -234,8 +234,7 @@ while (running)
               System.Console.WriteLine("Invalid choice.");
               System.Console.WriteLine("Press ENTER to continue.....");
               Console.ReadLine();
-              
-              
+              break;
           }
           
 
