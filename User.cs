@@ -28,7 +28,9 @@ namespace App;
         return _role;
     }
 
+}
 
+/*
     // Kontrollera om användaren har en viss permission
     /*public bool HasPermission(Permission permission)
     
@@ -40,3 +42,4 @@ namespace App;
         return $"{_username} ({_role})";
     }
 }
+*/
