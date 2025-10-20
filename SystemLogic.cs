@@ -182,8 +182,6 @@ public class SystemLogicMenu
  
   
 
-<<<<<<< HEAD
-=======
 public void Accept_requests()
   {
     foreach(RequestRegistration Request in request_registrations)
@@ -196,7 +194,6 @@ public void Accept_requests()
       System.Console.WriteLine("type yes if you want to accept and no to deny");
       string input = Console.ReadLine();
       switch (input)
->>>>>>> 5ee17ad1cce30886ad7047a4e93f203e685d372d
       {
         case "yes":
           Request.Status = RegistrationStatus.Accept;
@@ -219,24 +216,4 @@ public void Accept_requests()
 
     }
 
-<<<<<<< HEAD
-
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 5ee17ad1cce30886ad7047a4e93f203e685d372d
 }
