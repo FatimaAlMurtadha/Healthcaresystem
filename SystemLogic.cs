@@ -152,27 +152,13 @@ public class SystemLogicMenu
     Console.WriteLine("Account created successfully!");
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // function för att "As a patient, I need to be able to view my own journal."
   // Lista på alla Journaler
   List<Patient_Journal> journals = new List<Patient_Journal>();
   public void ViewMyOwnJournal()
   {
-    try { Console.Clear(); } catch { };
+    try { Console.Clear(); } catch { }
+    ;
     if (active_user == null)
     {
       System.Console.WriteLine("You should first log in");
@@ -183,12 +169,12 @@ public class SystemLogicMenu
       {
         foreach (Patient_Journal journal in journals)
         {
-          if   (journal.ToString() == active_user.ToString())
+          if (journal.ToString() == active_user.ToString())
           {
             System.Console.WriteLine("----------Your Own Journal--------");
 
           }
-      }
+        }
       }
       else
       {
@@ -199,4 +185,19 @@ public class SystemLogicMenu
 
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
