@@ -1,5 +1,5 @@
 Oskar,UNLEASHED,Personnel
 Lukas,Eriksson,Local_Admin
-
+Kebab,Falafel,Main_Admin
 Ni kan testa med att bara inputta login details.r
 sigge,von,User

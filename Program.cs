@@ -62,10 +62,15 @@ while (running)
     System.Console.WriteLine("4. Admin");
     System.Console.WriteLine("f. Close");
     System.Console.WriteLine("C. Create account");
+
+
     string? input = Console.ReadLine();
-    switch (input)
+    menu.LogInAsUser();
+  }  
+  
+    else
     {
-      case "1":
+      
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
         if (active_user?.IsRole(Role.User) == true)
@@ -77,7 +82,7 @@ while (running)
           System.Console.WriteLine("e. log out");
           System.Console.WriteLine("f. Close");
           string? userinput = Console.ReadLine();
-          switch (input)
+          switch (userinput)
           {
             case "1": // request registration
               menu.SendRegistrationRequest();
@@ -100,10 +105,8 @@ while (running)
               break;
           }
         }
-        break;
-      case "2": // Patient
-        menu.LogInAsUser();                    //frågar efter username/password
-        active_user = menu.ActiveUser;         // resultat
+        
+         // resultat
         if (active_user?.IsRole(Role.Patient) == true)
         {
           try { Console.Clear(); } catch { }
@@ -139,10 +142,9 @@ while (running)
           }
 
         } // slut på patient meny
-        break;
-      case "3": // Personnel
-        menu.LogInAsUser();                    //frågar efter username/password
-        active_user = menu.ActiveUser;         // resultat
+   
+      // Personnel
+             // resultat
         if (active_user?.IsRole(Role.Personnel) == true)
         {
           try { Console.Clear(); } catch { }
@@ -181,32 +183,12 @@ while (running)
           }
 
         } // slut på Personnel meny
-        break;
-      case "4": // Admin
-        menu.LogInAsUser();                    //frågar efter username/password
-        active_user = menu.ActiveUser;         // resultat
+             // resultat
         if (active_user?.IsRole(Role.Main_Admin) == true)
         {
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("MainAdmin menue");
-          string? mainadmininput = Console.ReadLine();
-          switch (mainadmininput)
-          {
-            case "1":
-              break;
-            default:
-              System.Console.WriteLine("Invalid choice.");
-              System.Console.WriteLine("Press ENTER to continue.....");
-              Console.ReadLine();
-              break;
-          }
-
-        } // slut på Main Admin meny 
-        //Fixa case för Local Admin pls :D
-        if (active_user!.IsRole(Role.Local_Admin))
-        {
-          try { Console.Clear(); } catch { }
-          System.Console.WriteLine("LocalAdmin menue");
+          System.Console.WriteLine("2. Accept Requests");
           string? mainadmininput = Console.ReadLine();
           switch (mainadmininput)
           {
@@ -219,37 +201,42 @@ while (running)
               break;
 
             case "2":
+              menu.Accept_requests();
+              break;
+
+          }
+
+        } // slut på Main Admin meny 
+        //Fixa case för Local Admin pls :D
+        if (active_user!.IsRole(Role.Local_Admin))
+        {
+          try { Console.Clear(); } catch { }
+          System.Console.WriteLine("LocalAdmin menue");
+          string? mainadmininput = Console.ReadLine();
+          switch (mainadmininput)
+          {
+          
+            default:
+              System.Console.WriteLine("Invalid choice.");
+              System.Console.WriteLine("Press ENTER to continue.....");
+              Console.ReadLine();
+              break;
+
+            case "2":
               menu.Make_Personnel();
               break;
           }
 
         } // slut på Local Admin meny
-        break;
-
-      // The rest of the first switch
-      case "f": // close
-        running = false;
-        break;
 
 
-            case "C":
-              menu.Make_account();
-            
-            
-              break;
-              
-      default:
-        System.Console.WriteLine("Invalid choice.");
-        System.Console.WriteLine("Press ENTER to continue.....");
-        Console.ReadLine();
-        break;
     }
 
 
 
   }
-  
-}
+
+
 
 
 

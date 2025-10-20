@@ -147,8 +147,44 @@ internal IUser? ActiveUser => active_user;
     UserDataManager.SaveUser(username, password, Role.Personnel);
 
     File.AppendAllText("Users_log.txt",
-    $"New Personnel created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
+    $"New  created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
 
     Console.WriteLine("Account created successfully!");
   }
+
+
+public void Accept_requests()
+  {
+    foreach(RequestRegistration Request in request_registrations)
+    {
+
+      if (Request.Status == RegistrationStatus.Pending)
+            {
+
+        System.Console.WriteLine("do you want to accept" + Request + "Registration");
+      System.Console.WriteLine("type yes if you want to accept and no to deny");
+      string input = Console.ReadLine();
+      switch (input)
+      {
+        case "yes":
+            Request.Status = RegistrationStatus.Accept;
+          users.Add(new User(Request.PatientName!, Request.PatientPassword!, Role.Patient));
+           UserDataManager.SaveUser(Request.PatientName!, Request.PatientPassword!, Role.Personnel);
+
+          break;
+
+          case "no":
+            Request.Status = RegistrationStatus.Deny;
+
+  System.Console.WriteLine("you did not accept thier request");
+            break;
+
+            }
+            
+
+        }    
+        }
+
+    }
+
 }
