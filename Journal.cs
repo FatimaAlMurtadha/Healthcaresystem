@@ -16,4 +16,11 @@ class Patient_Journal
     Notice = notice;
     Date = date;
   }
+
+  // function för att "As a patient, I need to be able to view my own journal."
+  public void ViewMyOwnJournal()
+  {
+    User active_user.IsRole(Role Patient); // Beh
+    if ()
+  }
 }
