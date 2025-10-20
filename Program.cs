@@ -49,7 +49,7 @@ bool running = true;
 
 
 while (running)
-{ // Skapa Welcom menu 
+{ // Create Welcome menu 
   if (active_user == null)
   {
     System.Console.WriteLine("------------  Health Care System  -------------");
@@ -73,7 +73,12 @@ while (running)
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("------Welcome User ------");
           System.Console.WriteLine("Choose one of the following: ");
+<<<<<<< HEAD
           System.Console.WriteLine("1. Request registration: ");
+=======
+
+          System.Console.WriteLine("1. Request registration as patient: ");
+>>>>>>> 41ecda3 (sparar ändringar innan pull)
           System.Console.WriteLine("e. log out");
           System.Console.WriteLine("f. Close");
           string? userinput = Console.ReadLine();
@@ -252,6 +257,34 @@ while (running)
 }
 
 
+<<<<<<< HEAD
+=======
+ // slut på else satsen som öppnar systemet
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+static void Make_Personnel(List<IUser> users)
+{
+  System.Console.WriteLine("Please enter the name of the account");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("Please enter the name of the account");
+  string password = Console.ReadLine()!;
+  users.Add(new Personnel(username, password));
+
+
+}
+>>>>>>> 41ecda3 (sparar ändringar innan pull)
 
 
 static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
