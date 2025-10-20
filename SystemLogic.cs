@@ -81,7 +81,7 @@ internal IUser? ActiveUser => active_user;
     }
 
   }
-  static void Give_Local_Admin(List<IUser> users)// detta kontot finns men det blir en local_Admin
+  public void Give_Local_Admin()// detta kontot finns men det blir en local_Admin
   {
     try { Console.Clear(); } catch {}
     System.Console.WriteLine("Please enter the name of the person who you wants to be a Local_Admin");
@@ -100,7 +100,7 @@ internal IUser? ActiveUser => active_user;
     }
   }
 
-  static void Make_Local_Admin(List<IUser> users)
+  public void Make_Local_Admin()
   {
     try { Console.Clear(); } catch {}
     System.Console.WriteLine("Please enter the name of the account");
@@ -110,8 +110,8 @@ internal IUser? ActiveUser => active_user;
     users.Add(new Local_Admin(username, password)); // need Local_Admin class
   }
 
-static void Make_account(List<IUser> users)
-{
+  public void Make_account()
+  {
     System.Console.WriteLine("Please enter your name:");
     string? username = Console.ReadLine();
 
@@ -120,8 +120,8 @@ static void Make_account(List<IUser> users)
 
     if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
     {
-        Console.WriteLine("Invalid input. Try again.");
-        return;
+      Console.WriteLine("Invalid input. Try again.");
+      return;
     }
 
     var newUser = new User(username, password);
@@ -130,8 +130,24 @@ static void Make_account(List<IUser> users)
     // Save to file
     UserDataManager.SaveUser(username, password, Role.User);
 
+
     File.AppendAllText("Users_log.txt",
     $"New user created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
+
+    Console.WriteLine("Account created successfully!");
+  }
+  public void Make_Personnel()
+  {
+    System.Console.WriteLine("Please enter the name of the account");
+    string username = Console.ReadLine()!;
+    System.Console.WriteLine("Please enter the Password of the account");
+    string password = Console.ReadLine()!;
+    users.Add(new User(username, password));
+
+    UserDataManager.SaveUser(username, password, Role.Personnel);
+
+    File.AppendAllText("Users_log.txt",
+    $"New Personnel created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
 
     Console.WriteLine("Account created successfully!");
   }
