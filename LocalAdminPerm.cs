@@ -1,5 +1,6 @@
 namespace App;
 
+
     class Location
     {
         public string Name;
@@ -17,6 +18,45 @@ namespace App;
         }
     }
 
+
+class Local_Admin: IUser
+{
+    private string admin_username;
+    private string _password;
+    private Role _role;
+
+    public Local_Admin(string username, string password, Role role = Role.Local_Admin)
+    {
+        admin_username = username;
+        _password = password;
+        _role = role;
+    }
+    public bool TryLogin(string username, string password)
+    {
+        return admin_username == username && _password == password;
+    }
+
+    public bool IsRole(Role role)
+    {
+        return _role == role;
+    }
+
+    public Role GetRole()
+    {
+        return _role;
+    }
+
+    public override string ToString()
+    {
+        return $"{admin_username} ({_role})";
+    }
+    
+
+
+}
+
+
+
     //Personal konto
     class PersonnelAccount
     {
@@ -30,28 +70,7 @@ namespace App;
         }
     }
 
-    // Registrering
-    class Registration
-    {
-        public string UserEmail;
-        public string Password;
-        public RegistrationStatus Status;
 
-        public Registration(string useremail, string password, RegistrationStatus status)
-        {
-            UserEmail = useremail;
-            Password = password;
-            Status = status;
-        }
-    }
-
-    // Status för registrering
-    public enum RegistrationStatus
-    {
-        Pending,
-        Accept,
-        Deny
-    }
 
    
     class Local_Admin_Permission
@@ -59,7 +78,7 @@ namespace App;
         
         public static List<Location> Locations = new List<Location>();
         public static List<PersonnelAccount> Personnels = new List<PersonnelAccount>();
-        public static List<Registration> Registrations = new List<Registration>();
+    
 
         public static bool NewLocation(string LocationName, string HospitalName)
         {
@@ -95,56 +114,7 @@ namespace App;
             Console.WriteLine("Nytt konto för personalen: " + personnelemail);
             return true;
         }
+      
 
-        //Skapar en registreringsförfrågan
-        public static bool CreateRegistration(string userEmail, string password)
-        {
-
-
-            Registrations.Add(new Registration(userEmail, password, RegistrationStatus.Pending));
-            Console.WriteLine("Registreringsförfrågan skapad för: " + userEmail);
-            return true;
-        }
-
-   
-
-        //Godkänn en registrering
-        public static bool AcceptNewPatient(string userEmail)
-        {
-            int i = 0;
-      while (i < Registrations.Count)
-      {
-        Registration reg = Registrations[i];
-        if (reg.UserEmail == userEmail && reg.Status == RegistrationStatus.Pending)
-        {
-          reg.Status = RegistrationStatus.Accept;
-          Console.WriteLine("Registrering godkänd: " + reg.UserEmail);
-          return true;
-        }
-        i = i + 1;
-      }
-
-      return false;
-
-           
-        }
-
-        // Deny registration.
-        public static bool DenyNewPatient(string userEmail)
-        {
-            int i = 0;
-            while (i < Registrations.Count)
-            {
-                Registration reg = Registrations[i];
-                if (reg.UserEmail == userEmail && reg.Status == RegistrationStatus.Pending)
-                {
-                    reg.Status = RegistrationStatus.Deny;
-                    Console.WriteLine("Registrering avslagen: " + reg.UserEmail);
-                    return true;
-                }
-                i = i + 1;
-            }
-
-            return false;
-        }
+       
     }

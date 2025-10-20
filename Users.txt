@@ -1,0 +1,4 @@
+Oskar,UNLEASHED,Personnel
+
+
+Ni kan testa med att bara inputta login details. User/Password/Role
