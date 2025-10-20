@@ -2,9 +2,13 @@
 using App;
 
 
-/*
-As an admin with sufficient permissions, I need to be able to give admins the permission to handle the permission system, in fine granularity.
 
+<<<<<<< HEAD
+
+// En lista på alla registration requests
+
+
+=======
 As an admin with sufficient permissions, I need to be able to assign admins to certain regions.
 
 As an admin with sufficient permissions, I need to be able to give admins the permission to handle registrations.
@@ -43,23 +47,41 @@ As a patient, I need to be able to request an appointment.
 
 As a logged in Patient, I need to be able to view my schedule.
 */
+>>>>>>> main
 SystemLogicMenu menu = new SystemLogicMenu();
 IUser? active_user = null;
 bool running = true;
 
 
 while (running)
-{ // Skapa Welcom menu 
+{ // Create Welcome menu 
   if (active_user == null)
   {
     System.Console.WriteLine("------------  Health Care System  -------------");
     System.Console.WriteLine("-----------------------------------------------------");
+<<<<<<< HEAD
+    System.Console.WriteLine("-----Log in ---------");
+    System.Console.WriteLine("Username: ");
+    string? username = Console.ReadLine();
+    System.Console.WriteLine("Password:");
+    string? password = Console.ReadLine();
+    // 
+
+    string? input = Console.ReadLine();
+    switch (input)
+    {
+      case "1": // User
+        if (active_user.IsRole(Role.User))
+        {
+          try { Console.Clear(); } catch {}
+=======
     System.Console.WriteLine("Log in firsta to open the system");
     System.Console.WriteLine();
     System.Console.WriteLine("1. User.");
     System.Console.WriteLine("2. Patient.");
     System.Console.WriteLine("3. Personnel.");
-    System.Console.WriteLine("4. Admin");
+    System.Console.WriteLine("4. Main admin");
+    System.Console.WriteLine("5. Local admin");
     System.Console.WriteLine("f. Close");
     System.Console.WriteLine("C. Create account");
     string? input = Console.ReadLine();
@@ -71,9 +93,13 @@ while (running)
         if (active_user?.IsRole(Role.User) == true)
         {
           try { Console.Clear(); } catch { }
+>>>>>>> main
           System.Console.WriteLine("------Welcome User ------");
           System.Console.WriteLine("Choose one of the following: ");
+
           System.Console.WriteLine("1. Request registration: ");
+
+          System.Console.WriteLine("1. Request registration as patient: ");
           System.Console.WriteLine("e. log out");
           System.Console.WriteLine("f. Close");
           string? userinput = Console.ReadLine();
@@ -102,9 +128,13 @@ while (running)
         }
         break;
       case "2": // Patient
+<<<<<<< HEAD
+        if (active_user.IsRole(Role.Patient))
+=======
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
         if (active_user?.IsRole(Role.Patient) == true)
+>>>>>>> main
         {
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("------Welcome Patient ------");
@@ -141,9 +171,13 @@ while (running)
         } // slut på patient meny
         break;
       case "3": // Personnel
+<<<<<<< HEAD
+        if (active_user.IsRole(Role.Personnel))
+=======
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
         if (active_user?.IsRole(Role.Personnel) == true)
+>>>>>>> main
         {
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("1. View a patient's journal entries.");
@@ -182,19 +216,62 @@ while (running)
 
         } // slut på Personnel meny
         break;
+<<<<<<< HEAD
       case "4": // Admin
+<<<<<<< HEAD
+        if (active_user.IsRole(Role.Main_Admin))
+=======
+=======
+      case "4": // Main Admin
+>>>>>>> abaec5c7fb1b33e2fa1d9bb7e83ac14cb56b123b
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
         if (active_user?.IsRole(Role.Main_Admin) == true)
+>>>>>>> main
         {
-          try { Console.Clear(); } catch { }
+<<<<<<< HEAD
+          try { Console.Clear(); } catch {}
           System.Console.WriteLine("MainAdmin menue");
+<<<<<<< HEAD
           System.Console.WriteLine("2. Accept Requests");
+=======
+=======
+          try { Console.Clear(); } catch { }
+          System.Console.WriteLine("Main Admin menu");
+          System.Console.WriteLine("1. Give admins the permission to handle registrations");
+          System.Console.WriteLine("2. Give admins the permission to add locations");
+          System.Console.WriteLine("3. Assign admins to certain regions");
+          System.Console.WriteLine("4. Give admins the permission to to handle the permission system");
+          System.Console.WriteLine("5. Give admins the permission to create personell accounts");
+          System.Console.WriteLine("e. Log out");
+          System.Console.WriteLine("f. Close");
+>>>>>>> abaec5c7fb1b33e2fa1d9bb7e83ac14cb56b123b
+>>>>>>> d3d64efc359ecd12de5503c60a00f445efb602df
           string? mainadmininput = Console.ReadLine();
-          switch (mainadmininput)
+          switch(mainadmininput)
           {
-            case "1":
+            case "1": // Give admins the permission to handle registrations
               break;
+
+            case "2": //  Give admins the permission to add locations
+            break;
+
+            case "3": // Assign admins to certain regions
+            break;
+
+            case "4": // Give admins the permission to to handle the permission system
+            break;
+
+            case "5": // Give admins the permission to create personell accounts
+            break;
+
+             case "e": // Log out
+            active_user = null;
+
+            case "f": // close
+            running = false;
+            
+            
             default:
               System.Console.WriteLine("Invalid choice.");
               System.Console.WriteLine("Press ENTER to continue.....");
@@ -210,13 +287,34 @@ while (running)
               break;
 
           }
+          
 
+<<<<<<< HEAD
+        } // slut på Main Admin meny
+        if (active_user.IsRole(Role.Local_Admin))
+=======
         } // slut på Main Admin meny 
+<<<<<<< HEAD
         //Fixa case för Local Admin pls :D
         if (active_user!.IsRole(Role.Local_Admin))
+>>>>>>> main
+=======
+
+        break;
+        case "5": // Local admin
+        menu.LogInAsUser();
+        active_user = menu.ActiveUser;
+        if (active_user?.IsRole(Role.Local_Admin) == true)
+
+>>>>>>> abaec5c7fb1b33e2fa1d9bb7e83ac14cb56b123b
         {
           try { Console.Clear(); } catch { }
-          System.Console.WriteLine("LocalAdmin menue");
+          System.Console.WriteLine("LocalAdmin menu");
+          System.Console.WriteLine("1. Handle patient registration");
+          System.Console.WriteLine("2. Create accounts for personell");
+          System.Console.WriteLine("3. Add locations");
+          System.Console.WriteLine("e. Log out");
+          System.Console.WriteLine("f. Close ");
           string? mainadmininput = Console.ReadLine();
           switch (mainadmininput)
           {
@@ -231,6 +329,14 @@ while (running)
             case "2":
               menu.Make_Personnel();
               break;
+
+            case "e": // Log out
+            active_user = null;
+
+            case "f": // close
+            running = false;
+
+
           }
 
         } // slut på Local Admin meny
@@ -261,6 +367,41 @@ while (running)
   
 }
 
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+
+>>>>>>> abaec5c7fb1b33e2fa1d9bb7e83ac14cb56b123b
+ // slut på else satsen som öppnar systemet
+
+
+
+
+   
+>>>>>>> main
+
+
+
+
+
+
+
+
+
+static void Make_Personnel(List<IUser> users)
+{
+  System.Console.WriteLine("Please enter the name of the account");
+  string username = Console.ReadLine()!;
+  System.Console.WriteLine("Please enter the name of the account");
+  string password = Console.ReadLine()!;
+  //users.Add(new Personnel(username, password));
+
+
+}
 
 
 

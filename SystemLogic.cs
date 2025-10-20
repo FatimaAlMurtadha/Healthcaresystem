@@ -4,7 +4,7 @@ namespace App;
 
 public class SystemLogicMenu
 {
-internal IUser? ActiveUser => active_user;
+  internal IUser? ActiveUser => active_user;
   IUser? active_user = null;
   bool running = true;
 

@@ -2,18 +2,24 @@ namespace App;
 
 class Patient_Journal
 {
-  public User PatientName;
-  public string? Title;
-  public string? Description;
-  public string? Notice;
-  public DateTime Date;
+  User PatientPersonalNumber;
+   string? Title { get; set; }
+   string? Description { get; set; }
+   string? Notice { get; set; }
+   DateTime Date { get; set; }
 
-  public Patient_Journal(User patientname, string? title, string? description, string notice, DateTime date)
+  public Patient_Journal(User patientpersonalnaumber, string? title, string? description, string notice, DateTime date)
   {
-    PatientName = patientname;
+    PatientPersonalNumber = patientpersonalnaumber;
     Title = title;
     Description = description;
     Notice = notice;
     Date = date;
   }
+  public string? ToString()
+  {
+    return "{PatientPersonalNumber}";
+  }
+
+
 }

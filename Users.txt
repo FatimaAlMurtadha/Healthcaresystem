@@ -1,5 +1,13 @@
 Oskar,UNLEASHED,Personnel
 Lukas,Eriksson,Local_Admin
+<<<<<<< HEAD
 Kebab,Falafel,Main_Admin
+=======
+Sigge,Von,Main_Admin
+
+>>>>>>> d3d64efc359ecd12de5503c60a00f445efb602df
 Ni kan testa med att bara inputta login details.r
 sigge,von,User
+Lukas,Lös,User
+
+
