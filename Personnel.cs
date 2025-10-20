@@ -11,12 +11,13 @@ class Personnel : IUser
         Password = password;
 
     }
-    
+
     public bool TryLogin(string username, string password)
     {
         return username == Username && password == Password;
 
     }
+
      
 public bool IsRole(Role role)
     {
