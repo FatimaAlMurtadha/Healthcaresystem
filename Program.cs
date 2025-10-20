@@ -46,6 +46,7 @@ As a logged in Patient, I need to be able to view my schedule.
 SystemLogicMenu menu = new SystemLogicMenu();
 IUser? active_user = null;
 bool running = true;
+bool testing = true;
 
 
 while (running)
@@ -67,8 +68,10 @@ while (running)
     {
       case "1":
         menu.LogInAsUser();                    //frågar efter username/password
-        active_user = menu.ActiveUser;         // resultat
-        while (active_user?.IsRole(Role.User) == true)
+        testing = true;
+        active_user = menu.ActiveUser;
+        while (testing == true) {       // resultat
+        if (active_user!.IsRole(Role.User) == true)
         
         {
           try { Console.Clear(); } catch { }
@@ -80,7 +83,7 @@ while (running)
           System.Console.WriteLine("e. log out");
           System.Console.WriteLine("f. Close");
           string? userinput = Console.ReadLine();
-          switch (input)
+          switch (userinput)
           {
             case "1": // request registration
               menu.SendRegistrationRequest();
@@ -88,6 +91,7 @@ while (running)
 
             case "e": // As a user, I need to be able to log out.
               active_user = null;
+              testing = false;
               break;
 
             case "f": // close
@@ -100,14 +104,15 @@ while (running)
               System.Console.WriteLine("Invalid choice.");
               System.Console.WriteLine("Press ENTER to continue.....");
               Console.ReadLine();
-              break;
+                break;
+              }
           }
         }
         break;
       case "2": // Patient
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
-        if (active_user?.IsRole(Role.Patient) == true)
+        while (active_user?.IsRole(Role.Patient) == true)
         {
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("------Welcome Patient ------");
@@ -147,7 +152,7 @@ while (running)
       case "3": // Personnel
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
-        if (active_user?.IsRole(Role.Personnel) == true)
+        while (active_user?.IsRole(Role.Personnel) == true)
         {
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("1. View a patient's journal entries.");
@@ -190,7 +195,7 @@ while (running)
       case "4": // Admin
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat
-        if (active_user?.IsRole(Role.Main_Admin) == true)
+        while (active_user?.IsRole(Role.Main_Admin) == true)
         {
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("MainAdmin menue");
@@ -237,7 +242,7 @@ while (running)
 
         } // slut på Main Admin meny 
         //Fixa case för Local Admin pls :D
-        if (active_user!.IsRole(Role.Local_Admin))
+        while (active_user!.IsRole(Role.Local_Admin))
         {
           try { Console.Clear(); } catch { }
           System.Console.WriteLine("LocalAdmin menue");
