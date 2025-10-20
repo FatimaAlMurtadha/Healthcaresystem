@@ -224,11 +224,7 @@ while (running)
 
              case "e": // Log out
             active_user = null;
-<<<<<<< HEAD
-            
-=======
             break;
->>>>>>> 96cf6ec (la till breaks)
 
             case "f": // close
             running = false;
@@ -238,7 +234,7 @@ while (running)
               System.Console.WriteLine("Invalid choice.");
               System.Console.WriteLine("Press ENTER to continue.....");
               Console.ReadLine();
-              
+              break;
           }
           
 
