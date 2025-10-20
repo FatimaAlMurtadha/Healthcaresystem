@@ -147,7 +147,7 @@ public class SystemLogicMenu
     UserDataManager.SaveUser(username, password, Role.Personnel);
 
     File.AppendAllText("Users_log.txt",
-    $"New Personnel created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
+    $"New  created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
 
     Console.WriteLine("Account created successfully!");
   }
@@ -155,7 +155,7 @@ public class SystemLogicMenu
   // function för att "As a patient, I need to be able to view my own journal."
   // Lista på alla Journaler
   List<Patient_Journal> journals = new List<Patient_Journal>();
-  public void ShwJournal() // vissa min egen journal som patient
+  public void ShowJournal() // vissa min egen journal som patient
   {
     try { Console.Clear(); } catch { }
     ;
@@ -176,13 +176,48 @@ public class SystemLogicMenu
           }
         }
       }
-      else
+    }
+  }
+  
+
+<<<<<<< HEAD
+=======
+public void Accept_requests()
+  {
+    foreach(RequestRegistration Request in request_registrations)
+    {
+
+      if (Request.Status == RegistrationStatus.Pending)
+            {
+
+        System.Console.WriteLine("do you want to accept" + Request + "Registration");
+      System.Console.WriteLine("type yes if you want to accept and no to deny");
+      string input = Console.ReadLine();
+      switch (input)
+>>>>>>> 5ee17ad1cce30886ad7047a4e93f203e685d372d
       {
-        System.Console.WriteLine("You do not have the permission to view this journal");
-      }
+        case "yes":
+          Request.Status = RegistrationStatus.Accept;
+          users.Add(new User(Request.PatientName!, Request.PatientPassword!, Role.Patient));
+          UserDataManager.SaveUser(Request.PatientName!, Request.PatientPassword!, Role.Personnel);
+
+          break;
+
+        case "no":
+          Request.Status = RegistrationStatus.Deny;
+
+          System.Console.WriteLine("you did not accept thier request");
+          break;
+
+        }
+
+
+      }    
+        }
 
     }
 
+<<<<<<< HEAD
 
   }
 
@@ -200,4 +235,6 @@ public class SystemLogicMenu
 
 
 
+=======
+>>>>>>> 5ee17ad1cce30886ad7047a4e93f203e685d372d
 }
