@@ -155,7 +155,7 @@ public class SystemLogicMenu
   // function för att "As a patient, I need to be able to view my own journal."
   // Lista på alla Journaler
   List<Patient_Journal> journals = new List<Patient_Journal>();
-  public void ViewMyOwnJournal()
+  public void ShwJournal() // vissa min egen journal som patient
   {
     try { Console.Clear(); } catch { }
     ;
