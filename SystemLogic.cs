@@ -57,7 +57,7 @@ public class SystemLogicMenu
   public void SendRegistrationRequest()
   {
 
-    try { Console.Clear(); } catch {}
+    try { Console.Clear(); } catch { }
     System.Console.WriteLine("Your personal security number: ");
     string? patientpersonalnumber = Console.ReadLine();
     System.Console.WriteLine("Your name: ");
@@ -81,7 +81,34 @@ public class SystemLogicMenu
     }
 
   }
-  public void Give_Local_Admin()// detta kontot finns men det blir en local_Admin
+
+  // function för att "As a patient, I need to be able to view my own journal."
+  // Lista på alla Journaler
+  List<Patient_Journal> journals = new List<Patient_Journal>();
+  public void ShowJournal() // vissa min egen journal som patient
+  {
+    try { Console.Clear(); } catch {};
+    if (active_user == null)
+    {
+      System.Console.WriteLine("You should first log in");
+    }
+    else
+    {
+      if (active_user.IsRole(Role.Patient))
+      {
+        foreach (Patient_Journal journal in journals)
+        {
+          if (journal.ToString() == active_user.ToString())
+          {
+            System.Console.WriteLine("----------Your Own Journal--------");
+
+          }
+        }
+      }
+    }
+  }
+
+        public void Give_Local_Admin()// detta kontot finns men det blir en local_Admin
   {
     try { Console.Clear(); } catch {}
     System.Console.WriteLine("Please enter the name of the person who you wants to be a Local_Admin");
@@ -159,6 +186,8 @@ public class SystemLogicMenu
     Console.WriteLine("Account created successfully!");
   }
 
+ 
+  
 
 public void Accept_requests()
   {
@@ -174,22 +203,22 @@ public void Accept_requests()
       switch (input)
       {
         case "yes":
-            Request.Status = RegistrationStatus.Accept;
+          Request.Status = RegistrationStatus.Accept;
           users.Add(new User(Request.PatientName!, Request.PatientPassword!, Role.Patient));
-           UserDataManager.SaveUser(Request.PatientName!, Request.PatientPassword!, Role.Personnel);
+          UserDataManager.SaveUser(Request.PatientName!, Request.PatientPassword!, Role.Personnel);
 
           break;
 
-          case "no":
-            Request.Status = RegistrationStatus.Deny;
+        case "no":
+          Request.Status = RegistrationStatus.Deny;
 
-  System.Console.WriteLine("you did not accept thier request");
-            break;
+          System.Console.WriteLine("you did not accept thier request");
+          break;
 
-            }
-            
+        }
 
-        }    
+
+      }    
         }
 
     }
