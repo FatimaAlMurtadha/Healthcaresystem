@@ -218,15 +218,18 @@ while (running)
             case "5": // Give admins the permission to create personell accounts
             break;
 
-             case "e": // Log out
-            active_user = null;
+            case "e": // Log out
+            break;
+              active_user = null;
+            
             break;
 
             case "f": // close
             running = false;
             break;
-            
+
             default:
+            
               System.Console.WriteLine("Invalid choice.");
               System.Console.WriteLine("Press ENTER to continue.....");
               Console.ReadLine();
@@ -262,12 +265,12 @@ while (running)
               break;
 
             case "e": // Log out
-            active_user = null;
-            break;
+              active_user = null;
+              break;
 
             case "f": // close
-            running = false;
-            break;
+              running = false;
+              break;
 
 
           }
