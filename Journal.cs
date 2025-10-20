@@ -16,13 +16,10 @@ class Patient_Journal
     Notice = notice;
     Date = date;
   }
-<<<<<<< HEAD
-=======
   public string? ToString()
   {
     return "{PatientPersonalNumber}";
   }
 
->>>>>>> main
 
 }
