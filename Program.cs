@@ -2,49 +2,10 @@
 using App;
 
 
-/*
-As an admin with sufficient permissions, I need to be able to give admins the permission to handle the permission system, in fine granularity.
 
-As an admin with sufficient permissions, I need to be able to assign admins to certain regions.
-
-As an admin with sufficient permissions, I need to be able to give admins the permission to handle registrations.
-
-As an admin with sufficient permissions, I need to be able to give admins the permission to add locations.
-
-As an admin with sufficient permissions, I need to be able to give admins the permission to create accounts for personnel.
-
-As an admin with sufficient permissions, I need to be able to give admins the permission to view a list of who has permission to what.
-
-As an admin with sufficient permissions, I need to be able to add locations.
-
-As an admin with sufficient permissions, I need to be able to accept user registration as patients.
-
-As an admin with sufficient permissions, I need to be able to deny user registration as patients.
-
-As an admin with sufficient permissions, I need to be able to create accounts for personnel.
-
-As an admin with sufficient permissions, I need to be able to view a list of who has permission to what.
-
-As personnel with sufficient permissions, I need to be able to view a patients journal entries.
-
-As personnel with sufficient permissions, I need to be able to mark journal entries with different levels of read permissions.
-
-As personnel with sufficient permissions, I need to be able to register appointments.
-
-As personnel with sufficient permissions, I need to be able to modify appointments.
-
-As personnel with sufficient permissions, I need to be able to approve appointment requests.
-
-As personnel with sufficient permissions, I need to be able to view the schedule of a location.
-
-As a patient, I need to be able to view my own journal.
-
-As a patient, I need to be able to request an appointment.
-
-As a logged in Patient, I need to be able to view my schedule.
-*/
 
 // En lista på alla registration requests
+
 
 SystemLogicMenu menu = new SystemLogicMenu();
 IUser? active_user = null;
@@ -57,21 +18,19 @@ while (running)
   {
     System.Console.WriteLine("------------  Health Care System  -------------");
     System.Console.WriteLine("-----------------------------------------------------");
-    System.Console.WriteLine("Log in As: ");
-    System.Console.WriteLine();
-    System.Console.WriteLine("1. User.");
-    System.Console.WriteLine("2. Patient.");
-    System.Console.WriteLine("3. Personnel.");
-    System.Console.WriteLine("4. Admin");
-    System.Console.WriteLine("f. Close");
+    System.Console.WriteLine("-----Log in ---------");
+    System.Console.WriteLine("Username: ");
+    string? username = Console.ReadLine();
+    System.Console.WriteLine("Password:");
+    string? password = Console.ReadLine();
+    // 
+
     string? input = Console.ReadLine();
     switch (input)
     {
-      case "1":
-      menu.LogInAsUser();                    //frågar efter username/password
-      active_user = menu.ActiveUser;         // resultat
-       if (active_user?.IsRole(Role.User) == true)
-  {
+      case "1": // User
+        if (active_user.IsRole(Role.User))
+        {
           try { Console.Clear(); } catch {}
           System.Console.WriteLine("------Welcome User ------");
           System.Console.WriteLine("Choose one of the following: ");
@@ -103,9 +62,7 @@ while (running)
         }
         break;
       case "2": // Patient
-      menu.LogInAsUser();                    //frågar efter username/password
-      active_user = menu.ActiveUser;         // resultat
-      if (active_user?.IsRole(Role.Patient) == true)
+        if (active_user.IsRole(Role.Patient))
         {
           try{ Console.Clear(); } catch{}
           System.Console.WriteLine("------Welcome Patient ------");
@@ -142,9 +99,7 @@ while (running)
         } // slut på patient meny
         break;
       case "3": // Personnel
-      menu.LogInAsUser();                    //frågar efter username/password
-      active_user = menu.ActiveUser;         // resultat
-       if (active_user?.IsRole(Role.Personnel) == true)
+        if (active_user.IsRole(Role.Personnel))
         {
           try { Console.Clear(); } catch {}
           System.Console.WriteLine("1. View a patient's journal entries.");
@@ -184,14 +139,12 @@ while (running)
         } // slut på Personnel meny
         break;
       case "4": // Admin
-      menu.LogInAsUser();                    //frågar efter username/password
-      active_user = menu.ActiveUser;         // resultat
-        if (active_user?.IsRole(Role.Main_Admin) == true)
+        if (active_user.IsRole(Role.Main_Admin))
         {
-          try { Console.Clear(); } catch { }
+          try { Console.Clear(); } catch {}
           System.Console.WriteLine("MainAdmin menue");
           string? mainadmininput = Console.ReadLine();
-          switch (mainadmininput)
+          switch(mainadmininput)
           {
             case "1":
               break;
@@ -202,8 +155,7 @@ while (running)
               break;
           }
 
-        } // slut på Main Admin meny 
-        //Fixa case för Local Admin pls :D
+        } // slut på Main Admin meny
         if (active_user.IsRole(Role.Local_Admin))
         {
           try { Console.Clear(); } catch {}
@@ -237,16 +189,26 @@ while (running)
 }
 
 
+
+
+
+
+
+
+
+
+
 static void Make_Personnel(List<IUser> users)
 {
   System.Console.WriteLine("Please enter the name of the account");
   string username = Console.ReadLine()!;
   System.Console.WriteLine("Please enter the name of the account");
   string password = Console.ReadLine()!;
-  users.Add(new Personnel(username, password));
+  //users.Add(new Personnel(username, password));
 
 
 }
+
 
 static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
 {
