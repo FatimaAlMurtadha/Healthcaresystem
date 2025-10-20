@@ -57,7 +57,7 @@ internal IUser? ActiveUser => active_user;
   public void SendRegistrationRequest()
   {
 
-    try { Console.Clear(); } catch {}
+    try { Console.Clear(); } catch { }
     System.Console.WriteLine("Your personal security number: ");
     string? patientpersonalnumber = Console.ReadLine();
     System.Console.WriteLine("Your name: ");
@@ -81,6 +81,9 @@ internal IUser? ActiveUser => active_user;
     }
 
   }
+  
+
+  
   public void Give_Local_Admin()// detta kontot finns men det blir en local_Admin
   {
     try { Console.Clear(); } catch {}
