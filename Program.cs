@@ -122,8 +122,10 @@ while (running)
             case "1": // view journal
               break;
             case "2": // request an appointment
+              AppointmentMenu.Patient_RequestAppointment();
               break;
             case "3": // view sechdule
+              AppointmentMenu.Patient_ViewSchedule();
               break;
             case "e": // Log out
               active_user = null;
@@ -140,48 +142,59 @@ while (running)
 
         } // slut på patient meny
         break;
-      case "3": // Personnel
-        menu.LogInAsUser();                    //frågar efter username/password
-        active_user = menu.ActiveUser;         // resultat
-        if (active_user?.IsRole(Role.Personnel) == true)
-        {
-          try { Console.Clear(); } catch { }
-          System.Console.WriteLine("1. View a patient's journal entries.");
-          System.Console.WriteLine("2. Mark journal entries with different levels of read permissions.");
-          System.Console.WriteLine("3. Register appointments.");
-          System.Console.WriteLine("4. Modify appointments.");
-          System.Console.WriteLine("5. Approve appointment requests.");
-          System.Console.WriteLine("6. View the schedule of a location.");
-          System.Console.WriteLine("7. Log out");
-          System.Console.WriteLine("f. Close");
-          string? personnelinput = Console.ReadLine();
-          switch (personnelinput)
-          {
-            case "1": // View a patient's journal entries
-              break;
-            case "2": // Mark Journal entries
-              break;
-            case "3": // Register appointment
-              break;
-            case "4": // Modify appointment
-              break;
-            case "5": // Approve appointment request
-              break;
-            case "6": // View schedule of location
-              break;
-            case "7": // Log out
-              break;
-            case "f": // Close
-              break;
-            default:
-              System.Console.WriteLine("Invalid choice.");
-              System.Console.WriteLine("Press ENTER to continue.....");
-              Console.ReadLine();
-              break;
-          }
+case "3": // Personnel
+    menu.LogInAsUser();                    //frågar efter username/password
+    active_user = menu.ActiveUser;         // resultat
 
-        } // slut på Personnel meny
-        break;
+    if (active_user?.IsRole(Role.Personnel) == true)
+    {
+        bool personnelRunning = true;
+        while (personnelRunning)
+        {
+            try { Console.Clear(); } catch {}
+            System.Console.WriteLine("1. View a patient's journal entries.");
+            System.Console.WriteLine("2. Mark journal entries with different levels of read permissions.");
+            System.Console.WriteLine("3. Register appointments.");
+            System.Console.WriteLine("4. Modify appointments.");
+            System.Console.WriteLine("5. Approve appointment requests.");
+            System.Console.WriteLine("6. View the schedule.");
+            System.Console.WriteLine("7. Log out");
+            System.Console.WriteLine("f. Close");
+            string? personnelinput = Console.ReadLine();
+
+            switch (personnelinput)
+            {
+                case "1": // View a patient's journal entries
+                    break;
+                case "2": // Mark Journal entries
+                    break;
+                case "3": // Register appointment
+                    break;
+                case "4": // Modify appointment
+                    break;
+                case "5": // Approve appointment request
+                    AppointmentMenu.Personnel_ApproveRequests();
+                    break;
+                case "6": // View schedule
+                    AppointmentMenu.Personnel_ViewSchedule();
+                    break;
+                case "7": // Log out
+                    active_user = null;
+                    personnelRunning = false; // return to main menu
+                    break;
+                case "f": // Close
+                    running = false;
+                    personnelRunning = false;
+                    break;
+                default:
+                    System.Console.WriteLine("Invalid choice.");
+                    System.Console.WriteLine("Press ENTER to continue.....");
+                    Console.ReadLine();
+                    break;
+            }
+        }
+    } // slut på Personnel meny
+    break;
       case "4": // Admin
         menu.LogInAsUser();                    //frågar efter username/password
         active_user = menu.ActiveUser;         // resultat

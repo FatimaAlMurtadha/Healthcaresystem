@@ -45,7 +45,7 @@ If you are using Windows you need to:
 Clone the repository:
 Open "git bash" or "Windows PowerShell".
 Write this command : "git clone https:the link of the project on GitHub".
-Go in the application by this command : cd TradeSystem
+Go in the application by this command : cd HealthcareSystem
 
 Run the application using this command : dotnet run
 
