@@ -1,42 +1,33 @@
 namespace App;
 
- class User : IUser
+class User : IUser
 {
-    private string _username;
-    private string _password;
-    private Role _role;
+    public string UserName;
+    string _password;
 
-    public User(string username, string password, Role role = Role.User)
+    public User(string? username, string password)
     {
-        _username = username;
+        UserName = username;
         _password = password;
-        _role = role;
     }
 
     public bool TryLogin(string username, string password)
     {
-        return _username == username && _password == password;
+        return username == UserName && password == _password;
     }
 
     public bool IsRole(Role role)
     {
-        return _role == role;
+        return Role.User == role;
     }
 
     public Role GetRole()
     {
-        return _role;
+        return Role.User;
     }
-
-
-    // Kontrollera om användaren har en viss permission
-    public bool HasPermission(Permission permission)
+    public static Permission Permissions { get; set; }
+    public string? GetPersonalNumber()
     {
-        return (_permissions & permission) == permission;
-    }
-
-    public override string ToString()
-    {
-        return $"{_username} ({_role})";
+        return UserName;
     }
 }
