@@ -86,6 +86,8 @@ public class SystemMenu
         Console.WriteLine("---------------------------------"); // a line to seprate items to be be orgnized on the screen.
         found_patient = true;
       }
+      System.Console.WriteLine("Press ENTER to continue........");
+      Console.ReadLine();
 
     }
     if (!found_patient)
@@ -93,7 +95,10 @@ public class SystemMenu
       System.Console.WriteLine("There is no journal connected with this account");
     }
   }
-  public void Creat_JournalNote()
+
+  // a list with patient 
+  List<Patient> patients = new List<Patient>();
+  public void CreateJournalNote()
   {
     if (active_user == null)
     {
@@ -104,17 +109,30 @@ public class SystemMenu
     {
       System.Console.WriteLine("Patient's personal security number: ");
       string? personalnaumber = Console.ReadLine();
+      // check if there is a patient with the given personal security number
+
+      Patient? patient_peesonnumber = patients.FirstOrDefault(patient_found => patient_found.GetPersonalNumber() == personalnaumber);
+      if (patient_peesonnumber == null)
+      {
+        System.Console.WriteLine("Patient not found");
+        return;
+      }
       System.Console.WriteLine("Title: ");
       string? title = Console.ReadLine();
       System.Console.WriteLine("Description: ");
       string? description = Console.ReadLine();
       System.Console.WriteLine("Note: ");
-      string? other = Console.ReadLine();
+      string? notes = Console.ReadLine();
+
       DateTime created_date = DateTime.Now;
 
 
       // put all information on the patient' journal list
-      journals.Add(new Patient_Journal(personalnaumber, title,description, other, created_date));
+      Patient_Journal new_journal_note = new Patient_Journal(patient_peesonnumber, title, description, notes, created_date);
+      journals.Add(new_journal_note);
+      System.Console.WriteLine("Note added successfully.");
+      System.Console.WriteLine("Press ENTER to continue........");
+      Console.ReadLine();
 
     }
   }

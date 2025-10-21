@@ -47,7 +47,7 @@ As a logged in Patient, I need to be able to view my schedule.
 
   users.Add(new Patient("patient", "123"));
   users.Add(new Personnel("personnel", "123"));
-  users.Add(new Local_Admin("localadmin", "123", "Skåne"));
+  // users.Add(new Local_Admin("localadmin", "123", "Skåne")); // need fixing I comment it in order to run the program
 
   users.Add(new Main_Admin("mainadmin", "123"));
 
@@ -179,7 +179,7 @@ As a logged in Patient, I need to be able to view my schedule.
               if (menu.HasPermission(Personnel.Permissions, Permission.Create_Journal_note))
               {
                 try { Console.Clear(); } catch { }
-                menu.Creat_JournalNote();
+                menu.CreateJournalNote();
               }
               else
               {
