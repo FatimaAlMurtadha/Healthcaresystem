@@ -130,11 +130,18 @@ public class SystemLogicMenu
   public void Make_Local_Admin()
   {
     try { Console.Clear(); } catch {}
-    System.Console.WriteLine("Please enter the name of the account");
+       System.Console.WriteLine("Please enter the name of the account");
     string username = Console.ReadLine()!;
-    System.Console.WriteLine("Please enter the name of the account");
+    System.Console.WriteLine("Please enter the Password of the account");
     string password = Console.ReadLine()!;
-    users.Add(new Local_Admin(username, password)); // need Local_Admin class
+    users.Add(new User(username, password));
+
+    UserDataManager.SaveUser(username, password, Role.Local_Admin);
+
+    File.AppendAllText("Users_log.txt",
+    $"New  created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
+
+    Console.WriteLine("Account created successfully!");
   }
 
   public void Make_account()
@@ -192,7 +199,7 @@ public void Accept_requests()
 
         System.Console.WriteLine("do you want to accept" + Request + "Registration");
       System.Console.WriteLine("type yes if you want to accept and no to deny");
-      string input = Console.ReadLine();
+      string input = Console.ReadLine()!;
       switch (input)
       {
         case "yes":
