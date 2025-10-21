@@ -4,18 +4,13 @@ class Local_Admin : IUser
 {
     private string admin_username;
     private string _password;
-    public string? Region;
+    private Role _role;
 
-
-
-
-    public Local_Admin(string? username, string? password, string? region)
+    public Local_Admin(string username, string password, Role role = Role.Local_Admin, string tba_handleregistration, string tba_addlocation)
     {
         admin_username = username;
         _password = password;
-        Region = region;
-
-
+        _role = role;
     }
 
     public bool TryLogin(string username, string password)
