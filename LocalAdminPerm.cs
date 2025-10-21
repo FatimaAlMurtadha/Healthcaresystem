@@ -24,12 +24,16 @@ class Local_Admin: IUser
     private string admin_username;
     private string _password;
     private Role _role;
+    string ToBeAbleHandleRegistration;
+    string ToBeAbleToAddLocation;
 
-    public Local_Admin(string username, string password, Role role = Role.Local_Admin)
+    public Local_Admin(string username, string password, Role role = Role.Local_Admin, string tba_handleregistration, string tba_addlocation)
     {
         admin_username = username;
         _password = password;
         _role = role;
+        ToBeAbleHandleRegistration = tba_handleregistration;
+        ToBeAbleToAddLocation = tba_addlocation;
     }
     public bool TryLogin(string username, string password)
     {
