@@ -28,7 +28,15 @@ class Personnel : IUser
         return Role.Personnel;
 
     }
-    public static Permission Permissions { get; set; }
+   
+    // Define the permission to a specific personnel
+    public List<Permission> Permissions { get; set; } = new List<Permission>();
+
+    public bool HasPermission(Permission permission)
+    {
+        return Permissions.Contains(permission);
+
+    }
 
 
 }

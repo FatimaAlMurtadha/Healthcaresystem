@@ -1,4 +1,4 @@
-﻿
+﻿using App;
 
 /*
 As an admin with sufficient permissions, I need to be able to give admins the permission to handle the permission system, in fine granularity.
@@ -44,18 +44,26 @@ As a logged in Patient, I need to be able to view my schedule.
 
 
 
-using App;
 
 
-  IUser? active_user = null;
 
-  List<IUser> users = new List<IUser>();
+IUser? active_user = null;
 
-  users.Add(new Patient("patient", "123"));
-  users.Add(new Personnel("personnel", "123"));
-  // users.Add(new Local_Admin("localadmin", "123", "Skåne")); // need fixing I comment it in order to run the program
+List<IUser> users = new List<IUser>();
 
-  users.Add(new Main_Admin("mainadmin", "123"));
+users.Add(new Patient("patient", "123"));
+// creat a perssonel with out the permission to manage the journal
+users.Add(new Personnel("personnel", "123"));
+// creat a personal with the permission to manage the journal
+var doctor = new Personnel("doctor", "123");
+doctor.Permissions.Add(Permission.Create_Journal_note);
+
+// users.Add(new Local_Admin("localadmin", "123", "Skåne")); // need fixing I comment it in order to run the program
+
+//users.Add(new Main_Admin("mainadmin", "123"));
+
+// a list to manage permission
+
 
 
   SystemMenu menu = new SystemMenu();
@@ -170,7 +178,7 @@ using App;
         case Role.Personnel:
           Console.WriteLine("----------Welcome personnel---------");
           System.Console.WriteLine(" 1. Show patient journals ");
-          System.Console.WriteLine(" 2. Create journalnotes ");
+          System.Console.WriteLine(" 2. Create journal notes ");
           System.Console.WriteLine(" 3. Book patient appointments ");
           System.Console.WriteLine(" 4. Handle patient visits ");
           System.Console.WriteLine(" 5. Show schedule for my hospital ");
@@ -181,8 +189,10 @@ using App;
           {
             case "1":
               break;
-            case "2": // create journal note
-              if (menu.HasPermission(Personnel.Permissions, Permission.Create_Journal_note))
+          case "2": // create journal note
+            if (active_user is Personnel personnel)
+            {
+              if (personnel.HasPermission(Permission.Create_Journal_note))
               {
                 try { Console.Clear(); } catch { }
                 menu.CreateJournalNote();
@@ -191,6 +201,13 @@ using App;
               {
                 System.Console.WriteLine("You do not have the permission to manage the journal");
               }
+
+            }
+            else
+            {
+              System.Console.WriteLine("Current user is not personnel");
+            }
+              
 
               break;
 

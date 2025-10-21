@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace App
+namespace App;
+/*
 {
     static class UserDataManager
     {
@@ -31,4 +32,4 @@ namespace App
             return users;
         }
     }
-}
+}*/
