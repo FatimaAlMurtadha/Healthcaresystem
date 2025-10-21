@@ -1,8 +1,5 @@
 namespace App;
 
-
-
-
 class Local_Admin : IUser
 {
     private string admin_username;
@@ -35,6 +32,7 @@ class Local_Admin : IUser
     {
         return Role.Local_Admin;
     }
+
 
 
 

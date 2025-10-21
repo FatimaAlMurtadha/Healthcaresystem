@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-using App;
+﻿using App;
 
 
 /*
@@ -43,7 +42,6 @@ As a patient, I need to be able to request an appointment.
 
 As a logged in Patient, I need to be able to view my schedule.
 */
-using App;
 
 
 IUser? active_user = null;
