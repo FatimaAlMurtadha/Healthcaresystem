@@ -8,11 +8,13 @@ public class SystemMenu
   List<IUser> users = new List<IUser>();
   IUser? active_user = null;
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
+  List<Patient> patients = new List<Patient>();
 
   // Loud all the users when we first run the system // need to expand with the rest of the data on the system
   public SystemMenu()
   {
     users = UserDataManager.LoadUsers();
+    journals = JournalDataManager.LoadJournals();
   }
   // a function to log in as a user "Patient, personnel, main_admin, and local_admin"
   public void LogIn()
@@ -109,75 +111,44 @@ public class SystemMenu
 
   // View my own journal 
   List<Patient_Journal> journals = new List<Patient_Journal>();
- 
-
   public void ShowJournal()
   {
     if (active_user == null)
     {
-      System.Console.WriteLine("No patient is logged in");
+      Console.WriteLine(" No patient is logged in");
       return;
     }
-    bool found_patient = false;
-    foreach (Patient_Journal journal in journals)
+    else if (active_user.IsRole(Role.Patient))
     {
-      if (journal.GetPersonalNumber() == active_user.GetPersonalNumber())
+      foreach (Patient_Journal journal in journals)
       {
-        Console.WriteLine(journal + "\n"); // show the specific patient journal
+        var patient = active_user as Patient;
+        if (patient != null && journal.GetPersonalNumber() == patient.GetPersonalNumber())
+        {
+          Console.WriteLine(journal);
+          Console.WriteLine("---------------------------------");
 
-        Console.WriteLine("---------------------------------"); // a line to seprate items to be be orgnized on the screen.
-        found_patient = true;
+        }
+        else
+        {
+          System.Console.WriteLine("You can only view your own journal.");
+        }
+
+
       }
-      System.Console.WriteLine("Press ENTER to continue........");
-      Console.ReadLine();
 
-    }
-    if (!found_patient)
-    {
-      System.Console.WriteLine("There is no journal connected with this account");
-    }
-  }
 
-  // a list with patient 
-  List<Patient> patients = new List<Patient>();
-  public void CreateJournalNote()
-  {
-    if (active_user == null)
-    {
-      System.Console.WriteLine("No personnel is logged in");
-      return;
     }
     else
     {
-      System.Console.WriteLine("Patient's personal security number: ");
-      string? personalnaumber = Console.ReadLine();
-      // check if there is a patient with the given personal security number
-
-      Patient? patient_peesonnumber = patients.FirstOrDefault(patient_found => patient_found.GetPersonalNumber() == personalnaumber);
-      if (patient_peesonnumber == null)
-      {
-        System.Console.WriteLine("Patient not found");
-        return;
-      }
-      System.Console.WriteLine("Title: ");
-      string? title = Console.ReadLine();
-      System.Console.WriteLine("Description: ");
-      string? description = Console.ReadLine();
-      System.Console.WriteLine("Note: ");
-      string? notes = Console.ReadLine();
-
-      DateTime created_date = DateTime.Now;
-
-
-      // put all information on the patient' journal list
-      Patient_Journal new_journal_note = new Patient_Journal(patient_peesonnumber, title, description, notes, created_date);
-      journals.Add(new_journal_note);
-      System.Console.WriteLine("Note added successfully.");
-      System.Console.WriteLine("Press ENTER to continue........");
-      Console.ReadLine();
-
+      System.Console.WriteLine("Only patient can view their own journal");
     }
+    Console.WriteLine("Press ENTER to continue...");
+    Console.ReadLine();
   }
+
+ 
+  
 }
 
 

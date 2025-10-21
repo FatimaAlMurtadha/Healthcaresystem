@@ -2,7 +2,7 @@ namespace App;
 
 class Patient : IUser
 {
-  string? Personal_Number;
+  public string? Personal_Number;
   string? _password;
 
   public Patient(string personal_number, string password)
