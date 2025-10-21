@@ -5,6 +5,48 @@ namespace App;
 
 public class SystemMenu
 {
+  List<IUser> users = new List<IUser>();
+  IUser? active_user = null;
+  List<RequestRegistration> request_registrations = new List<RequestRegistration>();
+
+  // Loud all the users when we first run the system // need to expand with the rest of the data on the system
+  public SystemMenu()
+  {
+    users = UserDataManager.LoadUsers();
+  }
+  // a function to log in as a user "Patient, personnel, main_admin, and local_admin"
+  public void LogIn()
+  {
+    try { Console.Clear(); } catch { }
+    System.Console.WriteLine();
+    Console.Write("Username: ");
+    string username = Console.ReadLine();
+
+    try { Console.Clear(); } catch { }
+
+    Console.Clear();
+    Console.Write("Password: ");
+    string password = Console.ReadLine();
+
+    try { Console.Clear(); } catch { }
+
+    foreach (IUser user in users)
+    {
+      if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+      {
+        Console.WriteLine("Login failed. Username or password was empty.");
+        return;
+      }
+
+      else if (user.TryLogin(username, password))
+      {
+        active_user = user;
+        break;
+      }
+    }
+  }
+
+  // a function to close the system
   public void CloseSystem()
   {
     Console.Clear();
@@ -13,6 +55,7 @@ public class SystemMenu
     System.Console.WriteLine("Press Enter to close");
     Console.ReadLine();
   }
+  // a function to log out th user "Patient, personnel, main_admin, and local_admin"
   public void LogOut()
   {
     Console.Clear();
@@ -21,10 +64,9 @@ public class SystemMenu
     System.Console.WriteLine("Press ENTER to continue......");
     Console.ReadLine();
   }
-  List<RequestRegistration> request_registrations = new List<RequestRegistration>();
+  //  a function to request registration as a patient
   public void SendRegistrationRequest()
   {
-
     try { Console.Clear(); } catch { }
     System.Console.WriteLine("Your personal security number: ");
     string? patientpersonalnumber = Console.ReadLine(); // personal number
@@ -67,7 +109,7 @@ public class SystemMenu
 
   // View my own journal 
   List<Patient_Journal> journals = new List<Patient_Journal>();
-  User? active_user = null;
+ 
 
   public void ShowJournal()
   {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace App;
-/*
-{
+
+
     static class UserDataManager
     {
         private const string FilePath = "Users.txt"; 
@@ -32,4 +32,3 @@ namespace App;
             return users;
         }
     }
-}*/
