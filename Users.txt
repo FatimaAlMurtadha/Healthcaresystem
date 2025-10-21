@@ -1,7 +1,7 @@
 Oskar,UNLEASHED,Personnel
 Fatima,123,Local_Admin
 User,123,Patient
-King,Boss,Admin
+King,Boss,Main_Admin
 Ni kan testa med att bara inputta login details. User/Password/Role
 Lukas,Eriksson,Local_Admin
 Kebab,Falafel,Main_Admin
