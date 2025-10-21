@@ -48,16 +48,18 @@ As a logged in Patient, I need to be able to view my schedule.
 
 IUser? active_user = null;
 
-List<IUser> users = new List<IUser>();
-
-users.Add(new Patient("patient", "123"));
-users.Add(new Personnel("personnel", "123"));
-users.Add(new Local_Admin("localadmin", "123"));
-
-users.Add(new Main_Admin("mainadmin", "123"));
-
+//Inga static användare snälla. Använd UserDataManager.LoadUsers() istället.
+List<IUser> users = UserDataManager.LoadUsers();
+if (users.Count == 0)
+{
+    Console.WriteLine("Varning: inga användare laddades från Users.txt.");
+    Console.WriteLine("Exempelrad: patient,123,Patient");
+    Console.WriteLine("Tryck ENTER för att fortsätta...");
+    Console.ReadLine();
+}
 
 SystemMenu menu = new SystemMenu();
+
 
 
 bool running = true;
@@ -97,7 +99,7 @@ while (running)
           if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
           {
             Console.WriteLine("Login failed. Username or password was empty.");
-            return;
+            break;
           }
 
           else if (user.TryLogin(username, password))
