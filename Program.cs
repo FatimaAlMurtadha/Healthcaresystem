@@ -49,24 +49,16 @@ As a logged in Patient, I need to be able to view my schedule.
 
 IUser? active_user = null;
 
-List<IUser> users = new List<IUser>();
+//Inga static användare snälla. Använd UserDataManager.LoadUsers() istället.
+List<IUser> users = UserDataManager.LoadUsers();
+if (users.Count == 0)
+{
+    Console.WriteLine("Varning: inga användare laddades från Users.txt.");
+    Console.WriteLine("Tryck ENTER för att fortsätta...");
+    Console.ReadLine();
+}
 
-users.Add(new Patient("patient", "123"));
-// creat a perssonel with out the permission to manage the journal
-users.Add(new Personnel("personnel", "123"));
-// creat a personal with the permission to manage the journal
-var doctor = new Personnel("doctor", "123");
-doctor.Permissions.Add(Permission.Create_Journal_note);
-
-// users.Add(new Local_Admin("localadmin", "123", "Skåne")); // need fixing I comment it in order to run the program
-
-//users.Add(new Main_Admin("mainadmin", "123"));
-
-// a list to manage permission
-
-
-
-  SystemMenu menu = new SystemMenu();
+SystemMenu menu = new SystemMenu();
 
 
   bool running = true;
@@ -88,33 +80,7 @@ doctor.Permissions.Add(Permission.Create_Journal_note);
       {
         // As a user, I need to be able to log in.
         case "1":
-          Console.Clear();
-          System.Console.WriteLine();
-          Console.Write("Username: ");
-          string username = Console.ReadLine();
-
-          try { Console.Clear(); } catch { }
-
-          Console.Clear();
-          Console.Write("Password: ");
-          string password = Console.ReadLine();
-
-          Console.Clear();
-
-          foreach (IUser user in users)
-          {
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            {
-              Console.WriteLine("Login failed. Username or password was empty.");
-              return;
-            }
-
-            else if (user.TryLogin(username, password))
-            {
-              active_user = user;
-              break;
-            }
-          }
+        menu.LogIn();
           break;
         case "2": // As a user, I need to be able to request registration as a patient.
           menu.SendRegistrationRequest();
