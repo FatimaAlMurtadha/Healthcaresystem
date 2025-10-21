@@ -1,58 +1,66 @@
 namespace App;
 
 
-    class Location
-    {
-        public string Name;
-        public string Hospital;
 
-        public Location(string name, string hospital)
-        {
-            Name = name;
-            Hospital = hospital;
-        }
 
-        public override string ToString()
-        {
-            return Name + " (Sjukhus: " + Hospital + ")";
-        }
-    }
-
-class Local_Admin: IUser
+class Local_Admin : IUser
 {
     private string admin_username;
     private string _password;
-    private Role _role;
+    public string? Region;
 
-    public Local_Admin(string username, string password, Role role = Role.Local_Admin)
+
+
+
+    public Local_Admin(string? username, string? password, string? region)
     {
         admin_username = username;
         _password = password;
-        _role = role;
+        Region = region;
+
+
     }
+
     public bool TryLogin(string username, string password)
     {
-        return admin_username == username && _password == password;
+        return username == admin_username && password == _password;
     }
 
     public bool IsRole(Role role)
     {
-        return _role == role;
+        return Role.Local_Admin == role;
     }
 
     public Role GetRole()
     {
-        return _role;
+        return Role.Local_Admin;
+    }
+
+
+
+}
+
+
+
+
+
+class Location
+{
+    public string Name;
+    public string Hospital;
+
+    public Location(string name, string hospital)
+    {
+        Name = name;
+        Hospital = hospital;
     }
 
     public override string ToString()
     {
-        return $"{admin_username} ({_role})";
+        return Name + " (Sjukhus: " + Hospital + ")";
     }
-    
-
-
 }
+
 
 
 

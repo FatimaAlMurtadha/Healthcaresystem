@@ -1,37 +1,34 @@
 namespace App;
 
-class Patient
+class Patient : IUser
 {
-  string? PatientPersonalNumber { get; set; }
-  string? PatientPassword { get; set; }
+  string? Personal_Number;
+  string? _password;
 
-  public Patient( string? patientpersonalnumber,string? patientpassword)
+  public Patient(string personal_number, string password)
   {
-    PatientPersonalNumber = patientpersonalnumber;
-    PatientPassword = patientpassword;
-
+    Personal_Number = personal_number;
+    _password = password;
   }
 
-  public bool TryLogin(string? patientpersonalnumber, string? patientpassword)
+  public bool TryLogin(string personal_number, string password)
   {
-    return patientpersonalnumber == PatientPersonalNumber && patientpassword == PatientPassword;
-
+    return personal_number == Personal_Number && password == _password;
   }
 
   public bool IsRole(Role role)
   {
     return Role.Patient == role;
-
   }
+
   public Role GetRole()
   {
     return Role.Patient;
-
   }
-  public string? GetPatientPersonalNumber()
+  public static Permission Permissions { get; set; }
+
+  public string? GetPersonalNumber()
   {
-    return PatientPersonalNumber;
+    return Personal_Number;
   }
-
-
 }

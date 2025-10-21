@@ -9,7 +9,7 @@ interface IUser
     public Role GetRole();
 }
 
-public enum Role
+enum Role
 {
     None,
     User,
@@ -17,5 +17,4 @@ public enum Role
     Main_Admin,
     Local_Admin,
     Personnel,
-
 }

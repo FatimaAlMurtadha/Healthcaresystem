@@ -2,24 +2,27 @@ namespace App;
 
 class Patient_Journal
 {
-  User PatientPersonalNumber;
-   string? Title { get; set; }
-   string? Description { get; set; }
-   string? Notice { get; set; }
-   DateTime Date { get; set; }
+  Patient? PersonalNumber;
+  string? Title { get; set; }
+  string? Description { get; set; }
+  string? Notes { get; set; }
+  DateTime Created_Date { get; set; }
 
-  public Patient_Journal(User patientpersonalnaumber, string? title, string? description, string notice, DateTime date)
+  public Patient_Journal(Patient? personalnaumber, string? title, string? description, string notice, DateTime created_date)
   {
-    PatientPersonalNumber = patientpersonalnaumber;
+    PersonalNumber = personalnaumber;
     Title = title;
     Description = description;
-    Notice = notice;
-    Date = date;
+    Notes = notice;
+    Created_Date = created_date;
   }
-  public string? ToString()
+  public string? GetPersonalNumber()
   {
-    return "{PatientPersonalNumber}";
+    return PersonalNumber?.GetPersonalNumber(); // on patient class // connect both patient and journal
   }
-
+  public override string ToString()
+  {
+    return $"The date: {Created_Date:yyyy-MM-dd}.\nThe title: {Title}.\nDescription: {Description}.\nNotes: {Notes}.";
+  }
 
 }

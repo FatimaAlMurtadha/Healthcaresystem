@@ -43,272 +43,214 @@ As a patient, I need to be able to request an appointment.
 
 As a logged in Patient, I need to be able to view my schedule.
 */
-SystemLogicMenu menu = new SystemLogicMenu();
-IUser? active_user = null;
-bool running = true;
-bool testing = true;
+using App;
 
+
+IUser? active_user = null;
+
+List<IUser> users = new List<IUser>();
+
+users.Add(new Patient("patient", "123"));
+users.Add(new Personnel("personnel", "123"));
+users.Add(new Local_Admin("localadmin", "123", "Skåne"));
+
+users.Add(new Main_Admin("mainadmin", "123"));
+
+
+SystemMenu menu = new SystemMenu();
+
+
+bool running = true;
 
 while (running)
-{ // Create Welcome menu 
+{
+  Console.Clear();
+
   if (active_user == null)
   {
     System.Console.WriteLine("------------  Health Care System  -------------");
     System.Console.WriteLine("-----------------------------------------------------");
-    System.Console.WriteLine("Log in firsta to open the system");
-    System.Console.WriteLine();
-    System.Console.WriteLine("1. User.");
-    System.Console.WriteLine("2. Patient.");
-    System.Console.WriteLine("3. Personnel.");
-    System.Console.WriteLine("4. Admin");
-    System.Console.WriteLine("f. Close");
-    System.Console.WriteLine("C. Create account");
+    System.Console.WriteLine("1. Log in.");
+    System.Console.WriteLine("2. Request registration as patient: ");
+    System.Console.WriteLine("f. close");
     string? input = Console.ReadLine();
+    // 
     switch (input)
     {
+      // As a user, I need to be able to log in.
       case "1":
-        menu.LogInAsUser();                    //frågar efter username/password
-        testing = true;
-        active_user = menu.ActiveUser;
-        while (testing == true) {       // resultat
-        if (active_user!.IsRole(Role.User) == true)
-        
+        Console.Clear();
+        System.Console.WriteLine();
+        Console.Write("Username: ");
+        string username = Console.ReadLine();
+
+        try { Console.Clear(); } catch { }
+
+        Console.Clear();
+        Console.Write("Password: ");
+        string password = Console.ReadLine();
+
+        Console.Clear();
+
+        foreach (IUser user in users)
         {
-          try { Console.Clear(); } catch { }
-          System.Console.WriteLine("------Welcome User ------");
-          System.Console.WriteLine("Choose one of the following: ");
-          System.Console.WriteLine("1. Request registration: ");
-
-          System.Console.WriteLine("1. Request registration as patient: ");
-          System.Console.WriteLine("e. log out");
-          System.Console.WriteLine("f. Close");
-          string? userinput = Console.ReadLine();
-          switch (userinput)
+          if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
           {
-            case "1": // request registration
-              menu.SendRegistrationRequest();
-              break; // slut av request registration
+            Console.WriteLine("Login failed. Username or password was empty.");
+            return;
+          }
 
-            case "e": // As a user, I need to be able to log out.
-              active_user = null;
-              testing = false;
-              break;
-
-            case "f": // close
-              running = false;
-              break;
-
-
-
-            default:
-              System.Console.WriteLine("Invalid choice.");
-              System.Console.WriteLine("Press ENTER to continue.....");
-              Console.ReadLine();
-                break;
-              }
+          else if (user.TryLogin(username, password))
+          {
+            active_user = user;
+            break;
           }
         }
         break;
-      case "2": // Patient
-        menu.LogInAsUser();                    //frågar efter username/password
-        active_user = menu.ActiveUser;         // resultat
-        while (active_user?.IsRole(Role.Patient) == true)
-        {
-          try { Console.Clear(); } catch { }
-          System.Console.WriteLine("------Welcome Patient ------");
-          System.Console.WriteLine("Choose one of the following: ");
-          System.Console.WriteLine();
-          System.Console.WriteLine("1. View your journal. ");
-          System.Console.WriteLine("2. Request an appointment");
-          System.Console.WriteLine("3. View your sechedule");
-          System.Console.WriteLine("e. Log out");
-          System.Console.WriteLine("f. Close");
-          string? patientinput = Console.ReadLine();
-
-          switch (patientinput)
-          {
-            case "1": // view journal
-              break;
-            case "2": // request an appointment
-              AppointmentMenu.Patient_RequestAppointment();  
-              break;
-            case "3": // view sechdule
-              break;
-            case "e": // Log out
-              active_user = null;
-              break;
-            case "f": // close
-              running = false;
-              break;
-            default:
-              System.Console.WriteLine("Invalid choice.");
-              System.Console.WriteLine("Press ENTER to continue.....");
-              Console.ReadLine();
-              break;
-          }
-
-        } // slut på patient meny
+      case "2": // As a user, I need to be able to request registration as a patient.
+        menu.SendRegistrationRequest();
         break;
-      case "3": // Personnel
-        menu.LogInAsUser();                    //frågar efter username/password
-        active_user = menu.ActiveUser;         // resultat
-        while (active_user?.IsRole(Role.Personnel) == true)
-        {
-          try { Console.Clear(); } catch { }
-          System.Console.WriteLine("1. View a patient's journal entries.");
-          System.Console.WriteLine("2. Mark journal entries with different levels of read permissions.");
-          System.Console.WriteLine("3. Register appointments.");
-          System.Console.WriteLine("4. Modify appointments.");
-          System.Console.WriteLine("5. Approve appointment requests.");
-          System.Console.WriteLine("6. View the schedule of a location.");
-          System.Console.WriteLine("7. Log out");
-          System.Console.WriteLine("f. Close");
-          string? personnelinput = Console.ReadLine();
-          switch (personnelinput)
-          {
-            case "1": // View a patient's journal entries
-              break;
-            case "2": // Mark Journal entries
-              break;
-            case "3": // Register appointment
-              break;
-            case "4": // Modify appointment
-              break;
-            case "5": // Approve appointment request
-              break;
-            case "6": // View schedule of location
-              AppointmentMenu.Personnel_ViewSchedule();
-              break;
-            case "7": // Log out
-              break;
-            case "f": // Close
-              break;
-            default:
-              System.Console.WriteLine("Invalid choice.");
-              System.Console.WriteLine("Press ENTER to continue.....");
-              Console.ReadLine();
-              break;
-          }
-
-        } // slut på Personnel meny
-        break;
-      case "4": // Admin
-        menu.LogInAsUser();                    //frågar efter username/password
-        active_user = menu.ActiveUser;         // resultat
-        while (active_user?.IsRole(Role.Main_Admin) == true)
-        {
-          try { Console.Clear(); } catch { }
-          System.Console.WriteLine("MainAdmin menue");
-          System.Console.WriteLine("2. Accept Requests");
-          string? mainadmininput = Console.ReadLine();
-          switch (mainadmininput)
-          {
-            case "1":
-              break;
-
-            case "2": //  Give admins the permission to add locations
-            break;
-
-            case "3": // Assign admins to certain regions
-            break;
-
-            case "4": // Give admins the permission to to handle the permission system
-            break;
-
-            case "5": // Give admins the permission to create personell accounts
-            break;
-
-            case "e": // Log out
-            break;
-              active_user = null;
-            
-            break;
-
-            case "f": // close
-            running = false;
-            break;
-
-            default:
-            
-              System.Console.WriteLine("Invalid choice.");
-              System.Console.WriteLine("Press ENTER to continue.....");
-              Console.ReadLine();
-              break;
-
-
-
-
-
-             
-
-          }
-
-        } // slut på Main Admin meny 
-        //Fixa case för Local Admin pls :D
-        while (active_user!.IsRole(Role.Local_Admin))
-        {
-          try { Console.Clear(); } catch { }
-          System.Console.WriteLine("LocalAdmin menue");
-          string? mainadmininput = Console.ReadLine();
-          switch (mainadmininput)
-          {
-            case "1":
-              break;
-            default:
-              System.Console.WriteLine("Invalid choice.");
-              System.Console.WriteLine("Press ENTER to continue.....");
-              Console.ReadLine();
-              break;
-
-            case "2":
-              menu.Make_Personnel();
-              break;
-
-            case "e": // Log out
-              active_user = null;
-              break;
-
-            case "f": // close
-              running = false;
-              break;
-
-
-          }
-
-        } // slut på Local Admin meny
-        break;
-
-      // The rest of the first switch
-      case "f": // close
+      case "f": // Close 
         running = false;
+        menu.CloseSystem();
         break;
-
-
-            case "C":
-              menu.Make_account();
-            
-            
-              break;
-              
       default:
-        System.Console.WriteLine("Invalid choice.");
-        System.Console.WriteLine("Press ENTER to continue.....");
-        Console.ReadLine();
+        System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
         break;
+    }
+
+
+  }
+  else
+  {
+    switch (active_user.GetRole())
+    {
+      case Role.Patient:
+        Console.WriteLine("-----------Welcome patient-----------");
+        System.Console.WriteLine();
+        System.Console.WriteLine(" 1. Show my Journal ");
+        System.Console.WriteLine(" 2. Book an appointment ");
+        System.Console.WriteLine(" 3. Show my schedule ");
+        System.Console.WriteLine(" h. Log out  ");
+        System.Console.WriteLine(" f. Close  ");
+        string? patient_choice = Console.ReadLine();
+        switch (patient_choice) // patient choices
+        {
+          case "1": // show my own journal
+            if (menu.HasPermission(Patient.Permissions, Permission.ShowJournal))
+            {
+              try { Console.Clear(); } catch { }
+              menu.ShowJournal();
+            }
+            else
+            {
+              System.Console.WriteLine("You do not have the permission to view this journal");
+            }
+            break;
+          case "2": // book an appointment
+            break;
+          case "3": // show my schedule
+            break;
+          case "h": // log out as a patient
+            active_user = null;
+            menu.LogOut();
+
+            break;
+          case "f": // quit
+            running = false;
+            menu.CloseSystem();
+            break;
+          default:
+            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+            break;
+
+        } // slut på patient choices
+        break;
+      case Role.Personnel:
+        Console.WriteLine("----------Welcome personnel---------");
+        System.Console.WriteLine(" 1. Show patient journals ");
+        System.Console.WriteLine(" 2. Create journalnotes ");
+        System.Console.WriteLine(" 3. Book patient appointments ");
+        System.Console.WriteLine(" 4. Handle patient visits ");
+        System.Console.WriteLine(" 5. Show schedule for my hospital ");
+        System.Console.WriteLine(" h. Log out  ");
+        System.Console.WriteLine("f. Close");
+        string? personnel_choice = Console.ReadLine();
+        switch (personnel_choice) // start of personnel switch choices
+        {
+          case "1":
+            break;
+          case "2": // create journal note
+            if (menu.HasPermission(Personnel.Permissions, Permission.ManageJournals))
+            {
+              try { Console.Clear(); } catch { }
+              menu.Creat_JournalNote();
+            }
+            else
+            {
+              System.Console.WriteLine("You do not have the permission to manage the journal");
+            }
+
+            break;
+
+          case "h": // log out 
+            active_user = null;
+            menu.LogOut();
+            break;
+          case "f": // quit
+            running = false;
+            menu.CloseSystem();
+            break;
+          default:
+            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+            break;
+
+
+
+        } // end of personnel switch choices
+        break;
+      case Role.Main_Admin:
+        Console.WriteLine("----------Welcome main admin--------");
+        break;
+      case Role.Local_Admin:
+        Console.WriteLine("---------Welcome local admin---------");
+        System.Console.WriteLine(" 1. Create accounts for personell ");
+        System.Console.WriteLine(" 2. Accept/deny user registration as patients ");
+        System.Console.WriteLine(" 3. Add locations ");
+        System.Console.WriteLine(" 4. Handle permission system ");
+        System.Console.WriteLine(" 5. Handle registrations  ");
+        System.Console.WriteLine(" 6. Fix personell status  ");
+        System.Console.WriteLine(" h. Log out");
+        System.Console.WriteLine("f. Close");
+        string? localAdmin_choice = Console.ReadLine();
+        switch (localAdmin_choice) // start of local admin switch choices
+        {
+          case "1":
+            break;
+
+          case "h": // log out 
+            active_user = null;
+            menu.LogOut();
+            break;
+          case "f": // quit
+            running = false;
+            menu.CloseSystem();
+            break;
+          default:
+            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+            break;
+
+
+
+        } // end of local admin switch choices
+
+        break;
+      default: break;
     }
 
 
 
   }
-  
 }
 
 
-
-
-static void Add_Locations() // kan inte fixa denna just nu då locations är ej fungerande just nu
-{
-    
-
-
-}
