@@ -2,6 +2,7 @@ using System.ComponentModel.Design;
 
 namespace App;
 
+
 public class SystemMenu
 {
   public void CloseSystem()
