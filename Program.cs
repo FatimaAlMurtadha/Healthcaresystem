@@ -43,43 +43,17 @@ As a logged in Patient, I need to be able to view my schedule.
 */
 
 
-
-
-
-
 IUser? active_user = null;
 
-List<IUser> users = new List<IUser>();
-
-users.Add(new Patient("patient", "123"));
-// creat a perssonel with out the permission to manage the journal
-users.Add(new Personnel("personnel", "123"));
-// creat a personal with the permission to manage the journal
-var doctor = new Personnel("doctor", "123");
-doctor.Permissions.Add(Permission.Create_Journal_note);
-
-// users.Add(new Local_Admin("localadmin", "123", "Skåne")); // need fixing I comment it in order to run the program
-
-//users.Add(new Main_Admin("mainadmin", "123"));
-
-// a list to manage permission
-
-
-
-users.Add(new Patient("patient", "123"));
-// creat a perssonel with out the permission to manage the journal
-users.Add(new Personnel("personnel", "123"));
-// creat a personal with the permission to manage the journal
-var doctor = new Personnel("doctor", "123");
-doctor.Permissions.Add(Permission.Create_Journal_note);
-
-// users.Add(new Local_Admin("localadmin", "123", "Skåne")); // need fixing I comment it in order to run the program
-
-//users.Add(new Main_Admin("mainadmin", "123"));
-
-// a list to manage permission
-
-
+//Inga static användare snälla. Använd UserDataManager.LoadUsers() istället.
+List<IUser> users = UserDataManager.LoadUsers();
+if (users.Count == 0)
+{
+    Console.WriteLine("Varning: inga användare laddades från Users.txt.");
+    Console.WriteLine("Exempelrad: patient,123,Patient");
+    Console.WriteLine("Tryck ENTER för att fortsätta...");
+    Console.ReadLine();
+}
 
 SystemMenu menu = new SystemMenu();
 
