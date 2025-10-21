@@ -33,10 +33,6 @@ class Local_Admin : IUser
 
 }
 
-
-
-
-
 class Location
 {
     public string Name;

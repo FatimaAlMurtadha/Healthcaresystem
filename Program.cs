@@ -1,4 +1,5 @@
-﻿using App;
+﻿
+
 /*
 As an admin with sufficient permissions, I need to be able to give admins the permission to handle the permission system, in fine granularity.
 
@@ -40,7 +41,12 @@ As a patient, I need to be able to request an appointment.
 
 As a logged in Patient, I need to be able to view my schedule.
 */
-{
+
+
+
+using App;
+
+
   IUser? active_user = null;
 
   List<IUser> users = new List<IUser>();
@@ -247,6 +253,12 @@ As a logged in Patient, I need to be able to view my schedule.
 
     }
   }
-}
+
+
+
+
+
+
+
 
 
