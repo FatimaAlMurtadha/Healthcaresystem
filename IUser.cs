@@ -17,5 +17,4 @@ public enum Role
     Main_Admin,
     Local_Admin,
     Personnel,
-
 }

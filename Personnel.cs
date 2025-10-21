@@ -18,17 +18,17 @@ class Personnel : IUser
 
     }
 
-     
-public bool IsRole(Role role)
+    public bool IsRole(Role role)
     {
         return Role.Personnel == role;
-        
+
     }
-public Role GetRole()
+    public Role GetRole()
     {
         return Role.Personnel;
-        
+
     }
+    public static Permission Permissions { get; set; }
 
 
 }

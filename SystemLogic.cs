@@ -1,190 +1,107 @@
-using System.Reflection.Metadata;
+using System.ComponentModel.Design;
 
 namespace App;
 
-public class SystemLogicMenu
+public class SystemMenu
 {
-  internal IUser? ActiveUser => active_user;
-  IUser? active_user = null;
-  bool running = true;
-
-  List<IUser> users = UserDataManager.LoadUsers();
-
-  List<RequestRegistration> request_registrations = new List<RequestRegistration>();
-
-
-  //As a user, I need to be able to log in.
-  public void LogInAsUser()
+  public void CloseSystem()
   {
-    if (users.Count == 0)
-      users.Add(new User("Fatima", "123")); // För testing. Annars kan ni gå in i User.txt och skapa ett konto där
-
-    Console.Write("Username: ");
-    string? username = Console.ReadLine();
-
     Console.Clear();
-    Console.Write("Password: ");
-    string? password = Console.ReadLine();
-    Console.Clear();
-
-    // Checkar efter tom användarnamn eller lösenord
-    if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-    {
-      Console.WriteLine("Login failed. Username or password was empty.");
-      return;
-    }
-
-    // Efter checken så kan vi vara säkra på att username och password inte är null eller whitespace
-    string u = username;
-    string p = password;
-
-    bool success = false;
-    foreach (IUser user in users)
-    {
-      if (user.TryLogin(u, p))
-      {
-        active_user = user;
-        success = true;
-        break;
-      }
-    }
-
-    if (!success)
-      Console.WriteLine("Login failed. Wrong username or password.");
+    System.Console.WriteLine("Thank you for using this Healthcare System.");
+    System.Console.WriteLine();
+    System.Console.WriteLine("Press Enter to close");
+    Console.ReadLine();
   }
-
-  // As a user, I need to be able to request registration as a patient.
+  public void LogOut()
+  {
+    Console.Clear();
+    System.Console.WriteLine("You are susseccfully logged out");
+    System.Console.WriteLine();
+    System.Console.WriteLine("Press ENTER to continue......");
+    Console.ReadLine();
+  }
+  List<RequestRegistration> request_registrations = new List<RequestRegistration>();
   public void SendRegistrationRequest()
   {
 
-    try { Console.Clear(); } catch {}
+    try { Console.Clear(); } catch { }
     System.Console.WriteLine("Your personal security number: ");
-    string? patientpersonalnumber = Console.ReadLine();
+    string? patientpersonalnumber = Console.ReadLine(); // personal number
     System.Console.WriteLine("Your name: ");
-    string? patientname = Console.ReadLine();
+    string? patientname = Console.ReadLine(); // patient name
     System.Console.WriteLine("Your email: ");
-    string? patientemail = Console.ReadLine();
+    string? patientemail = Console.ReadLine(); // patient email
     System.Console.WriteLine("Your password: ");
-    string? patientpassword = Console.ReadLine();
-
-    if (patientpersonalnumber != null && patientpersonalnumber != "" && patientname != null && patientname != "" && patientemail != null && patientemail != "" && patientpassword != null && patientpassword != "")
+    string? patientpassword = Console.ReadLine(); // patient paswword
+    System.Console.WriteLine("Your phone number: ");
+    string? patient_phone_number = Console.ReadLine(); // patient phone number
+    if (string.IsNullOrWhiteSpace(patientpersonalnumber) || string.IsNullOrWhiteSpace(patientname) || string.IsNullOrWhiteSpace(patientpassword) || string.IsNullOrWhiteSpace(patient_phone_number))
     {
-
-      request_registrations.Add(new RequestRegistration(patientpersonalnumber, patientname, patientemail, patientpassword, RegistrationStatus.Pending));
-      System.Console.WriteLine("Your request has been sent susseccfully");
+      Console.WriteLine("Faild to send a registration request. one or more of the information were empty.");
+      System.Console.WriteLine();
+      System.Console.WriteLine("Press ENTER to try again");
+      Console.ReadLine();
+      return;
     }
+
     else
     {
-      System.Console.WriteLine("Invlid input. Nothing of the information can be null or empty");
-      System.Console.WriteLine("Press ENTER to continue......");
+      try { Console.Clear(); } catch { }
+      request_registrations.Add(new RequestRegistration(patientpersonalnumber, patientname, patientemail, patientpassword, patient_phone_number, RegistrationStatus.Pending));
+      System.Console.WriteLine();
+      System.Console.WriteLine("Your request has been sent susseccfully");
+      System.Console.WriteLine();
+      System.Console.WriteLine("Press ENTER to continue........");
       Console.ReadLine();
     }
 
   }
-  public void Give_Local_Admin()// detta kontot finns men det blir en local_Admin
+  // chech permission after log in
+
+  public bool HasPermission(Permission user_Permession, Permission required_Permission)
   {
-    try { Console.Clear(); } catch {}
-    System.Console.WriteLine("Please enter the name of the person who you wants to be a Local_Admin");
-    string username = Console.ReadLine()!;
-    System.Console.WriteLine("please enter the password of that person");
-    string password = Console.ReadLine()!;
-    foreach (IUser user in users)
-    {
-      if (user.TryLogin(username, password))
-      {
-        user.IsRole(Role.Local_Admin);
-
-      }
-
-
-    }
+    return (user_Permession & required_Permission) == required_Permission;
   }
 
-  public void Make_Local_Admin()
+
+  // View my own journal 
+  List<Patient_Journal> journals = new List<Patient_Journal>();
+  User? active_user = null;
+
+  public void ShowJournal()
   {
-    try { Console.Clear(); } catch {}
-    System.Console.WriteLine("Please enter the name of the account");
-    string username = Console.ReadLine()!;
-    System.Console.WriteLine("Please enter the name of the account");
-    string password = Console.ReadLine()!;
-    users.Add(new Local_Admin(username, password)); // need Local_Admin class
-  }
-
-  public void Make_account()
-  {
-    System.Console.WriteLine("Please enter your name:");
-    string? username = Console.ReadLine();
-
-    System.Console.WriteLine("Please enter your password:");
-    string? password = Console.ReadLine();
-
-    if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+    if (active_user == null)
     {
-      Console.WriteLine("Invalid input. Try again.");
+      System.Console.WriteLine("No patient is logged in");
       return;
     }
-
-    var newUser = new User(username, password);
-    users.Add(newUser);
-
-    // Save to file
-    UserDataManager.SaveUser(username, password, Role.User);
-
-
-    File.AppendAllText("Users_log.txt",
-    $"New user created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
-
-    Console.WriteLine("Account created successfully!");
-  }
-  public void Make_Personnel()
-  {
-    System.Console.WriteLine("Please enter the name of the account");
-    string username = Console.ReadLine()!;
-    System.Console.WriteLine("Please enter the Password of the account");
-    string password = Console.ReadLine()!;
-    users.Add(new User(username, password));
-
-    UserDataManager.SaveUser(username, password, Role.Personnel);
-
-    File.AppendAllText("Users_log.txt",
-    $"New  created: {username} {password} ({DateTime.Now}){Environment.NewLine}");
-
-    Console.WriteLine("Account created successfully!");
-  }
-
-
-public void Accept_requests()
-  {
-    foreach(RequestRegistration Request in request_registrations)
+    bool found_patient = false;
+    foreach (Patient_Journal journal in journals)
     {
-
-      if (Request.Status == RegistrationStatus.Pending)
-            {
-
-        System.Console.WriteLine("do you want to accept" + Request + "Registration");
-      System.Console.WriteLine("type yes if you want to accept and no to deny");
-      string input = Console.ReadLine()!;
-      switch (input)
+      if (journal.GetPersonalNumber() == active_user.GetPersonalNumber())
       {
-        case "yes":
-            Request.Status = RegistrationStatus.Accept;
-          users.Add(new User(Request.PatientName!, Request.PatientPassword!, Role.Patient));
-           UserDataManager.SaveUser(Request.PatientName!, Request.PatientPassword!, Role.Personnel);
+        Console.WriteLine(journal + "\n"); // show the specific patient journal
 
-          break;
-
-          case "no":
-            Request.Status = RegistrationStatus.Deny;
-
-  System.Console.WriteLine("you did not accept thier request");
-            break;
-
-            }
-            
-
-        }    
-        }
+        Console.WriteLine("---------------------------------"); // a line to seprate items to be be orgnized on the screen.
+        found_patient = true;
+      }
 
     }
-
+    if (!found_patient)
+    {
+      System.Console.WriteLine("There is no journal connected with this account");
+    }
+  }
+  public void Creat_JournalNote()
+  {
+    if (active_user == null)
+    {
+      System.Console.WriteLine("No personnel is logged in");
+      return;
+    }
+    else
+    { }
+  }
 }
+
+
