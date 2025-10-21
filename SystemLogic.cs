@@ -163,7 +163,7 @@ public void Accept_requests()
 
         System.Console.WriteLine("do you want to accept" + Request + "Registration");
       System.Console.WriteLine("type yes if you want to accept and no to deny");
-      string input = Console.ReadLine();
+      string input = Console.ReadLine()!;
       switch (input)
       {
         case "yes":

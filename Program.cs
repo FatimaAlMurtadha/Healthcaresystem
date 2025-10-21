@@ -19,11 +19,7 @@ while (running)
     System.Console.WriteLine("------------  Health Care System  -------------");
     System.Console.WriteLine("-----------------------------------------------------");
     System.Console.WriteLine("-----Log in ---------");
-    System.Console.WriteLine("Username: ");
-    string? username = Console.ReadLine();
-    System.Console.WriteLine("Password:");
-    string? password = Console.ReadLine();
-    // 
+     menu.LogInAsUser();
 
     string? input = Console.ReadLine();
     switch (input)
@@ -180,11 +176,7 @@ while (running)
             case "5": // Give admins the permission to create personell accounts
             break;
 
-             case "e": // Log out
-            active_user = null;
-
-            case "f": // close
-            running = false;
+           
             
             
             default:
@@ -215,6 +207,8 @@ while (running)
           switch (mainadmininput)
           {
             case "1":
+
+              menu.Accept_requests();
               break;
             default:
               System.Console.WriteLine("Invalid choice.");
@@ -225,12 +219,10 @@ while (running)
             case "2":
               menu.Make_Personnel();
               break;
+            case "3":
 
-            case "e": // Log out
-            active_user = null;
-
-            case "f": // close
-            running = false;
+              break;
+           
 
 
           }
