@@ -9,7 +9,7 @@ interface IUser
     public Role GetRole();
 }
 
-enum Role
+public enum Role
 {
     None,
     User,
