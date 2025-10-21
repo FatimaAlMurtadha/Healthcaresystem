@@ -88,33 +88,7 @@ doctor.Permissions.Add(Permission.Create_Journal_note);
       {
         // As a user, I need to be able to log in.
         case "1":
-          Console.Clear();
-          System.Console.WriteLine();
-          Console.Write("Username: ");
-          string username = Console.ReadLine();
-
-          try { Console.Clear(); } catch { }
-
-          Console.Clear();
-          Console.Write("Password: ");
-          string password = Console.ReadLine();
-
-          Console.Clear();
-
-          foreach (IUser user in users)
-          {
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            {
-              Console.WriteLine("Login failed. Username or password was empty.");
-              return;
-            }
-
-            else if (user.TryLogin(username, password))
-            {
-              active_user = user;
-              break;
-            }
-          }
+        menu.LogIn();
           break;
         case "2": // As a user, I need to be able to request registration as a patient.
           menu.SendRegistrationRequest();

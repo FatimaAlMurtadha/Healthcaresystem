@@ -7,6 +7,11 @@ interface IUser
     public bool IsRole(Role role);
 
     public Role GetRole();
+
+   public string? GetUserName()
+  {
+        return "";
+  }
 }
 
 public enum Role
