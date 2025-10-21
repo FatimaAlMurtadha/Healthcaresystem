@@ -1,5 +1,5 @@
-namespace App
-{
+namespace App;
+
     public class Main_Admin : IUser
     {
         private string _userName;
@@ -188,4 +188,3 @@ namespace App
 
         }
     }
-}

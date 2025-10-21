@@ -8,12 +8,12 @@ class Patient_Journal
   string? Notes { get; set; }
   DateTime Created_Date { get; set; }
 
-  public Patient_Journal(Patient? personalnaumber, string? title, string? description, string notice, DateTime created_date)
+  public Patient_Journal(Patient? personalnaumber, string? title, string? description, string notes, DateTime created_date)
   {
     PersonalNumber = personalnaumber;
     Title = title;
     Description = description;
-    Notes = notice;
+    Notes = notes;
     Created_Date = created_date;
   }
   public string? GetPersonalNumber()

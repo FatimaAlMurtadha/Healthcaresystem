@@ -178,26 +178,6 @@ users.Add(new User("Fatima", "123")); // Behövs en User Class
 
 
 
-SystemLogicMenu menu = new SystemLogicMenu();
-IUser? active_user = null;
-bool running = true;
-
-while (running)
-{
-    System.Console.WriteLine("------------  Health Care System  -------------");
-    System.Console.WriteLine("-----------------------------------------------------");
-    System.Console.WriteLine("-----Log in ---------");
-    System.Console.WriteLine("Username: ");
-    string? username = Console.ReadLine();
-    System.Console.WriteLine("Password:");
-    string? password = Console.ReadLine();
-
-    // skapa en user för att kolla vilken role den har eller ingen roll, alltså bara en user
-
-    
-
-
-}
 
 
 
