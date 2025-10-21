@@ -101,7 +101,22 @@ public class SystemMenu
       return;
     }
     else
-    { }
+    {
+      System.Console.WriteLine("Patient's personal security number: ");
+      string? personalnaumber = Console.ReadLine();
+      System.Console.WriteLine("Title: ");
+      string? title = Console.ReadLine();
+      System.Console.WriteLine("Description: ");
+      string? description = Console.ReadLine();
+      System.Console.WriteLine("Note: ");
+      string? other = Console.ReadLine();
+      DateTime created_date = DateTime.Now;
+
+
+      // put all information on the patient' journal list
+      journals.Add(new Patient_Journal(personalnaumber, title,description, other, created_date));
+
+    }
   }
 }
 
