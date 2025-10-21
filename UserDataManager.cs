@@ -25,7 +25,7 @@ namespace App
             {
                 var parts = line.Split(',');  //Dela upp varje rad i delar "username,password,role"
                 if (parts.Length >= 3 && Enum.TryParse(parts[2], out Role role))
-                    users.Add(new User(parts[0], parts[1], role)); // Skapar User-objekt och lägger till i listan
+                    users.Add(new User(parts[0], parts[1])); // Skapar User-objekt och lägger till i listan
             }
 
             return users;

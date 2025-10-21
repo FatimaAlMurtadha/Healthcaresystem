@@ -43,7 +43,7 @@ As a patient, I need to be able to request an appointment.
 
 As a logged in Patient, I need to be able to view my schedule.
 */
-using App;
+
 
 
 IUser? active_user = null;
@@ -52,7 +52,7 @@ List<IUser> users = new List<IUser>();
 
 users.Add(new Patient("patient", "123"));
 users.Add(new Personnel("personnel", "123"));
-users.Add(new Local_Admin("localadmin", "123", "Skåne"));
+users.Add(new Local_Admin("localadmin", "123"));
 
 users.Add(new Main_Admin("mainadmin", "123"));
 
@@ -82,13 +82,13 @@ while (running)
         Console.Clear();
         System.Console.WriteLine();
         Console.Write("Username: ");
-        string username = Console.ReadLine();
+        string username = Console.ReadLine()!;
 
         try { Console.Clear(); } catch { }
 
         Console.Clear();
         Console.Write("Password: ");
-        string password = Console.ReadLine();
+        string password = Console.ReadLine()!;
 
         Console.Clear();
 
@@ -123,6 +123,7 @@ while (running)
   }
   else
   {
+    if (active_user != null){
     switch (active_user.GetRole())
     {
       case Role.Patient:
@@ -137,7 +138,7 @@ while (running)
         switch (patient_choice) // patient choices
         {
           case "1": // show my own journal
-            if (menu.HasPermission(Patient.Permissions, Permission.ShowJournal))
+            /*if (menu.HasPermission(Patient.Permissions, Permission.ShowJournal))
             {
               try { Console.Clear(); } catch { }
               menu.ShowJournal();
@@ -145,7 +146,7 @@ while (running)
             else
             {
               System.Console.WriteLine("You do not have the permission to view this journal");
-            }
+            }*/
             break;
           case "2": // book an appointment
             break;
@@ -181,6 +182,7 @@ while (running)
           case "1":
             break;
           case "2": // create journal note
+          /*
             if (menu.HasPermission(Personnel.Permissions, Permission.ManageJournals))
             {
               try { Console.Clear(); } catch { }
@@ -190,7 +192,7 @@ while (running)
             {
               System.Console.WriteLine("You do not have the permission to manage the journal");
             }
-
+*/
             break;
 
           case "h": // log out 
@@ -251,6 +253,6 @@ while (running)
 
 
   }
-}
+}}
 
 

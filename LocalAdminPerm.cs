@@ -9,7 +9,7 @@ class Local_Admin : IUser
     private string _password;
     private Role _role;
 
-    public Local_Admin(string username, string password, Role role = Role.Local_Admin, string tba_handleregistration, string tba_addlocation)
+    public Local_Admin(string username, string password, Role role = Role.Local_Admin)
     {
         admin_username = username;
         _password = password;

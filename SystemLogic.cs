@@ -47,7 +47,7 @@ public class SystemMenu
     else
     {
       try { Console.Clear(); } catch { }
-      request_registrations.Add(new RequestRegistration(patientpersonalnumber, patientname, patientemail, patientpassword, patient_phone_number, RegistrationStatus.Pending));
+      request_registrations.Add(new RequestRegistration(patientpersonalnumber, patientname, patientemail, patientpassword, RegistrationStatus.Pending));
       System.Console.WriteLine();
       System.Console.WriteLine("Your request has been sent susseccfully");
       System.Console.WriteLine();

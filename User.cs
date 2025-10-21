@@ -5,7 +5,7 @@ class User : IUser
     public string UserName;
     string _password;
 
-    public User(string? username, string password)
+    public User(string username, string password)
     {
         UserName = username;
         _password = password;
