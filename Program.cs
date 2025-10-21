@@ -132,7 +132,7 @@ As a logged in Patient, I need to be able to view my schedule.
           switch (patient_choice) // patient choices
           {
             case "1": // show my own journal
-              if (menu.HasPermission(Patient.Permissions, Permission.ShowJournal))
+              if (menu.HasPermission(Patient.Permissions, Permission.ViewJournals))
               {
                 try { Console.Clear(); } catch { }
                 menu.ShowJournal();
@@ -176,7 +176,7 @@ As a logged in Patient, I need to be able to view my schedule.
             case "1":
               break;
             case "2": // create journal note
-              if (menu.HasPermission(Personnel.Permissions, Permission.ManageJournals))
+              if (menu.HasPermission(Personnel.Permissions, Permission.Create_Journal_note))
               {
                 try { Console.Clear(); } catch { }
                 menu.Creat_JournalNote();

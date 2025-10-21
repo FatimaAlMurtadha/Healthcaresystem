@@ -10,6 +10,7 @@ public enum Permission
     ViewPermissionList,
     AcceptPatient,
     DenyPatient,
+    Create_Journal_note,
     ViewJournals,
     ApproveAppointments,
     ModifyAppointments,

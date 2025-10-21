@@ -57,7 +57,7 @@ public class SystemMenu
     }
 
   }
-  // chech permission after log in
+  // check permission after log in
 
   public bool HasPermission(Permission user_Permession, Permission required_Permission)
   {
