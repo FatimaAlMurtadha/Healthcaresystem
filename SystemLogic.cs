@@ -265,6 +265,18 @@ private const string FilePath = "Users.txt";
 
     }
 
+/*
+      public void ShowPatientJournals()
+    {
+      System.Console.WriteLine(" Type in for which patient's journal you would like to view by writing their personalnumber" );
+      string input = Console.ReadLine();
+
+      if (input == patientpersonalnumber.personalNumber)
+      {
+        System.Console.WriteLine(patient.journal);
+      }
+    }
+*/
 
 }
 

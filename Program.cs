@@ -102,8 +102,8 @@ while (running)
               System.Console.WriteLine("You do not have the permission to view this journal");
             }
             break;
-          case "2":
-            AppointmentMenu.Patient_RequestAppointment(); // book an appointment
+          case "2": // book an appointment
+          AppointmentMenu.Patient_RequestAppointment();
             break;
           case "3": // show my schedule
             AppointmentMenu.Patient_ViewSchedule();
@@ -127,7 +127,7 @@ while (running)
         Console.WriteLine("----------Welcome personnel---------");
         System.Console.WriteLine(" 1. Show patient's journal entries");
         System.Console.WriteLine(" 2. Mark journal entries with different levels of read permissions");
-        System.Console.WriteLine(" 3. Book patient's appointments ");
+        System.Console.WriteLine(" 3. Register patient's appointments ");
         System.Console.WriteLine(" 4. Modify appointments");
         System.Console.WriteLine(" 5. Approve appointments requests");
         System.Console.WriteLine(" 6. Show schedule for my hospital ");
@@ -140,14 +140,19 @@ while (running)
             break;
           case "2": // Mark journal entries with different levels of read permissions
             break;
-          case "3": // Book patient's appointments 
+          case "3": // Register patient's appointments 
             break;
           case "4": // Modify appointments
             break;
           case "5": // Approve appointments requests 
+<<<<<<< HEAD
             AppointmentMenu.Personnel_ApproveRequests();
+=======
+          AppointmentMenu.Personnel_ApproveRequests();
+>>>>>>> 82cc0f4 (personell can now show schedule)
             break;
           case "6": // Show schedule for my hospital 
+          AppointmentMenu.Patient_ViewSchedule();
             break;
 
 

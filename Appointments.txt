@@ -2,5 +2,10 @@
 638965523252717129|User|Oskar|IMORGON|Requested
 638965525400961729|TEST|Oskar|3434343343434343|Requested
 1|WAT|Oskar|3j4j34|Approved
+<<<<<<< HEAD
 2|LUkas|personnel|10 oktober 2028 |Approved
 3|Lukas|personnel|121212|Denied
+=======
+2|patient|personnel|123|Requested
+3|patient|personnel|25/04/11|Approved
+>>>>>>> 82cc0f4 (personell can now show schedule)
