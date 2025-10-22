@@ -171,7 +171,7 @@ while (running)
         break;
       case Role.Main_Admin:
         Console.WriteLine("----------Welcome main admin--------");
-        System.Console.WriteLine(" 1. Handle the system permission"); 
+        System.Console.WriteLine(" 1. Add admin to the system"); 
         System.Console.WriteLine(" 2. Assign admins to certain regions"); 
         System.Console.WriteLine(" 3. Give admins the permission to add locations"); 
         System.Console.WriteLine(" 4. Give admins the permission to create accounts for personell"); 
@@ -182,12 +182,43 @@ while (running)
 
         switch (mainAdmin_choice) // start of main admin switch choices
         {
-          case "1":    // Handle the system permission
+          case "1":    // Add Admin to the system
+            Console.WriteLine("Enter Local Admin's name to add to the system: ");
+            string? email = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+              bool success = MainAdminService.AddLocalAdmin(email);
+              if (success)
+                Console.WriteLine("Local Admin " + email + "added successfully");
+              else
+                Console.WriteLine("Failed to add " + email);
+            }
+            else
+            {
+              Console.WriteLine("Can not be Empty!");
+            }
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadLine();
             break;
 
           case "2":     // Assign admins to certain regions
+            Console.WriteLine("Admin Email:");
+            string? email2 = Console.ReadLine();
+            Console.WriteLine("Region Name: ");
+            string? region = Console.ReadLine();
+
+            bool ok = MainAdminService.AssignRegion(email2 ?? string.Empty, region ?? string.Empty);
+            Console.WriteLine(ok ? "Region assigned successfully." : "Failed to assign region.");
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadLine();
           break;
           case "3":    // Give admins the permission to add locations
+            Console.WriteLine("Admin email: ");
+            string? email3 = Console.ReadLine();
+            bool OkToAdd = MainAdminService.GivePermToAddLocation(email3 ?? string.Empty);
+            Console.WriteLine(OkToAdd ? "Succeed" : "Failed");
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadLine();
             break;
 
           case "4":    // Give admins the permission to create accounts for personell
