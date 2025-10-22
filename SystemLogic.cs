@@ -201,8 +201,8 @@ private const string FilePath = "Users.txt";
   }
  public void AcceptPatient()
   {
-    
-    
+   
+
         foreach(RequestRegistration user in request_registrations)
     {
 
@@ -221,24 +221,20 @@ private const string FilePath = "Users.txt";
           user.Status = RegistrationStatus.Accept;
            string line = $"{username},{password},{role}";
             File.AppendAllLines(FilePath, new[] { line });
-
-
+            System.Console.WriteLine("you have accepted this request, press enter to continue");
+            Console.ReadLine();
+ 
          }
               else
                 {
           Console.WriteLine("OK the request is denied");
                 }  
 
+       }
+          
      }
-            else
-            {
-        Console.WriteLine("there is no Requests");
-            }
-            
-
-
-     }
-
+    Console.WriteLine("ther is no more Requests, press ENTER to continue");
+    Console.ReadLine();
         
         
 
