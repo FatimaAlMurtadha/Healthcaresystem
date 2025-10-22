@@ -39,8 +39,6 @@ namespace App
             Role.Personnel    => new Personnel(username, password),
             Role.Main_Admin   => new Main_Admin(username, password),
             Role.Local_Admin  => new Local_Admin(username, password),
-            Role.User => new User(username, password, role),
-                  _          => new User(username, password, role)
         };
         users.Add(u);
     }

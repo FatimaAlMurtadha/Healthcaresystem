@@ -1,5 +1,5 @@
 namespace App;
-
+/*
 class User : IUser
 {
     public string? UserName;
@@ -31,4 +31,4 @@ class User : IUser
     {
         return UserName;
     }
-}
+}*/

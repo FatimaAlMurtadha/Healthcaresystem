@@ -7,7 +7,8 @@ namespace App;
 public class SystemMenu
 {
   List<IUser> users = new List<IUser>();
-  IUser? active_user = null;
+  IUser? current_user = null;
+  
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
   List<Patient> patients = new List<Patient>();
   List<Patient_Journal> journals = new List<Patient_Journal>();
@@ -19,7 +20,7 @@ public class SystemMenu
     journals = JournalDataManager.LoadJournals();
   }
   // a function to log in as a user "Patient, personnel, main_admin, and local_admin"
-  public void LogIn()
+  public IUser? LogIn()
   {
     try { Console.Clear(); } catch { }
     System.Console.WriteLine();
@@ -33,21 +34,28 @@ public class SystemMenu
     string password = Console.ReadLine();
 
     try { Console.Clear(); } catch { }
+    if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+    {
+      Console.WriteLine("Login failed. Username or password was empty.");
+      System.Console.WriteLine("Press ENTER to continue.....");
+      Console.ReadLine();
+      return null;
+    }
 
     foreach (IUser user in users)
     {
-      if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-      {
-        Console.WriteLine("Login failed. Username or password was empty.");
-        return;
-      }
 
-      else if (user.TryLogin(username, password))
+      if (user.TryLogin(username, password))
       {
-        active_user = user;
-        break;
+        System.Console.WriteLine("Login successful.");
+        current_user = user;
+        return user;
       }
     }
+    System.Console.WriteLine("Log in faild. Incorrect username or password.");
+    System.Console.WriteLine("Press ENTER to continue.....");
+    Console.ReadLine();
+    return null;
   }
 
   // a function to close the system
@@ -114,16 +122,16 @@ public class SystemMenu
   // View my own journal 
   public void ShowJournal()
   {
-    if (active_user == null)
+    if (current_user == null)
     {
       Console.WriteLine(" No patient is logged in");
       return;
     }
-    else if (active_user.IsRole(Role.Patient))
+    else if (current_user.IsRole(Role.Patient))
     {
       foreach (Patient_Journal journal in journals)
       {
-        var patient = active_user as Patient;
+        var patient = current_user as Patient;
         if (patient != null && journal.GetPersonalNumber() == patient.GetPersonalNumber())
         {
           System.Console.WriteLine($"Date: {journal.GetDate():yyyy-MM-dd}");

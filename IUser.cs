@@ -1,6 +1,6 @@
 namespace App;
 
-interface IUser
+public interface IUser
 {
     public bool TryLogin(string username, string password);
 
@@ -17,7 +17,6 @@ interface IUser
 public enum Role
 {
     None,
-    User,
     Patient,
     Main_Admin,
     Local_Admin,
