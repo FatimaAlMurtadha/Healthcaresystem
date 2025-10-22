@@ -10,7 +10,7 @@ public class SystemMenu
   
 
   List<IUser> users = new List<IUser>();
-  IUser? current_user = null;
+  public IUser? current_user = null;
   
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
   List<Patient_Journal> journals = new List<Patient_Journal>();
@@ -128,38 +128,15 @@ private const string FilePath = "Users.txt";
   // View my own journal 
   public void ShowMyJournal()
   {
-    if (current_user == null)
+    foreach(Patient_Journal journal in journals)
     {
-      Console.WriteLine("Only patient can view there own journal.");
-      return;
-    }
-    Patient patient = current_user as Patient;
-    if (patient == null)
-    {
-      System.Console.WriteLine("No patient is logged in");
-      return;
-    }
-    string? personalNumber = patient.GetPersonalNumber();
-    bool found_patient = false;
-    foreach (Patient_Journal journal in journals)
-    {
-      if (journal.GetPersonalNumber() == personalNumber)
+      var patient = current_user as Patient;
+      if (current_user == patient)
       {
-        System.Console.WriteLine($"Date: {journal.GetDate():yyyy-MM-dd}");
-        System.Console.WriteLine($"Title: {journal.GetTitle()}");
-        System.Console.WriteLine($"Note: {journal.GetNote()}");
-        System.Console.WriteLine($"Author: {journal.GetAuthor()}");
-        System.Console.WriteLine("---------------------------------");
-        found_patient = true;
+        System.Console.WriteLine();
+        
       }
     }
-    if (!found_patient)
-    {
-      System.Console.WriteLine("No journal entries found");
-    }
-
-    Console.WriteLine("Press ENTER to continue...");
-    Console.ReadLine();
   }
 
   // a function to allow a personnel with sufficient permission to creat a journal note
