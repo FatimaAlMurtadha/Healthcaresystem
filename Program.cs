@@ -181,16 +181,35 @@ while (running)
       case Role.Main_Admin:
         Console.WriteLine("----------Welcome main admin--------");
         System.Console.WriteLine(" 1. Handle the system permission");
-        System.Console.WriteLine(" 2. ");
-        System.Console.WriteLine(" 3. ");
+        System.Console.WriteLine(" 2. Assign admins to certain regions");
+        System.Console.WriteLine(" 3. Give admins the permission to handle registrations");
+        System.Console.WriteLine(" 4. Give admins the permission to add locations");
+        System.Console.WriteLine(" 5. Give admins the permission to create accounts for personell");
+        System.Console.WriteLine(" 6. Give admins the permission to view a list of who has permission to what");
         System.Console.WriteLine(" h. Log out");
         System.Console.WriteLine(" f. Close");
         string? mainAdmin_choice = Console.ReadLine();
 
         switch (mainAdmin_choice) // start of main admin switch choices
         {
-          case "1":
+          case "1":    // Handle the system permission
             break;
+
+          case "2":     // Assign admins to certain regions
+          break;
+
+          case "3":    // Give admins the permission to handle registrations
+          break;
+
+          case "4":    // Give admins the permission to add locations
+          break;
+
+          case "5":     // Give admins the permission to create accounts for personell
+          break;
+
+          case "6":     // Give admins the permission to view a list of who has permission to what
+          break;
+
 
           case "h": // log out 
             loggedin_user = null;
@@ -226,6 +245,9 @@ while (running)
           case "1":
             break;
 
+          case "2":
+            menu.AcceptPatient();
+            break;
           case "h": // log out 
             loggedin_user = null;
             menu.LogOut();

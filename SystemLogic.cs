@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace App;
 
@@ -12,7 +13,7 @@ public class SystemMenu
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
   List<Patient_Journal> journals = new List<Patient_Journal>();
   List<Permission> permissions = new List<Permission>();
-
+private const string FilePath = "Users.txt";
   public SystemMenu()
   {
     // Loud all the users when we first run the system
@@ -196,7 +197,52 @@ public class SystemMenu
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
   }*/
+  
+ public void AcceptPatient()
+  {
+    
+    
+        foreach(RequestRegistration user in request_registrations)
+    {
 
+      if (user.Status  != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
+      {
+        System.Console.WriteLine(user.PatientName + user.PatientEmail + user.Patient_Phone_Number + user.PersonalNumber);
+        Console.WriteLine("do you want to accept this person type yes");
+        string Admin_input = Console.ReadLine()!;
+       
+        if (Admin_input == "yes")
+        {
+          
+          string username = user.PatientName!;
+          string password = user.PatientPassword!;
+          Role role = Role.Patient;
+          user.Status = RegistrationStatus.Accept;
+           string line = $"{username},{password},{role}";
+            File.AppendAllLines(FilePath, new[] { line });
+
+
+         }
+              else
+                {
+          Console.WriteLine("OK the request is denied");
+                }  
+
+     }
+            else
+            {
+        Console.WriteLine("there is no Requests");
+            }
+            
+
+
+     }
+
+        
+        
+
+
+    }
 
 
 }

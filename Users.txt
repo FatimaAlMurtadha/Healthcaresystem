@@ -14,3 +14,5 @@ patient,123,Patient
 personnel,123,Personnel
 mainadmin,123,Main_Admin
 localadmin,123,Local_Admin
+
+Lukas,kebab,Patient
