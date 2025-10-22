@@ -224,9 +224,9 @@ private const string FilePath = "Users.txt";
           user.Status = RegistrationStatus.Accept;
           string line = $"{username},{password},{role}";
           File.AppendAllLines(FilePath, new[] { line });
-          string lines = $"{username},{password},{role},{time}";
+          File.AppendAllLines("Users_log.txt", new[] { line });
+           string lines = $"{username},{password},{role},{dateTime}";
           File.AppendAllLines("Users_log.txt", new[] { lines });
-          
           System.Console.WriteLine("you have accepted this request, press enter to continue");
           Console.ReadLine();
 

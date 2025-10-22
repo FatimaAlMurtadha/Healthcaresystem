@@ -15,12 +15,6 @@ As an admin with sufficient permissions, I need to be able to give admins the pe
 
 As an admin with sufficient permissions, I need to be able to add locations.
 
-As an admin with sufficient permissions, I need to be able to accept user registration as patients.
-
-As an admin with sufficient permissions, I need to be able to deny user registration as patients.
-
-As an admin with sufficient permissions, I need to be able to create accounts for personnel.
-
 As an admin with sufficient permissions, I need to be able to view a list of who has permission to what.
 
 As personnel with sufficient permissions, I need to be able to view a patients journal entries.
@@ -236,7 +230,7 @@ while (running)
             break;
 
           case "3": // Deny user registration as patients
-            menu.AcceptPatient();
+
             break;
           case "4": // Handle registrations
             break;
