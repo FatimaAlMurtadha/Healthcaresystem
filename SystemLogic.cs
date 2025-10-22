@@ -230,7 +230,10 @@ private const string FilePath = "Users.txt";
                 }  
 
      }
-            else {}
+            else
+            {
+        Console.WriteLine("there is no Requests");
+            }
             
 
 
