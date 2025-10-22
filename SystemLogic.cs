@@ -196,6 +196,7 @@ private const string FilePath = "Users.txt";
     Console.WriteLine("Journal note saved successfully.");
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
+<<<<<<< HEAD
   }*/
   
  public void AcceptPatient()
@@ -205,6 +206,16 @@ private const string FilePath = "Users.txt";
         foreach(RequestRegistration user in request_registrations)
     {
 
+=======
+  }
+ public void AcceptPatient()
+  {
+   
+
+        foreach(RequestRegistration user in request_registrations)
+    {
+
+>>>>>>> main
       if (user.Status  != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
       {
         System.Console.WriteLine(user.PatientName + user.PatientEmail + user.Patient_Phone_Number + user.PersonalNumber);
@@ -220,14 +231,21 @@ private const string FilePath = "Users.txt";
           user.Status = RegistrationStatus.Accept;
            string line = $"{username},{password},{role}";
             File.AppendAllLines(FilePath, new[] { line });
+<<<<<<< HEAD
 
 
+=======
+            System.Console.WriteLine("you have accepted this request, press enter to continue");
+            Console.ReadLine();
+ 
+>>>>>>> main
          }
               else
                 {
           Console.WriteLine("OK the request is denied");
                 }  
 
+<<<<<<< HEAD
      }
             else
             {
@@ -238,6 +256,13 @@ private const string FilePath = "Users.txt";
 
      }
 
+=======
+       }
+          
+     }
+    Console.WriteLine("ther is no more Requests, press ENTER to continue");
+    Console.ReadLine();
+>>>>>>> main
         
         
 
