@@ -1,11 +1,3 @@
-638965492169993510|User|Oskar|19:e november|Requested
-638965523252717129|User|Oskar|IMORGON|Requested
-638965525400961729|TEST|Oskar|3434343343434343|Requested
-1|WAT|Oskar|3j4j34|Approved
-<<<<<<< HEAD
-2|LUkas|personnel|10 oktober 2028 |Approved
-3|Lukas|personnel|121212|Denied
-=======
-2|patient|personnel|123|Requested
-3|patient|personnel|25/04/11|Approved
->>>>>>> 82cc0f4 (personell can now show schedule)
+1|User|Oskar|2025-10-23 12:30|Approved|ONT...VÄLDIGT ONT
+2|YAHOO|Oskar|2000-11-10 07:30|Requested|ITS TIME
+3|Karl Marx|Oskar|1848-12-03 12:00|Denied|Manifesto time baby

@@ -107,8 +107,8 @@ while (running)
           AppointmentMenu.Patient_RequestAppointment();
             break;
           case "3": // show my schedule
-            AppointmentMenu.Patient_ViewSchedule();
-            break;
+          AppointmentMenu.Patient_ViewSchedule(loggedin_user?.GetUserName());
+           break;
           case "h": // log out as a patient
             loggedin_user = null;
             menu.LogOut();
@@ -131,7 +131,7 @@ while (running)
         System.Console.WriteLine(" 3. Register patient's appointments ");
         System.Console.WriteLine(" 4. Modify appointments");
         System.Console.WriteLine(" 5. Approve appointments requests");
-        System.Console.WriteLine(" 6. Show schedule for my hospital ");
+        System.Console.WriteLine(" 6. Show schedule for the week ");
         System.Console.WriteLine(" h. Log out  ");
         System.Console.WriteLine(" f. Close");
         string? personnel_choice = Console.ReadLine();
@@ -146,15 +146,11 @@ while (running)
           case "4": // Modify appointments
             break;
           case "5": // Approve appointments requests 
-<<<<<<< HEAD
-            AppointmentMenu.Personnel_ApproveRequests();
-=======
-          AppointmentMenu.Personnel_ApproveRequests();
->>>>>>> 82cc0f4 (personell can now show schedule)
+          AppointmentMenu.Personnel_ApproveRequests(loggedin_user?.GetUserName());
             break;
-          case "6": // Show schedule for my hospital 
-          AppointmentMenu.Patient_ViewSchedule();
-            break;
+          case "6": // Show schedule 
+          AppointmentMenu.Personnel_ViewSchedule(loggedin_user?.GetUserName());
+          break;
 
 
           case "h": // log out 
@@ -224,6 +220,7 @@ while (running)
         System.Console.WriteLine(" 4. Handle registrations  "); // yes
         System.Console.WriteLine(" 5. Create accounts for personell "); //yes
         System.Console.WriteLine(" 6. View a list of who has permission to what");
+        System.Console.WriteLine(" 7. Manage appointments ");
         System.Console.WriteLine(" h. Log out");
         System.Console.WriteLine(" f. Close");
         string? localAdmin_choice = Console.ReadLine();
@@ -246,6 +243,9 @@ while (running)
           case "5": // Create accounts for personell
             break;
           case "6": // View a list of who has permission to what
+            break;
+            case "7": // View all scheduled appointments
+            AppointmentMenu.LocalAdmin_ManageAppointments();
             break;
           case "h": // log out 
             loggedin_user = null;
