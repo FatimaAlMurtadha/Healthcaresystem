@@ -60,7 +60,7 @@ namespace App
             File.WriteAllLines(FilePath, lines.ToArray());
         }
 
-        public static List<Appointment> LoadForUser(string username)  // for “schedule”
+        public static List<Appointment> LoadForUser(string username)  // för “schedule”
         {
             var result = new List<Appointment>();
             var all = LoadAll();
@@ -74,7 +74,7 @@ namespace App
             return result;
         }
 
-        public static List<Appointment> PendingForPersonnel(string personnel) // personnel-only view
+        public static List<Appointment> PendingForPersonnel(string personnel) // personnel view
         {
             var result = new List<Appointment>();
             var all = LoadAll();
@@ -88,7 +88,7 @@ namespace App
             return result;
         }
 
-        public static List<Appointment> PendingAll() // for Local_Admin
+        public static List<Appointment> PendingAll() // för Local_Admin
         {
             var result = new List<Appointment>();
             var all = LoadAll();

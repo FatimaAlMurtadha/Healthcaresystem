@@ -29,7 +29,7 @@ namespace App
             return Id + "|" + Patient + "|" + Personnel + "|" + When + "|" + Status.ToString() + "|" + safeNote;
         }
 
-        // Parses an bokningen från en line of text
+        // Parsar bokningen från en line of text
         public static bool TryParse(string line, out Appointment a)
         {
             a = null;

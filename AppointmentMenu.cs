@@ -119,7 +119,7 @@ namespace App
          DateTime now = DateTime.Now;
 
         // Beräkna denna veckas måndag och söndag
-         int diff = ((int)now.DayOfWeek + 6) % 7; // Monday = 0
+         int diff = ((int)now.DayOfWeek + 6) % 7; // Måndag = 0
           DateTime monday = now.Date.AddDays(-diff);
           DateTime from = monday;
          DateTime to = monday.AddDays(7).AddSeconds(-1);
@@ -189,7 +189,7 @@ namespace App
         return;
     }
 
-    // Sort by time (simple ascending order)
+    // Här sorterar vi med tid (ascending)
     all.Sort((a, b) =>
     {
         if (TryParseStart(a.When, out var t1) && TryParseStart(b.When, out var t2))
@@ -197,7 +197,7 @@ namespace App
         return 0;
     });
 
-    // Show every appointment
+    // Visar ALLA bokningar (epic)
     for (int i = 0; i < all.Count; i++)
     {
         var a = all[i];
@@ -215,7 +215,7 @@ namespace App
             Console.WriteLine($"   » {a.Note}");
     }
 
-    // Ask if admin wants to approve/deny any
+    // Denna del frågar vilken bokning admin vill ändra status på och accept eller deny
     Console.WriteLine();
     Console.Write("Enter number to approve/deny (or press ENTER to exit): ");
     string choice = Console.ReadLine();
