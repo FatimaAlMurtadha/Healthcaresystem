@@ -62,6 +62,7 @@ while (running)
       // As a user, I need to be able to log in.
       case "1":
         loggedin_user = menu.LogIn();
+        menu.current_user = loggedin_user;
         break;
       case "2": // As a user, I need to be able to request registration as a patient.
         menu.SendRegistrationRequest();

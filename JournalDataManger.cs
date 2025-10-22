@@ -10,7 +10,7 @@ static class JournalDataManager
 
   public static void SaveJournals(Patient_Journal journal) 
   {
-    string line = $"{ journal.GetPersonalNumber()},{ journal.GetAuthor()},{ journal.GetTitle()},{ journal.GetNote()},{ journal.GetDate()}";
+    string line = $"{ journal.GetUseName()},{ journal.GetAuthor()},{ journal.GetTitle()},{ journal.GetNote()},{ journal.GetDate()}";
     try { File.AppendAllLines(FilePath, new[] { line }); } catch(IOException ex){System.Console.WriteLine($"Error saving journal: {ex.Message}");}
   }
 
@@ -19,8 +19,10 @@ static class JournalDataManager
     var journals = new List<Patient_Journal>(); //Fixar lista att fylla på
 
     if (!File.Exists(FilePath))
+    {
+      System.Console.WriteLine("No journals file found");
       return journals;
-
+    }
     foreach (var line in File.ReadAllLines(FilePath))
     {
       var parts = line.Split(',');  //Dela upp varje rad i delar 
