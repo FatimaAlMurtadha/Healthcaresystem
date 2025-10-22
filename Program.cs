@@ -172,12 +172,26 @@ while (running)
         break;
       case Role.Main_Admin:
         Console.WriteLine("----------Welcome main admin--------");
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        System.Console.WriteLine(" 1. Handle the system permission"); 
+        System.Console.WriteLine(" 2. Assign admins to certain regions"); 
+        System.Console.WriteLine(" 3. Give admins the permission to add locations"); 
+        System.Console.WriteLine(" 4. Give admins the permission to create accounts for personell"); 
+        System.Console.WriteLine(" 5. Give admins the permission to view a list of who has permission to what"); 
+=======
+>>>>>>> logicfunction
         System.Console.WriteLine(" 1. Handle the system permission");
         System.Console.WriteLine(" 2. Assign admins to certain regions");
         System.Console.WriteLine(" 3. Give admins the permission to handle registrations");
         System.Console.WriteLine(" 4. Give admins the permission to add locations");
         System.Console.WriteLine(" 5. Give admins the permission to create accounts for personell");
         System.Console.WriteLine(" 6. Give admins the permission to view a list of who has permission to what");
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> logicfunction
         System.Console.WriteLine(" h. Log out");
         System.Console.WriteLine(" f. Close");
         string? mainAdmin_choice = Console.ReadLine();
@@ -190,6 +204,19 @@ while (running)
           case "2":     // Assign admins to certain regions
           break;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          case "3":    // Give admins the permission to add locations
+            break;
+
+          case "4":    // Give admins the permission to create accounts for personell
+            break;
+
+          case "5":     //  Give admins the permission to view a list of who has permission to what
+            break;
+=======
+>>>>>>> logicfunction
           case "3":    // Give admins the permission to handle registrations
           break;
 
@@ -203,6 +230,10 @@ while (running)
           break;
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> logicfunction
           case "h": // log out 
             loggedin_user = null;
             menu.LogOut();
@@ -237,9 +268,29 @@ while (running)
           case "1": // Add locations
             break;
 
+<<<<<<< HEAD
           case "2":
             menu.AcceptPatient();
             break;
+=======
+<<<<<<< HEAD
+          case "2": // Accept user registration as patients
+            menu.AcceptPatient();
+            break;
+          case "3": // Deny user registration as patients
+            break;
+          case "4": // Handle registrations 
+            break;
+          case "5": // Create accounts for personell
+            break;
+          case "6": // View a list of who has permission to what
+            break;
+=======
+          case "2":
+            menu.AcceptPatient();
+            break;
+>>>>>>> main
+>>>>>>> logicfunction
           case "h": // log out 
             loggedin_user = null;
             menu.LogOut();
