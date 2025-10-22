@@ -41,8 +41,9 @@ namespace App
 
             DateTime parsed;
             if (!TryParseStart(whenText, out parsed))
-            {
-                Console.WriteLine("Invalid format. Example: 2025-11-02 09:30");
+            {Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid format. Example: 2025-11-02 09:30",Console.ForegroundColor);
+             Console.ForegroundColor = ConsoleColor.White;
                 Console.ReadLine();
                 return;
             }
@@ -66,7 +67,9 @@ namespace App
             }
             if (!ok)
             {
-                Console.WriteLine("No such personnel.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No such personnel.", Console.ForegroundColor);
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.ReadLine();
                 return;
             }

@@ -72,7 +72,7 @@ while (running)
         menu.CloseSystem();
         break;
       default:
-        System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+        menu.false_input();
         break;
     }
 
@@ -82,7 +82,7 @@ while (running)
     switch (loggedin_user.GetRole())
     {
       case Role.Patient:
-        Console.WriteLine("-----------Welcome patient-----------");
+        Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
         System.Console.WriteLine();
         System.Console.WriteLine(" 1. Show my Journal ");
         System.Console.WriteLine(" 2. Book an appointment ");
@@ -96,11 +96,11 @@ while (running)
             if (menu.HasPermission(Patient.Permissions, Permission.ViewJournals))
             {
               try { Console.Clear(); } catch { }
-              menu.ShowMyJournal();
+             // menu.ShowMyJournal();
             }
             else
             {
-              System.Console.WriteLine("You do not have the permission to view this journal");
+              menu.NO_permissions();
             }
             break;
           case "2": // book an appointment
@@ -119,13 +119,13 @@ while (running)
             menu.CloseSystem();
             break;
           default:
-            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+             menu.false_input();
             break;
 
         } // slut på patient choices
         break;
       case Role.Personnel:
-        Console.WriteLine("----------Welcome personnel---------");
+        Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
         System.Console.WriteLine(" 1. Show patient's journal entries");
         System.Console.WriteLine(" 2. Mark journal entries with different levels of read permissions");
         System.Console.WriteLine(" 3. Register patient's appointments ");
@@ -162,7 +162,7 @@ while (running)
             menu.CloseSystem();
             break;
           default:
-            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+              menu.false_input();
             break;
 
 
@@ -170,7 +170,7 @@ while (running)
         } // end of personnel switch choices
         break;
       case Role.Main_Admin:
-        Console.WriteLine("----------Welcome main admin--------");
+        Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
         System.Console.WriteLine(" 1. Handle the system permission"); 
         System.Console.WriteLine(" 2. Assign admins to certain regions"); 
         System.Console.WriteLine(" 3. Give admins the permission to add locations"); 
@@ -204,7 +204,7 @@ while (running)
             menu.CloseSystem();
             break;
           default:
-            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+             menu.false_input();
             break;
 
 
@@ -213,8 +213,8 @@ while (running)
 
         break;
       case Role.Local_Admin:
-        Console.WriteLine("---------Welcome local admin---------");
-        System.Console.WriteLine(" 1. Add locations "); // yes
+        Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
+        System.Console.WriteLine(" 1. Add locations "); // no
         System.Console.WriteLine(" 2. Accept user registration as patients "); //yes
         System.Console.WriteLine(" 3. Deny user registration as patients");
         System.Console.WriteLine(" 4. Handle registrations  "); // yes
@@ -228,7 +228,7 @@ while (running)
         switch (localAdmin_choice) // start of local admin switch choices
         {
           case "1":
-            menu.Create_personell_accounts();
+            
             break;
 
           case "2": // Accept user registration as patients
@@ -241,6 +241,7 @@ while (running)
           case "4": // Handle registrations
             break;
           case "5": // Create accounts for personell
+          menu.Create_personell_accounts();
             break;
           case "6": // View a list of who has permission to what
             break;
@@ -256,7 +257,7 @@ while (running)
             menu.CloseSystem();
             break;
           default:
-            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+              menu.false_input();
             break;
 
 

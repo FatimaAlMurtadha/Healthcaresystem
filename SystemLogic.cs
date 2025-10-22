@@ -7,15 +7,15 @@ namespace App;
 
 public class SystemMenu
 {
-  
+
 
   List<IUser> users = new List<IUser>();
   public IUser? current_user = null;
-  
+
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
   List<Patient_Journal> journals = new List<Patient_Journal>();
   List<Permission> permissions = new List<Permission>();
-private const string FilePath = "Users.txt";
+  private const string FilePath = "Users.txt";
   public SystemMenu()
   {
     // Loud all the users when we first run the system
@@ -57,9 +57,12 @@ private const string FilePath = "Users.txt";
         current_user = user;
         return user;
       }
-    }
-    System.Console.WriteLine("Log in faild. Incorrect username or password.");
+    }   
+    Console.ForegroundColor = ConsoleColor.Red;
+    System.Console.WriteLine("Log in faild. Incorrect username or password.Press ENTER to continue.....", Console.ForegroundColor);
     System.Console.WriteLine("Press ENTER to continue.....");
+    Console.ForegroundColor = ConsoleColor.White;
+
     Console.ReadLine();
     return null;
   }
@@ -68,7 +71,9 @@ private const string FilePath = "Users.txt";
   public void CloseSystem()
   {
     Console.Clear();
-    System.Console.WriteLine("Thank you for using this Healthcare System.");
+      Console.ForegroundColor = ConsoleColor.Red;
+    System.Console.WriteLine("Thank you for using this Healthcare System.", Console.ForegroundColor);
+    Console.ForegroundColor = ConsoleColor.White;
     System.Console.WriteLine();
     System.Console.WriteLine("Press Enter to close");
     Console.ReadLine();
@@ -98,9 +103,10 @@ private const string FilePath = "Users.txt";
     string? patient_phone_number = Console.ReadLine(); // patient phone number
     if (string.IsNullOrWhiteSpace(patientpersonalnumber) || string.IsNullOrWhiteSpace(patientname) || string.IsNullOrWhiteSpace(patientpassword) || string.IsNullOrWhiteSpace(patient_phone_number))
     {
-      Console.WriteLine("Faild to send a registration request. one or more of the information were empty.");
-      System.Console.WriteLine();
-      System.Console.WriteLine("Press ENTER to try again");
+      Console.ForegroundColor = ConsoleColor.Red;
+      Console.WriteLine("Faild to send a registration request. one or more of the information were empty.", Console.ForegroundColor);
+      System.Console.WriteLine("Press ENTER to try again", Console.ForegroundColor);
+      Console.ForegroundColor = ConsoleColor.White;
       Console.ReadLine();
       return;
     }
@@ -109,10 +115,12 @@ private const string FilePath = "Users.txt";
     {
       try { Console.Clear(); } catch { }
       request_registrations.Add(new RequestRegistration(patientpersonalnumber, patientname, patientemail, patientpassword, patient_phone_number, RegistrationStatus.Pending));
+       Console.ForegroundColor = ConsoleColor.Green;
       System.Console.WriteLine();
       System.Console.WriteLine("Your request has been sent susseccfully");
       System.Console.WriteLine();
       System.Console.WriteLine("Press ENTER to continue........");
+       Console.ForegroundColor = ConsoleColor.White;
       Console.ReadLine();
     }
 
@@ -126,18 +134,41 @@ private const string FilePath = "Users.txt";
 
 
   // View my own journal 
-  public void ShowMyJournal()
+  /*public void ShowMyJournal()
   {
-    foreach(Patient_Journal journal in journals)
+    if (current_user == null)
     {
-      var patient = current_user as Patient;
-      if (current_user == patient)
+      Console.WriteLine("Only patient can view there own journal.");
+      return;
+    }
+    Patient patient = current_user as Patient;
+    if (patient == null)
+    {
+      System.Console.WriteLine("No patient is logged in");
+      return;
+    }
+    string? personalNumber = patient.GetPersonalNumber();
+    bool found_patient = false;
+    foreach (Patient_Journal journal in journals)
+    {
+      if (journal.GetPersonalNumber() == personalNumber)
       {
-        System.Console.WriteLine();
-        
+        System.Console.WriteLine($"Date: {journal.GetDate():yyyy-MM-dd}");
+        System.Console.WriteLine($"Title: {journal.GetTitle()}");
+        System.Console.WriteLine($"Note: {journal.GetNote()}");
+        System.Console.WriteLine($"Author: {journal.GetAuthor()}");
+        System.Console.WriteLine("---------------------------------");
+        found_patient = true;
       }
     }
-  }
+    if (!found_patient)
+    {
+      System.Console.WriteLine("No journal entries found");
+    }
+
+    Console.WriteLine("Press ENTER to continue...");
+    Console.ReadLine();
+  }*/
 
   // a function to allow a personnel with sufficient permission to creat a journal note
 
@@ -145,7 +176,11 @@ private const string FilePath = "Users.txt";
   {
     if (current_user == null || !current_user.IsRole(Role.Personnel))
     {
+      Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine("Only personnel can create journal notes.");
+      Console.WriteLine("Press ENTER to continue...");
+       Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadLine();
       return;
     }
 
@@ -173,10 +208,11 @@ private const string FilePath = "Users.txt";
 
 
     JournalDataManager.SaveJournals(journal); // save the new note on the file 
-
+      Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("Journal note saved successfully.");
     Console.WriteLine("Press ENTER to continue...");
-    Console.ReadLine();
+       Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadLine();
   }
   public void AcceptPatient()
   {
@@ -197,15 +233,18 @@ private const string FilePath = "Users.txt";
           var time = dateTime.ToString("ddd, dd MMM yyyy h:mm");
           string username = user.PatientName!;
           string password = user.PatientPassword!;
-          Role role = Role.Patient; 
+          Role role = Role.Patient;
           user.Status = RegistrationStatus.Accept;
           string line = $"{username},{password},{role}";
           File.AppendAllLines(FilePath, new[] { line });
           File.AppendAllLines("Users_log.txt", new[] { line });
-           string lines = $"{username},{password},{role},{dateTime}";
+          string lines = $"{username},{password},{role},{dateTime}";
           File.AppendAllLines("Users_log.txt", new[] { lines });
-          System.Console.WriteLine("you have accepted this request, press enter to continue");
-          Console.ReadLine();
+             Console.ForegroundColor = ConsoleColor.Green;
+         Console.WriteLine("you have accepted this request, press enter to continue", Console.ForegroundColor);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadLine();
+    
 
         }
         else
@@ -223,37 +262,45 @@ private const string FilePath = "Users.txt";
 
 
   }
-    
-    public void Create_personell_accounts()
+
+  public void Create_personell_accounts()
   {
-        System.Console.WriteLine("Write username to the account");
+    System.Console.WriteLine("Write username to the account");
     string username = Console.ReadLine()!;
     Console.Clear();
     System.Console.WriteLine("Write password to the account");
     string password = Console.ReadLine()!;
     Role role = Role.Personnel;
     users.Add(new Personnel(username, password));
-              string line = $"{username},{password},{role}";
-          File.AppendAllLines(FilePath, new[] { line });
-          System.Console.WriteLine("you have accepted this request, press enter to continue");
-          Console.ReadLine();
+    string line = $"{username},{password},{role}";
+    File.AppendAllLines(FilePath, new[] { line });
+    System.Console.WriteLine("you have accepted this request, press enter to continue");
+    Console.ReadLine();
 
 
+
+  }
+
+  public void false_input()
+  {
+   Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("Invalid choice. Press ENTER to continue........", Console.ForegroundColor);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadLine();
+
+
+
+  }
+
+public void NO_permissions()
+  {
+        Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("You dont have permissions to do this, Press Enter to continue....", Console.ForegroundColor);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadLine();
+        
 
     }
-
-/*
-      public void ShowPatientJournals()
-    {
-      System.Console.WriteLine(" Type in for which patient's journal you would like to view by writing their personalnumber" );
-      string input = Console.ReadLine();
-
-      if (input == patientpersonalnumber.personalNumber)
-      {
-        System.Console.WriteLine(patient.journal);
-      }
-    }
-*/
 
 }
 
