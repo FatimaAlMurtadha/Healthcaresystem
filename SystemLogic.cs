@@ -121,11 +121,10 @@ public class SystemMenu
   }
 
 
-
   // View my own journal 
   public void ShowMyJournal()
   {
-    if (current_user == null)
+    if (current_user == null || !current_user.IsRole(Role.Patient))
     {
       Console.WriteLine("Only patient can view there own journal.");
       return;
@@ -133,7 +132,7 @@ public class SystemMenu
     Patient patient = current_user as Patient;
     if (patient == null)
     {
-      System.Console.WriteLine("No patient is logged in");
+      System.Console.WriteLine("Invalid patient");
       return;
     }
     string? personalNumber = patient.GetPersonalNumber();
@@ -152,7 +151,7 @@ public class SystemMenu
     }
     if (!found_patient)
     {
-      System.Console.WriteLine("No journal entries found");
+      System.Console.WriteLine("No journal entries found for your account");
     }
 
     Console.WriteLine("Press ENTER to continue...");
@@ -161,7 +160,7 @@ public class SystemMenu
 
   // a function to allow a personnel with sufficient permission to creat a journal note
 
-  public void CreateJournalNote()
+  /*public void CreateJournalNote()
   {
     if (current_user == null || !current_user.IsRole(Role.Personnel))
     {
@@ -191,13 +190,12 @@ public class SystemMenu
     Patient_Journal journal = new Patient_Journal(personalNumber, author, title, note, createdDate);
     journals.Add(journal); // adding the new note to the current list
 
-
     JournalDataManager.SaveJournals(journal); // save the new note on the file 
 
     Console.WriteLine("Journal note saved successfully.");
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
-  }
+  }*/
 
 
 

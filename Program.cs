@@ -35,7 +35,7 @@ As personnel with sufficient permissions, I need to be able to approve appointme
 
 As personnel with sufficient permissions, I need to be able to view the schedule of a location.
 
-As a patient, I need to be able to view my own journal.
+As a patient, I need to be able to view my own journal. 
 
 As a patient, I need to be able to request an appointment.
 
@@ -43,18 +43,7 @@ As a logged in Patient, I need to be able to view my schedule.
 */
 
 
-
-
-
-
 IUser? loggedin_user = null;
-
-
-
-
-
-
-
 
 SystemMenu menu = new SystemMenu();
 
@@ -140,17 +129,18 @@ while (running)
         break;
       case Role.Personnel:
         Console.WriteLine("----------Welcome personnel---------");
-        System.Console.WriteLine(" 1. Show patient journals ");
-        System.Console.WriteLine(" 2. Create journal notes ");
-        System.Console.WriteLine(" 3. Book patient appointments ");
-        System.Console.WriteLine(" 4. Handle patient visits ");
-        System.Console.WriteLine(" 5. Show schedule for my hospital ");
+        System.Console.WriteLine(" 1. Show patient's journal entries");
+        System.Console.WriteLine(" 2. Mark journal entries with different levels of read permissions");
+        System.Console.WriteLine(" 3. Book patient's appointments ");
+        System.Console.WriteLine(" 4. Modify appointments");
+        System.Console.WriteLine(" 5. Approve appointments requests");
+        System.Console.WriteLine(" 6. Show schedule for my hospital ");
         System.Console.WriteLine(" h. Log out  ");
         System.Console.WriteLine(" f. Close");
         string? personnel_choice = Console.ReadLine();
         switch (personnel_choice) // start of personnel switch choices
         {
-          case "1":
+          case "1": // show 
             break;
           case "2": // create journal note
 
@@ -158,7 +148,7 @@ while (running)
             {
               if (personnel.HasPermission(Permission.Create_Journal_note))
               {
-                menu.CreateJournalNote();
+                //menu.CreateJournalNote();
               }
               else
               {
