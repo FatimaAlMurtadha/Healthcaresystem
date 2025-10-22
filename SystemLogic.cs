@@ -122,11 +122,10 @@ private const string FilePath = "Users.txt";
   }
 
 
-
   // View my own journal 
   public void ShowMyJournal()
   {
-    if (current_user == null)
+    if (current_user == null || !current_user.IsRole(Role.Patient))
     {
       Console.WriteLine("Only patient can view there own journal.");
       return;
@@ -134,7 +133,7 @@ private const string FilePath = "Users.txt";
     Patient patient = current_user as Patient;
     if (patient == null)
     {
-      System.Console.WriteLine("No patient is logged in");
+      System.Console.WriteLine("Invalid patient");
       return;
     }
     string? personalNumber = patient.GetPersonalNumber();
@@ -153,7 +152,7 @@ private const string FilePath = "Users.txt";
     }
     if (!found_patient)
     {
-      System.Console.WriteLine("No journal entries found");
+      System.Console.WriteLine("No journal entries found for your account");
     }
 
     Console.WriteLine("Press ENTER to continue...");
@@ -162,7 +161,7 @@ private const string FilePath = "Users.txt";
 
   // a function to allow a personnel with sufficient permission to creat a journal note
 
-  public void CreateJournalNote()
+  /*public void CreateJournalNote()
   {
     if (current_user == null || !current_user.IsRole(Role.Personnel))
     {
@@ -192,12 +191,35 @@ private const string FilePath = "Users.txt";
     Patient_Journal journal = new Patient_Journal(personalNumber, author, title, note, createdDate);
     journals.Add(journal); // adding the new note to the current list
 
-
     JournalDataManager.SaveJournals(journal); // save the new note on the file 
 
     Console.WriteLine("Journal note saved successfully.");
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
+  }*/
+  
+ public void AcceptPatient()
+  {
+    
+    
+        foreach(RequestRegistration user in request_registrations)
+    {
+
+      if (user.Status  != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
+      {
+        System.Console.WriteLine(user.PatientName + user.PatientEmail + user.Patient_Phone_Number + user.PersonalNumber);
+        Console.WriteLine("do you want to accept this person type yes");
+        string Admin_input = Console.ReadLine()!;
+       
+        if (Admin_input == "yes")
+        {
+          
+          string username = user.PatientName!;
+          string password = user.PatientPassword!;
+          Role role = Role.Patient;
+          user.Status = RegistrationStatus.Accept;
+           string line = $"{username},{password},{role}";
+            File.AppendAllLines(FilePath, new[] { line });
   }
  public void AcceptPatient()
   {
@@ -235,6 +257,28 @@ private const string FilePath = "Users.txt";
      }
     Console.WriteLine("ther is no more Requests, press ENTER to continue");
     Console.ReadLine();
+        
+        
+
+
+    }
+
+         }
+              else
+                {
+          Console.WriteLine("OK the request is denied");
+                }  
+
+     }
+            else
+            {
+        Console.WriteLine("there is no Requests");
+            }
+            
+
+
+     }
+
         
         
 
