@@ -49,7 +49,9 @@ As a logged in Patient, I need to be able to view my schedule.
 
 IUser? loggedin_user = null;
 
-List<IUser> users = new List<IUser>();
+
+
+
 
 
 
@@ -110,7 +112,7 @@ while (running)
             if (menu.HasPermission(Patient.Permissions, Permission.ViewJournals))
             {
               try { Console.Clear(); } catch { }
-              menu.ShowJournal();
+              menu.ShowMyJournal();
             }
             else
             {
@@ -151,32 +153,22 @@ while (running)
           case "1":
             break;
           case "2": // create journal note
+
             if (loggedin_user is Personnel personnel)
             {
               if (personnel.HasPermission(Permission.Create_Journal_note))
               {
-                try { Console.Clear(); } catch { }
-                System.Console.WriteLine("Enter patient security number");
-                string? patient_personal_number = Console.ReadLine();
-                System.Console.WriteLine("Title: ");
-                string? title = Console.ReadLine();
-                System.Console.WriteLine("Note: ");
-                string? notes = Console.ReadLine();
-                string? author = loggedin_user.GetUserName();
-                Patient_Journal entry = new Patient_Journal(patient_personal_number, author, title, notes, DateTime.Now);
-                System.Console.WriteLine("Note added successfully.");
+                menu.CreateJournalNote();
               }
               else
               {
                 System.Console.WriteLine("You do not have the permission to manage the journal");
               }
-
             }
             else
             {
               System.Console.WriteLine("Current user is not personnel");
             }
-
 
             break;
 

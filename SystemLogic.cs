@@ -10,14 +10,17 @@ public class SystemMenu
   IUser? current_user = null;
   
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
-  List<Patient> patients = new List<Patient>();
   List<Patient_Journal> journals = new List<Patient_Journal>();
+  List<Permission> permissions = new List<Permission>();
 
-  // Loud all the users when we first run the system // need to expand with the rest of the data on the system
   public SystemMenu()
   {
+    // Loud all the users when we first run the system
     users = UserDataManager.LoadUsers();
+    // Loud all the journals when we first run the system
     journals = JournalDataManager.LoadJournals();
+    // Loud all the permissions when we first run the system
+    PermissionsDataManager.LoadPermissions(users);
   }
   // a function to log in as a user "Patient, personnel, main_admin, and local_admin"
   public IUser? LogIn()
@@ -120,48 +123,84 @@ public class SystemMenu
 
 
   // View my own journal 
-  public void ShowJournal()
+  public void ShowMyJournal()
   {
     if (current_user == null)
     {
-      Console.WriteLine(" No patient is logged in");
+      Console.WriteLine("Only patient can view there own journal.");
       return;
     }
-    else if (current_user.IsRole(Role.Patient))
+    Patient patient = current_user as Patient;
+    if (patient == null)
     {
-      foreach (Patient_Journal journal in journals)
+      System.Console.WriteLine("No patient is logged in");
+      return;
+    }
+    string? personalNumber = patient.GetPersonalNumber();
+    bool found_patient = false;
+    foreach (Patient_Journal journal in journals)
+    {
+      if (journal.GetPersonalNumber() == personalNumber)
       {
-        var patient = current_user as Patient;
-        if (patient != null && journal.GetPersonalNumber() == patient.GetPersonalNumber())
-        {
-          System.Console.WriteLine($"Date: {journal.GetDate():yyyy-MM-dd}");
-          System.Console.WriteLine($"Title: {journal.GetTitle()}");
-          System.Console.WriteLine($"Note: {journal.GetNote()}");
-          System.Console.WriteLine($"Author: {journal.GetAuthor()}");
-          System.Console.WriteLine("---------------------------------");
-          
-
-        }
-        else
-        {
-          System.Console.WriteLine("You can only view your own journal.");
-        }
-
-
+        System.Console.WriteLine($"Date: {journal.GetDate():yyyy-MM-dd}");
+        System.Console.WriteLine($"Title: {journal.GetTitle()}");
+        System.Console.WriteLine($"Note: {journal.GetNote()}");
+        System.Console.WriteLine($"Author: {journal.GetAuthor()}");
+        System.Console.WriteLine("---------------------------------");
+        found_patient = true;
       }
-
-
     }
-    else
+    if (!found_patient)
     {
-      System.Console.WriteLine("Only patient can view their own journal");
+      System.Console.WriteLine("No journal entries found");
     }
+
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
   }
 
- 
-  
+  // a function to allow a personnel with sufficient permission to creat a journal note
+
+  public void CreateJournalNote()
+  {
+    if (current_user == null || !current_user.IsRole(Role.Personnel))
+    {
+      Console.WriteLine("Only personnel can create journal notes.");
+      return;
+    }
+
+    Personnel personnel = current_user as Personnel;
+    if (personnel == null || !personnel.HasPermission(Permission.Create_Journal_note))
+    {
+      Console.WriteLine("You do not have permission to create journal notes.");
+      return;
+    }
+
+    Console.Write("Enter patient's personal number: ");
+    string? personalNumber = Console.ReadLine();
+
+    Console.Write("Enter journal title: ");
+    string? title = Console.ReadLine();
+
+    Console.Write("Enter journal note: ");
+    string? note = Console.ReadLine();
+
+    DateTime createdDate = DateTime.Now;
+    string? author = personnel.Username;
+
+    Patient_Journal journal = new Patient_Journal(personalNumber, author, title, note, createdDate);
+    journals.Add(journal); // adding the new note to the current list
+
+
+    JournalDataManager.SaveJournals(journal); // save the new note on the file 
+
+    Console.WriteLine("Journal note saved successfully.");
+    Console.WriteLine("Press ENTER to continue...");
+    Console.ReadLine();
+  }
+
+
+
 }
 
 
