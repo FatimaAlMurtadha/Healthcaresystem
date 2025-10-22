@@ -1,0 +1,2 @@
+personnel,Create_Journal_note
+patient,ViewJournals
