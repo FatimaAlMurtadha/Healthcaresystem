@@ -1,10 +1,12 @@
 namespace App;
+
+/*
 // 1. 
 User.cs 
 
  return (_permissions & permission) == permission;
     }
-*/
+
 
     public override string ToString()
 {
@@ -453,15 +455,19 @@ while (running)
                   System.Console.WriteLine("f. Close");
                   string? userinput = Console.ReadLine();
                   static void Make_Personnel(List<IUser> users)
-            {
-              System.Console.WriteLine("Please enter the name of the account");
-              string username = Console.ReadLine()!;
-              System.Console.WriteLine("Please enter the name of the account");
-              string password = Console.ReadLine()!;
-              users.Add(new Personnel(username, password));
+                  {
+                    System.Console.WriteLine("Please enter the name of the account");
+                    string username = Console.ReadLine()!;
+                    System.Console.WriteLine("Please enter the name of the account");
+                    string password = Console.ReadLine()!;
+                    users.Add(new Personnel(username, password));
 
 
-            }
+                  }
+            
+
+*/
+            
 
 
 
