@@ -209,9 +209,7 @@ private const string FilePath = "Users.txt";
         foreach(RequestRegistration user in request_registrations)
     {
 
-<<<<<<< HEAD
-=======
-=======
+
   }
  public void AcceptPatient()
   {
@@ -220,8 +218,7 @@ private const string FilePath = "Users.txt";
         foreach(RequestRegistration user in request_registrations)
     {
 
->>>>>>> main
->>>>>>> logicfunction
+
       if (user.Status  != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
       {
         System.Console.WriteLine(user.PatientName + user.PatientEmail + user.Patient_Phone_Number + user.PersonalNumber);
@@ -237,7 +234,7 @@ private const string FilePath = "Users.txt";
           user.Status = RegistrationStatus.Accept;
            string line = $"{username},{password},{role}";
             File.AppendAllLines(FilePath, new[] { line });
-<<<<<<< HEAD
+
   }
  public void AcceptPatient()
   {
@@ -264,23 +261,17 @@ private const string FilePath = "Users.txt";
             System.Console.WriteLine("you have accepted this request, press enter to continue");
             Console.ReadLine();
  
-=======
-<<<<<<< HEAD
 
-
-=======
             System.Console.WriteLine("you have accepted this request, press enter to continue");
             Console.ReadLine();
  
->>>>>>> main
->>>>>>> logicfunction
          }
               else
                 {
           Console.WriteLine("OK the request is denied");
                 }  
 
-<<<<<<< HEAD
+
        }
           
      }
@@ -297,10 +288,6 @@ private const string FilePath = "Users.txt";
                 {
           Console.WriteLine("OK the request is denied");
                 }  
-
-=======
-<<<<<<< HEAD
->>>>>>> logicfunction
      }
             else
             {
@@ -310,19 +297,11 @@ private const string FilePath = "Users.txt";
 
 
      }
-
-<<<<<<< HEAD
-=======
-=======
        }
           
      }
     Console.WriteLine("ther is no more Requests, press ENTER to continue");
-    Console.ReadLine();
->>>>>>> main
->>>>>>> logicfunction
-        
-        
+    Console.ReadLine(); 
 
 
     }
