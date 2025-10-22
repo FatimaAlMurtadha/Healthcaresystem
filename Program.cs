@@ -102,9 +102,11 @@ while (running)
               System.Console.WriteLine("You do not have the permission to view this journal");
             }
             break;
-          case "2": // book an appointment
+          case "2":
+            AppointmentMenu.Patient_RequestAppointment(); // book an appointment
             break;
           case "3": // show my schedule
+            AppointmentMenu.Patient_ViewSchedule();
             break;
           case "h": // log out as a patient
             loggedin_user = null;
@@ -143,6 +145,7 @@ while (running)
           case "4": // Modify appointments
             break;
           case "5": // Approve appointments requests 
+            AppointmentMenu.Personnel_ApproveRequests();
             break;
           case "6": // Show schedule for my hospital 
             break;
