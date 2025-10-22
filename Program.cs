@@ -236,6 +236,9 @@ while (running)
           case "1":
             break;
 
+          case "2":
+            menu.AcceptPatient();
+            break;
           case "h": // log out 
             loggedin_user = null;
             menu.LogOut();
