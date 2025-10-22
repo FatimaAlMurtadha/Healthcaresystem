@@ -140,27 +140,19 @@ while (running)
         string? personnel_choice = Console.ReadLine();
         switch (personnel_choice) // start of personnel switch choices
         {
-          case "1": // show 
+          case "1": // show patient's journal entries
             break;
-          case "2": // create journal note
-
-            if (loggedin_user is Personnel personnel)
-            {
-              if (personnel.HasPermission(Permission.Create_Journal_note))
-              {
-                //menu.CreateJournalNote();
-              }
-              else
-              {
-                System.Console.WriteLine("You do not have the permission to manage the journal");
-              }
-            }
-            else
-            {
-              System.Console.WriteLine("Current user is not personnel");
-            }
-
+          case "2": // Mark journal entries with different levels of read permissions
             break;
+          case "3": // Book patient's appointments 
+            break;
+          case "4": // Modify appointments
+            break;
+          case "5": // Approve appointments requests 
+            break;
+          case "6": // Show schedule for my hospital 
+            break;
+
 
           case "h": // log out 
             loggedin_user = null;
@@ -180,12 +172,11 @@ while (running)
         break;
       case Role.Main_Admin:
         Console.WriteLine("----------Welcome main admin--------");
-        System.Console.WriteLine(" 1. Handle the system permission");
-        System.Console.WriteLine(" 2. Assign admins to certain regions");
-        System.Console.WriteLine(" 3. Give admins the permission to handle registrations");
-        System.Console.WriteLine(" 4. Give admins the permission to add locations");
-        System.Console.WriteLine(" 5. Give admins the permission to create accounts for personell");
-        System.Console.WriteLine(" 6. Give admins the permission to view a list of who has permission to what");
+        System.Console.WriteLine(" 1. Handle the system permission"); 
+        System.Console.WriteLine(" 2. Assign admins to certain regions"); 
+        System.Console.WriteLine(" 3. Give admins the permission to add locations"); 
+        System.Console.WriteLine(" 4. Give admins the permission to create accounts for personell"); 
+        System.Console.WriteLine(" 5. Give admins the permission to view a list of who has permission to what"); 
         System.Console.WriteLine(" h. Log out");
         System.Console.WriteLine(" f. Close");
         string? mainAdmin_choice = Console.ReadLine();
@@ -198,19 +189,14 @@ while (running)
           case "2":     // Assign admins to certain regions
           break;
 
-          case "3":    // Give admins the permission to handle registrations
-          break;
+          case "3":    // Give admins the permission to add locations
+            break;
 
-          case "4":    // Give admins the permission to add locations
-          break;
+          case "4":    // Give admins the permission to create accounts for personell
+            break;
 
-          case "5":     // Give admins the permission to create accounts for personell
-          break;
-
-          case "6":     // Give admins the permission to view a list of who has permission to what
-          break;
-
-
+          case "5":     //  Give admins the permission to view a list of who has permission to what
+            break;
           case "h": // log out 
             loggedin_user = null;
             menu.LogOut();
@@ -230,23 +216,31 @@ while (running)
         break;
       case Role.Local_Admin:
         Console.WriteLine("---------Welcome local admin---------");
-        System.Console.WriteLine(" 1. Create accounts for personell ");
-        System.Console.WriteLine(" 2. Accept/deny user registration as patients ");
-        System.Console.WriteLine(" 3. Add locations ");
-        System.Console.WriteLine(" 4. Handle permission system ");
-        System.Console.WriteLine(" 5. Handle registrations  ");
-        System.Console.WriteLine(" 6. Fix personell status  ");
+        System.Console.WriteLine(" 1. Add locations "); // yes
+        System.Console.WriteLine(" 2. Accept user registration as patients "); //yes
+        System.Console.WriteLine(" 3. Deny user registration as patients");
+        System.Console.WriteLine(" 4. Handle registrations  "); // yes
+        System.Console.WriteLine(" 5. Create accounts for personell "); //yes
+        System.Console.WriteLine(" 6. View a list of who has permission to what");
         System.Console.WriteLine(" h. Log out");
         System.Console.WriteLine(" f. Close");
         string? localAdmin_choice = Console.ReadLine();
 
         switch (localAdmin_choice) // start of local admin switch choices
         {
-          case "1":
+          case "1": // Add locations
             break;
 
-          case "2":
+          case "2": // Accept user registration as patients
             menu.AcceptPatient();
+            break;
+          case "3": // Deny user registration as patients
+            break;
+          case "4": // Handle registrations 
+            break;
+          case "5": // Create accounts for personell
+            break;
+          case "6": // View a list of who has permission to what
             break;
           case "h": // log out 
             loggedin_user = null;
