@@ -253,6 +253,7 @@ while (running)
         switch (localAdmin_choice) // start of local admin switch choices
         {
           case "1":
+            menu.Create_personell_accounts();
             break;
 
           case "2":

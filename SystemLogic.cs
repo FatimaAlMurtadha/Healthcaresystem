@@ -7,6 +7,8 @@ namespace App;
 
 public class SystemMenu
 {
+  
+
   List<IUser> users = new List<IUser>();
   IUser? current_user = null;
   
@@ -29,13 +31,13 @@ private const string FilePath = "Users.txt";
     try { Console.Clear(); } catch { }
     System.Console.WriteLine();
     Console.Write("Username: ");
-    string username = Console.ReadLine();
+    string username = Console.ReadLine()!;
 
     try { Console.Clear(); } catch { }
 
     Console.Clear();
     Console.Write("Password: ");
-    string password = Console.ReadLine();
+    string password = Console.ReadLine()!;
 
     try { Console.Clear(); } catch { }
     if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -199,44 +201,66 @@ private const string FilePath = "Users.txt";
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
   }
- public void AcceptPatient()
+  public void AcceptPatient()
   {
-   
 
-        foreach(RequestRegistration user in request_registrations)
+    foreach (RequestRegistration user in request_registrations)
     {
 
-      if (user.Status  != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
+      if (user.Status != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
       {
         System.Console.WriteLine(user.PatientName + user.PatientEmail + user.Patient_Phone_Number + user.PersonalNumber);
         Console.WriteLine("do you want to accept this person type yes");
         string Admin_input = Console.ReadLine()!;
-       
+
         if (Admin_input == "yes")
         {
-          
+
+          var dateTime = DateTime.Now;
+          var time = dateTime.ToString("ddd, dd MMM yyyy h:mm");
           string username = user.PatientName!;
           string password = user.PatientPassword!;
-          Role role = Role.Patient;
+          Role role = Role.Patient; 
           user.Status = RegistrationStatus.Accept;
-           string line = $"{username},{password},{role}";
-            File.AppendAllLines(FilePath, new[] { line });
-            System.Console.WriteLine("you have accepted this request, press enter to continue");
-            Console.ReadLine();
- 
-         }
-              else
-                {
-          Console.WriteLine("OK the request is denied");
-                }  
-
-       }
+          string line = $"{username},{password},{role}";
+          File.AppendAllLines(FilePath, new[] { line });
+          string lines = $"{username},{password},{role},{time}";
+          File.AppendAllLines("Users_log.txt", new[] { lines });
           
-     }
+          System.Console.WriteLine("you have accepted this request, press enter to continue");
+          Console.ReadLine();
+
+        }
+        else
+        {
+          Console.WriteLine("OK the request is denied");
+        }
+
+      }
+
+    }
     Console.WriteLine("ther is no more Requests, press ENTER to continue");
     Console.ReadLine();
-        
-        
+
+
+
+
+  }
+    
+    public void Create_personell_accounts()
+  {
+        System.Console.WriteLine("Write username to the account");
+    string username = Console.ReadLine()!;
+    Console.Clear();
+    System.Console.WriteLine("Write password to the account");
+    string password = Console.ReadLine()!;
+    Role role = Role.Personnel;
+    users.Add(new Personnel(username, password));
+              string line = $"{username},{password},{role}";
+          File.AppendAllLines(FilePath, new[] { line });
+          System.Console.WriteLine("you have accepted this request, press enter to continue");
+          Console.ReadLine();
+
 
 
     }
