@@ -2,6 +2,7 @@ namespace App;
 
 public enum Permission
 {
+    None,
     HandlePermissions,
     AssignRegion,
     HandleRegistrations,
@@ -10,8 +11,8 @@ public enum Permission
     ViewPermissionList,
     AcceptPatient,
     DenyPatient,
-    Create_Journal_note,
-    ViewJournals,
+    Create_Journal_note, // personnel 
+    ViewJournals, // patient
     ApproveAppointments,
     ModifyAppointments,
     ViewSchedule

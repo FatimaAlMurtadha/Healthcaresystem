@@ -1,13 +1,17 @@
 namespace App;
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+
 static class JournalDataManager
 {
   private const string FilePath = "Journals.txt";
 
-  public static void SaveJournals(string? personalnaumber, string? author, string? title, string? notes, DateTime created_date) 
+  public static void SaveJournals(Patient_Journal journal) 
   {
-    string line = $"{personalnaumber},{author},{title},{notes},{created_date}";
-    File.AppendAllLines(FilePath, new[] { line });
+    string line = $"{ journal.GetPersonalNumber()},{ journal.GetAuthor()},{ journal.GetTitle()},{ journal.GetNote()},{ journal.GetDate()}";
+    try { File.AppendAllLines(FilePath, new[] { line }); } catch(IOException ex){System.Console.WriteLine($"Error saving journal: {ex.Message}");}
   }
 
   public static List<Patient_Journal> LoadJournals() //Laddar journals från textfilen
@@ -20,7 +24,7 @@ static class JournalDataManager
     foreach (var line in File.ReadAllLines(FilePath))
     {
       var parts = line.Split(',');  //Dela upp varje rad i delar 
-      if (parts.Length >= 5 && Enum.TryParse(parts[4], out DateTime created_date))
+      if (parts.Length >= 5 && DateTime.TryParse(parts[4], out DateTime created_date))
         journals.Add(new Patient_Journal(parts[0], parts[1],parts[2],parts[3], created_date)); // Skapar journals-objekt och lägger till i listan
     }
 

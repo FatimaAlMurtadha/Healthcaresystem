@@ -1,4 +1,5 @@
-using System.ComponentModel.Design;
+using System;
+using System.Collections.Generic;
 
 namespace App;
 
@@ -9,6 +10,7 @@ public class SystemMenu
   IUser? active_user = null;
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
   List<Patient> patients = new List<Patient>();
+  List<Patient_Journal> journals = new List<Patient_Journal>();
 
   // Loud all the users when we first run the system // need to expand with the rest of the data on the system
   public SystemMenu()
@@ -101,16 +103,15 @@ public class SystemMenu
     }
 
   }
-  // check permission after log in
-
-  public bool HasPermission(Permission user_Permession, Permission required_Permission)
+  // check permission when ever the user wants to do sth on the system
+  public bool HasPermission(Permission userPermission, Permission requiredPermission)
   {
-    return (user_Permession & required_Permission) == required_Permission;
+    return userPermission == requiredPermission;
   }
 
 
+
   // View my own journal 
-  List<Patient_Journal> journals = new List<Patient_Journal>();
   public void ShowJournal()
   {
     if (active_user == null)
@@ -125,8 +126,12 @@ public class SystemMenu
         var patient = active_user as Patient;
         if (patient != null && journal.GetPersonalNumber() == patient.GetPersonalNumber())
         {
-          Console.WriteLine(journal);
-          Console.WriteLine("---------------------------------");
+          System.Console.WriteLine($"Date: {journal.GetDate():yyyy-MM-dd}");
+          System.Console.WriteLine($"Title: {journal.GetTitle()}");
+          System.Console.WriteLine($"Note: {journal.GetNote()}");
+          System.Console.WriteLine($"Author: {journal.GetAuthor()}");
+          System.Console.WriteLine("---------------------------------");
+          
 
         }
         else

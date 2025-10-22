@@ -2,17 +2,17 @@ namespace App;
 
 class Personnel : IUser
 {
-    public string Username;
-    string Password;
+    public string? Username{ get; set; }
+    string? Password { get; set; }
 
-    public Personnel(string username, string password)
+    public Personnel(string? username, string? password)
     {
         Username = username;
         Password = password;
 
     }
 
-    public bool TryLogin(string username, string password)
+    public bool TryLogin(string? username, string? password)
     {
         return username == Username && password == Password;
 
@@ -20,7 +20,7 @@ class Personnel : IUser
 
     public bool IsRole(Role role)
     {
-        return Role.Personnel == role;
+        return role == Role.Personnel;
 
     }
     public Role GetRole()
@@ -36,7 +36,10 @@ class Personnel : IUser
     {
         return Permissions.Contains(permission);
 
+
     }
+    // a function to give vissa personnel permissions
+    public void AddPermission(Permission permission) => Permissions.Add(permission);
 
 
 }
