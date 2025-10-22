@@ -55,7 +55,7 @@ namespace App
     }
     public static class MainAdminService
     {
-        private const string PermissionsFile = "Permissions.txt";
+        private const string PermissionsFile = "AdminPermissions.txt";
 
         public static List<LocAdmin> LoadAll()
         {
