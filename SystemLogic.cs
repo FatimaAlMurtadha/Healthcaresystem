@@ -211,7 +211,7 @@ public void AcceptPatient()
 
     if (user.Status != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
     {
-      System.Console.WriteLine(user.PatientName + user.PatientEmail + user.Patient_Phone_Number + user.PersonalNumber);
+      System.Console.WriteLine(user.PatientName + "" +user.PatientEmail + user.Patient_Phone_Number + "" + user.PersonalNumber);
       Console.WriteLine("do you want to accept this person type yes");
       string Admin_input = Console.ReadLine()!;
 

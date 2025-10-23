@@ -9,6 +9,7 @@ Sigge,Von,Main_Admin
 
 
 kebab,123,Personnel
+Gregory,House,Personnel
 
 patient,123,Patient
 personnel,123,Personnel
@@ -20,3 +21,4 @@ asd,a,Patient
 fatima,123,Patient
 fatima,1234,Personnel
 personnel9,123,Personnel
+sigge,123,Patient
