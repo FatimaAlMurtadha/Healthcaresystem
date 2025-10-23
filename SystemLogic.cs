@@ -136,43 +136,33 @@ public class SystemMenu
   // View my own journal 
   /*public void ShowMyJournal()
   {
-    if (current_user == null)
+    if (current_user == null || !current_user.IsRole(Role.Patient))
     {
-      Console.WriteLine("Only patient can view there own journal.");
+      System.Console.WriteLine("Only patients can view their own journals.");
       return;
-    }
-    Patient patient = current_user as Patient;
-    if (patient == null)
-    {
-      System.Console.WriteLine("No patient is logged in");
-      return;
-    }
-    string? personalNumber = patient.GetPersonalNumber();
-    bool found_patient = false;
-    foreach (Patient_Journal journal in journals)
-    {
-      if (journal.GetPersonalNumber() == personalNumber)
-      {
-        System.Console.WriteLine($"Date: {journal.GetDate():yyyy-MM-dd}");
-        System.Console.WriteLine($"Title: {journal.GetTitle()}");
-        System.Console.WriteLine($"Note: {journal.GetNote()}");
-        System.Console.WriteLine($"Author: {journal.GetAuthor()}");
-        System.Console.WriteLine("---------------------------------");
-        found_patient = true;
-      }
-    }
-    if (!found_patient)
-    {
-      System.Console.WriteLine("No journal entries found");
     }
 
-    Console.WriteLine("Press ENTER to continue...");
-    Console.ReadLine();
-  }*/
+    Patient patient = current_user as Patient;
+    string? username = patient.GetUserName();
+
+    var allJournals = JournalDataManager.LoadJournals();
+    var myJournals = allJournals.Where(j => j.GetUserName()?.Trim().ToLower() == username?.Trim().ToLower()).ToList();
+    if (myJournals.Count == 0)
+    {
+      System.Console.WriteLine("No journal entries found.");
+      return;
+    }
+
+    // call ShowJournal() from Patient_Journal
+    Patient_Journal journal = new Patient_Journal(username, "", "", "", DateTime.Now);
+    journal.Entries = myJournals;
+    journal.ShowJournal();
+  }
+
 
   // a function to allow a personnel with sufficient permission to creat a journal note
 
-  public void CreateJournalNote()
+  /*public void CreateJournalNote()
   {
     if (current_user == null || !current_user.IsRole(Role.Personnel))
     {
@@ -211,9 +201,9 @@ public class SystemMenu
       Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("Journal note saved successfully.");
     Console.WriteLine("Press ENTER to continue...");
-       Console.ForegroundColor = ConsoleColor.White;
-        Console.ReadLine();
-  }
+    Console.ReadLine();
+  }*/
+
   public void AcceptPatient()
   {
 
@@ -240,11 +230,9 @@ public class SystemMenu
           File.AppendAllLines("Users_log.txt", new[] { line });
           string lines = $"{username},{password},{role},{dateTime}";
           File.AppendAllLines("Users_log.txt", new[] { lines });
-             Console.ForegroundColor = ConsoleColor.Green;
-         Console.WriteLine("you have accepted this request, press enter to continue", Console.ForegroundColor);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.ReadLine();
-    
+
+          System.Console.WriteLine("you have accepted this request, press enter to continue");
+          Console.ReadLine();
 
         }
         else
@@ -276,17 +264,6 @@ public class SystemMenu
     File.AppendAllLines(FilePath, new[] { line });
     System.Console.WriteLine("you have accepted this request, press enter to continue");
     Console.ReadLine();
-
-
-
-  }
-
-  public void false_input()
-  {
-   Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("Invalid choice. Press ENTER to continue........", Console.ForegroundColor);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.ReadLine();
 
 
 
