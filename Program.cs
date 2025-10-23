@@ -171,7 +171,7 @@ while (running)
         break;
       case Role.Main_Admin:
         Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
-        System.Console.WriteLine(" 1. Handle the system permission"); 
+        System.Console.WriteLine(" 1. Add Admin to the system permission"); 
         System.Console.WriteLine(" 2. Assign admins to certain regions"); 
         System.Console.WriteLine(" 3. Give admins the permission to add locations"); 
         System.Console.WriteLine(" 4. Give admins the permission to create accounts for personell"); 
