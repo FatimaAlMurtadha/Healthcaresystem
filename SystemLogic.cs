@@ -7,15 +7,15 @@ namespace App;
 
 public class SystemMenu
 {
-  
+
 
   List<IUser> users = new List<IUser>();
   public IUser? current_user = null;
-  
+
   List<RequestRegistration> request_registrations = new List<RequestRegistration>();
   List<Patient_Journal> journals = new List<Patient_Journal>();
   List<Permission> permissions = new List<Permission>();
-private const string FilePath = "Users.txt";
+  private const string FilePath = "Users.txt";
   public SystemMenu()
   {
     // Loud all the users when we first run the system
@@ -128,16 +128,29 @@ private const string FilePath = "Users.txt";
   // View my own journal 
   public void ShowMyJournal()
   {
-    foreach (Patient_Journal journal in journals)
+    if (current_user == null || !current_user.IsRole(Role.Patient))
     {
-      var patient = current_user as Patient;
-      if (current_user == patient)
-      {
-        System.Console.WriteLine();
-
-      }
+      System.Console.WriteLine("Only patients can view their own journals.");
+      return;
     }
+
+    Patient patient = current_user as Patient;
+    string? username = patient.GetUserName();
+
+    var allJournals = JournalDataManager.LoadJournals();
+    var myJournals = allJournals.Where(j => j.GetUserName()?.Trim().ToLower() == username?.Trim().ToLower()).ToList();
+    if (myJournals.Count == 0)
+    {
+      System.Console.WriteLine("No journal entries found.");
+      return;
+    }
+
+    // call ShowJournal() from Patient_Journal
+    Patient_Journal journal = new Patient_Journal(username, "", "", "", DateTime.Now);
+    journal.Entries = myJournals;
+    journal.ShowJournal();
   }
+
 
   // a function to allow a personnel with sufficient permission to creat a journal note
 
@@ -178,7 +191,7 @@ private const string FilePath = "Users.txt";
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
   }*/
-  
+
   public void AcceptPatient()
   {
 
@@ -198,13 +211,13 @@ private const string FilePath = "Users.txt";
           var time = dateTime.ToString("ddd, dd MMM yyyy h:mm");
           string username = user.PatientName!;
           string password = user.PatientPassword!;
-          Role role = Role.Patient; 
+          Role role = Role.Patient;
           user.Status = RegistrationStatus.Accept;
           string line = $"{username},{password},{role}";
           File.AppendAllLines(FilePath, new[] { line });
           string lines = $"{username},{password},{role},{time}";
           File.AppendAllLines("Users_log.txt", new[] { lines });
-          
+
           System.Console.WriteLine("you have accepted this request, press enter to continue");
           Console.ReadLine();
 
@@ -224,24 +237,24 @@ private const string FilePath = "Users.txt";
 
 
   }
-    
-    public void Create_personell_accounts()
+
+  public void Create_personell_accounts()
   {
-        System.Console.WriteLine("Write username to the account");
+    System.Console.WriteLine("Write username to the account");
     string username = Console.ReadLine()!;
     Console.Clear();
     System.Console.WriteLine("Write password to the account");
     string password = Console.ReadLine()!;
     Role role = Role.Personnel;
     users.Add(new Personnel(username, password));
-              string line = $"{username},{password},{role}";
-          File.AppendAllLines(FilePath, new[] { line });
-          System.Console.WriteLine("you have accepted this request, press enter to continue");
-          Console.ReadLine();
+    string line = $"{username},{password},{role}";
+    File.AppendAllLines(FilePath, new[] { line });
+    System.Console.WriteLine("you have accepted this request, press enter to continue");
+    Console.ReadLine();
 
 
 
-    }
+  }
 
 
 }

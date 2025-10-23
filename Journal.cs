@@ -21,7 +21,7 @@ class Patient_Journal
   // a function to mark or add entries
   public void AddEntry(Patient_Journal entry)
   {
-    if (entry.GetUseName() == UserName)
+    if (entry.GetUserName() == UserName)
     {
       Entries.Add(entry);
       System.Console.WriteLine("Note was successfully added");
@@ -37,16 +37,18 @@ class Patient_Journal
   public void ShowJournal()
   {
     System.Console.WriteLine($"The journal of the patient {UserName}:");
-    foreach(Patient_Journal entry in Entries )
+    foreach (Patient_Journal entry in Entries)
     {
       System.Console.WriteLine($"- {entry.GetDate(): yyyy-MM-dd}, by {entry.GetAuthor()}");
       System.Console.WriteLine($"The title: {entry.GetTitle()}");
       System.Console.WriteLine($"The note: {entry.GetNote()}");
     }
   }
+  public string? GetUserName()
+  {
+    return UserName;
+  }
 
-
-  public string? GetUseName() => UserName;
   public string? GetAuthor() => Author;
   public string? GetNote() => Notes;
   public DateTime? GetDate() => Created_Date;

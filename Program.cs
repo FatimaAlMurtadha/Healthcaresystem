@@ -101,7 +101,6 @@ while (running)
           case "1": // show my own journal
             if (menu.HasPermission(Patient.Permissions, Permission.ViewJournals))
             {
-              try { Console.Clear(); } catch { }
               menu.ShowMyJournal();
             }
             else

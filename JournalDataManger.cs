@@ -10,7 +10,7 @@ static class JournalDataManager
 
   public static void SaveJournals(Patient_Journal journal) 
   {
-    string line = $"{ journal.GetUseName()},{ journal.GetAuthor()},{ journal.GetTitle()},{ journal.GetNote()},{ journal.GetDate()}";
+    string line = $"{ journal.GetUserName()},{ journal.GetAuthor()},{ journal.GetTitle()},{ journal.GetNote()},{ journal.GetDate()}";
     try { File.AppendAllLines(FilePath, new[] { line }); } catch(IOException ex){System.Console.WriteLine($"Error saving journal: {ex.Message}");}
   }
 
