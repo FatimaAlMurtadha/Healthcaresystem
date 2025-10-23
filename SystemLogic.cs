@@ -128,20 +128,20 @@ private const string FilePath = "Users.txt";
   // View my own journal 
   public void ShowMyJournal()
   {
-    foreach(Patient_Journal journal in journals)
+    foreach (Patient_Journal journal in journals)
     {
       var patient = current_user as Patient;
       if (current_user == patient)
       {
         System.Console.WriteLine();
-        
+
       }
     }
   }
 
   // a function to allow a personnel with sufficient permission to creat a journal note
 
-  public void CreateJournalNote()
+  /*public void CreateJournalNote()
   {
     if (current_user == null || !current_user.IsRole(Role.Personnel))
     {
@@ -177,7 +177,8 @@ private const string FilePath = "Users.txt";
     Console.WriteLine("Journal note saved successfully.");
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
-  }
+  }*/
+  
   public void AcceptPatient()
   {
 
