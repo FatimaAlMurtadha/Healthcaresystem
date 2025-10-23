@@ -15,12 +15,6 @@ As an admin with sufficient permissions, I need to be able to give admins the pe
 
 As an admin with sufficient permissions, I need to be able to add locations.
 
-As an admin with sufficient permissions, I need to be able to accept user registration as patients.
-
-As an admin with sufficient permissions, I need to be able to deny user registration as patients.
-
-As an admin with sufficient permissions, I need to be able to create accounts for personnel.
-
 As an admin with sufficient permissions, I need to be able to view a list of who has permission to what.
 
 As personnel with sufficient permissions, I need to be able to view a patients journal entries.
@@ -78,7 +72,7 @@ while (running)
         menu.CloseSystem();
         break;
       default:
-        System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+        menu.false_input();
         break;
     }
 
@@ -88,7 +82,7 @@ while (running)
     switch (loggedin_user.GetRole())
     {
       case Role.Patient:
-        Console.WriteLine("-----------Welcome patient-----------");
+        Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
         System.Console.WriteLine();
         System.Console.WriteLine(" 1. Show my Journal ");
         System.Console.WriteLine(" 2. Book an appointment ");
@@ -105,13 +99,15 @@ while (running)
             }
             else
             {
-              System.Console.WriteLine("You do not have the permission to view this journal");
+              menu.NO_permissions();
             }
             break;
           case "2": // book an appointment
+          AppointmentMenu.Patient_RequestAppointment();
             break;
           case "3": // show my schedule
-            break;
+          AppointmentMenu.Patient_ViewSchedule(loggedin_user?.GetUserName());
+           break;
           case "h": // log out as a patient
             loggedin_user = null;
             menu.LogOut();
@@ -122,19 +118,19 @@ while (running)
             menu.CloseSystem();
             break;
           default:
-            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+             menu.false_input();
             break;
 
         } // slut på patient choices
         break;
       case Role.Personnel:
-        Console.WriteLine("----------Welcome personnel---------");
+        Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
         System.Console.WriteLine(" 1. Show patient's journal entries");
         System.Console.WriteLine(" 2. Mark journal entries with different levels of read permissions");
-        System.Console.WriteLine(" 3. Book patient's appointments ");
+        System.Console.WriteLine(" 3. Register patient's appointments ");
         System.Console.WriteLine(" 4. Modify appointments");
         System.Console.WriteLine(" 5. Approve appointments requests");
-        System.Console.WriteLine(" 6. Show schedule for my hospital ");
+        System.Console.WriteLine(" 6. Show schedule for the week ");
         System.Console.WriteLine(" h. Log out  ");
         System.Console.WriteLine(" f. Close");
         string? personnel_choice = Console.ReadLine();
@@ -144,14 +140,16 @@ while (running)
             break;
           case "2": // Mark journal entries with different levels of read permissions
             break;
-          case "3": // Book patient's appointments 
+          case "3": // Register patient's appointments 
             break;
           case "4": // Modify appointments
             break;
           case "5": // Approve appointments requests 
+          AppointmentMenu.Personnel_ApproveRequests(loggedin_user?.GetUserName());
             break;
-          case "6": // Show schedule for my hospital 
-            break;
+          case "6": // Show schedule 
+          AppointmentMenu.Personnel_ViewSchedule(loggedin_user?.GetUserName());
+          break;
 
 
           case "h": // log out 
@@ -163,7 +161,7 @@ while (running)
             menu.CloseSystem();
             break;
           default:
-            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+              menu.false_input();
             break;
 
 
@@ -171,7 +169,7 @@ while (running)
         } // end of personnel switch choices
         break;
       case Role.Main_Admin:
-        Console.WriteLine("----------Welcome main admin--------");
+        Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
         System.Console.WriteLine(" 1. Handle the system permission"); 
         System.Console.WriteLine(" 2. Assign admins to certain regions"); 
         System.Console.WriteLine(" 3. Give admins the permission to add locations"); 
@@ -183,12 +181,43 @@ while (running)
 
         switch (mainAdmin_choice) // start of main admin switch choices
         {
-          case "1":    // Handle the system permission
+          case "1":    // Add Admin to the system
+            Console.WriteLine("Enter Local Admin's name to add to the system: ");
+            string? email = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+              bool success = MainAdminService.AddLocalAdmin(email);
+              if (success)
+                Console.WriteLine("Local Admin " + email + "added successfully");
+              else
+                Console.WriteLine("Failed to add " + email);
+            }
+            else
+            {
+              Console.WriteLine("Can not be Empty!");
+            }
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadLine();
             break;
 
           case "2":     // Assign admins to certain regions
+            Console.WriteLine("Admin Email:");
+            string? email2 = Console.ReadLine();
+            Console.WriteLine("Region Name: ");
+            string? region = Console.ReadLine();
+
+            bool ok = MainAdminService.AssignRegion(email2 ?? string.Empty, region ?? string.Empty);
+            Console.WriteLine(ok ? "Region assigned successfully." : "Failed to assign region.");
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadLine();
           break;
           case "3":    // Give admins the permission to add locations
+            Console.WriteLine("Admin email: ");
+            string? email3 = Console.ReadLine();
+            bool OkToAdd = MainAdminService.GivePermToAddLocation(email3 ?? string.Empty);
+            Console.WriteLine(OkToAdd ? "Succeed" : "Failed");
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadLine();
             break;
 
           case "4":    // Give admins the permission to create accounts for personell
@@ -205,7 +234,7 @@ while (running)
             menu.CloseSystem();
             break;
           default:
-            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+             menu.false_input();
             break;
 
 
@@ -214,13 +243,14 @@ while (running)
 
         break;
       case Role.Local_Admin:
-        Console.WriteLine("---------Welcome local admin---------");
-        System.Console.WriteLine(" 1. Add locations "); // yes
+        Console.WriteLine("-----------Welcome "+ loggedin_user?.GetUserName() + "-----------");
+        System.Console.WriteLine(" 1. Add locations "); // no
         System.Console.WriteLine(" 2. Accept user registration as patients "); //yes
         System.Console.WriteLine(" 3. Deny user registration as patients");
         System.Console.WriteLine(" 4. Handle registrations  "); // yes
         System.Console.WriteLine(" 5. Create accounts for personell "); //yes
         System.Console.WriteLine(" 6. View a list of who has permission to what");
+        System.Console.WriteLine(" 7. Manage appointments ");
         System.Console.WriteLine(" h. Log out");
         System.Console.WriteLine(" f. Close");
         string? localAdmin_choice = Console.ReadLine();
@@ -228,7 +258,7 @@ while (running)
         switch (localAdmin_choice) // start of local admin switch choices
         {
           case "1":
-            menu.Create_personell_accounts();
+            
             break;
 
           case "2": // Accept user registration as patients
@@ -236,13 +266,17 @@ while (running)
             break;
 
           case "3": // Deny user registration as patients
-            menu.AcceptPatient();
+
             break;
           case "4": // Handle registrations
             break;
           case "5": // Create accounts for personell
+          menu.Create_personell_accounts();
             break;
           case "6": // View a list of who has permission to what
+            break;
+            case "7": // View all scheduled appointments
+            AppointmentMenu.LocalAdmin_ManageAppointments();
             break;
           case "h": // log out 
             loggedin_user = null;
@@ -253,7 +287,7 @@ while (running)
             menu.CloseSystem();
             break;
           default:
-            System.Console.WriteLine("Invalid choice. Press ENTER to continue........");
+              menu.false_input();
             break;
 
 

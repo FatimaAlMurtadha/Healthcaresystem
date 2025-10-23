@@ -57,9 +57,12 @@ public class SystemMenu
         current_user = user;
         return user;
       }
-    }
-    System.Console.WriteLine("Log in faild. Incorrect username or password.");
+    }   
+    Console.ForegroundColor = ConsoleColor.Red;
+    System.Console.WriteLine("Log in faild. Incorrect username or password.Press ENTER to continue.....", Console.ForegroundColor);
     System.Console.WriteLine("Press ENTER to continue.....");
+    Console.ForegroundColor = ConsoleColor.White;
+
     Console.ReadLine();
     return null;
   }
@@ -68,7 +71,9 @@ public class SystemMenu
   public void CloseSystem()
   {
     Console.Clear();
-    System.Console.WriteLine("Thank you for using this Healthcare System.");
+      Console.ForegroundColor = ConsoleColor.Red;
+    System.Console.WriteLine("Thank you for using this Healthcare System.", Console.ForegroundColor);
+    Console.ForegroundColor = ConsoleColor.White;
     System.Console.WriteLine();
     System.Console.WriteLine("Press Enter to close");
     Console.ReadLine();
@@ -98,9 +103,10 @@ public class SystemMenu
     string? patient_phone_number = Console.ReadLine(); // patient phone number
     if (string.IsNullOrWhiteSpace(patientpersonalnumber) || string.IsNullOrWhiteSpace(patientname) || string.IsNullOrWhiteSpace(patientpassword) || string.IsNullOrWhiteSpace(patient_phone_number))
     {
-      Console.WriteLine("Faild to send a registration request. one or more of the information were empty.");
-      System.Console.WriteLine();
-      System.Console.WriteLine("Press ENTER to try again");
+      Console.ForegroundColor = ConsoleColor.Red;
+      Console.WriteLine("Faild to send a registration request. one or more of the information were empty.", Console.ForegroundColor);
+      System.Console.WriteLine("Press ENTER to try again", Console.ForegroundColor);
+      Console.ForegroundColor = ConsoleColor.White;
       Console.ReadLine();
       return;
     }
@@ -109,10 +115,12 @@ public class SystemMenu
     {
       try { Console.Clear(); } catch { }
       request_registrations.Add(new RequestRegistration(patientpersonalnumber, patientname, patientemail, patientpassword, patient_phone_number, RegistrationStatus.Pending));
+       Console.ForegroundColor = ConsoleColor.Green;
       System.Console.WriteLine();
       System.Console.WriteLine("Your request has been sent susseccfully");
       System.Console.WriteLine();
       System.Console.WriteLine("Press ENTER to continue........");
+       Console.ForegroundColor = ConsoleColor.White;
       Console.ReadLine();
     }
 
@@ -126,7 +134,7 @@ public class SystemMenu
 
 
   // View my own journal 
-  public void ShowMyJournal()
+  /*public void ShowMyJournal()
   {
     if (current_user == null || !current_user.IsRole(Role.Patient))
     {
@@ -158,7 +166,11 @@ public class SystemMenu
   {
     if (current_user == null || !current_user.IsRole(Role.Personnel))
     {
+      Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine("Only personnel can create journal notes.");
+      Console.WriteLine("Press ENTER to continue...");
+       Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadLine();
       return;
     }
 
@@ -186,7 +198,7 @@ public class SystemMenu
 
 
     JournalDataManager.SaveJournals(journal); // save the new note on the file 
-
+      Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("Journal note saved successfully.");
     Console.WriteLine("Press ENTER to continue...");
     Console.ReadLine();
@@ -215,7 +227,8 @@ public class SystemMenu
           user.Status = RegistrationStatus.Accept;
           string line = $"{username},{password},{role}";
           File.AppendAllLines(FilePath, new[] { line });
-          string lines = $"{username},{password},{role},{time}";
+          File.AppendAllLines("Users_log.txt", new[] { line });
+          string lines = $"{username},{password},{role},{dateTime}";
           File.AppendAllLines("Users_log.txt", new[] { lines });
 
           System.Console.WriteLine("you have accepted this request, press enter to continue");
@@ -256,6 +269,15 @@ public class SystemMenu
 
   }
 
+public void NO_permissions()
+  {
+        Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("You dont have permissions to do this, Press Enter to continue....", Console.ForegroundColor);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadLine();
+        
+
+    }
 
 }
 

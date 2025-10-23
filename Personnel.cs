@@ -4,6 +4,8 @@ class Personnel : IUser
 {
     public string? Username{ get; set; }
     string? Password { get; set; }
+    public string? GetUserName() => Username;
+
 
     public Personnel(string? username, string? password)
     {
