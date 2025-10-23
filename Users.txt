@@ -17,3 +17,6 @@ localadmin,123,Local_Admin
 
 Lukas,kebab,Patient
 asd,a,Patient
+fatima,123,Patient
+fatima,1234,Personnel
+personnel9,123,Personnel
