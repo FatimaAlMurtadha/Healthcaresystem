@@ -134,173 +134,162 @@ public class SystemMenu
 
 
   // View my own journal 
-  /*public void ShowMyJournal()
+  public void ShowMyJournal()
   {
-    if (current_user == null)
+    if (current_user == null || !current_user.IsRole(Role.Patient))
     {
-      Console.WriteLine("Only patient can view there own journal.");
+      System.Console.WriteLine("Only patients can view their own journals.");
       return;
-    }
-    Patient patient = current_user as Patient;
-    if (patient == null)
-    {
-      System.Console.WriteLine("No patient is logged in");
-      return;
-    }
-    string? personalNumber = patient.GetPersonalNumber();
-    bool found_patient = false;
-    foreach (Patient_Journal journal in journals)
-    {
-      if (journal.GetPersonalNumber() == personalNumber)
-      {
-        System.Console.WriteLine($"Date: {journal.GetDate():yyyy-MM-dd}");
-        System.Console.WriteLine($"Title: {journal.GetTitle()}");
-        System.Console.WriteLine($"Note: {journal.GetNote()}");
-        System.Console.WriteLine($"Author: {journal.GetAuthor()}");
-        System.Console.WriteLine("---------------------------------");
-        found_patient = true;
-      }
-    }
-    if (!found_patient)
-    {
-      System.Console.WriteLine("No journal entries found");
     }
 
-    Console.WriteLine("Press ENTER to continue...");
-    Console.ReadLine();
-  }*/
+    Patient patient = current_user as Patient;
+    string? username = patient.GetUserName();
+
+    var allJournals = JournalDataManager.LoadJournals();
+    var myJournals = allJournals.Where(j => j.GetUserName()?.Trim().ToLower() == username?.Trim().ToLower()).ToList();
+    if (myJournals.Count == 0)
+    {
+      System.Console.WriteLine("No journal entries found.");
+      return;
+    }
+
+    // call ShowJournal() from Patient_Journal
+    Patient_Journal journal = new Patient_Journal(username, "", "", "", DateTime.Now);
+    journal.Entries = myJournals;
+    journal.ShowJournal();
+  }
 
   // a function to allow a personnel with sufficient permission to creat a journal note
 
-  public void CreateJournalNote()
+/*public void CreateJournalNote()
+{
+  if (current_user == null || !current_user.IsRole(Role.Personnel))
   {
-    if (current_user == null || !current_user.IsRole(Role.Personnel))
-    {
-      Console.ForegroundColor = ConsoleColor.Red;
-      Console.WriteLine("Only personnel can create journal notes.");
-      Console.WriteLine("Press ENTER to continue...");
-       Console.ForegroundColor = ConsoleColor.White;
-        Console.ReadLine();
-      return;
-    }
-
-    Personnel personnel = current_user as Personnel;
-    if (personnel == null || !personnel.HasPermission(Permission.Create_Journal_note))
-    {
-      Console.WriteLine("You do not have permission to create journal notes.");
-      return;
-    }
-
-    Console.Write("Enter patient's personal number: ");
-    string? personalNumber = Console.ReadLine();
-
-    Console.Write("Enter journal title: ");
-    string? title = Console.ReadLine();
-
-    Console.Write("Enter journal note: ");
-    string? note = Console.ReadLine();
-
-    DateTime createdDate = DateTime.Now;
-    string? author = personnel.Username;
-
-    Patient_Journal journal = new Patient_Journal(personalNumber, author, title, note, createdDate);
-    journals.Add(journal); // adding the new note to the current list
-
-
-    JournalDataManager.SaveJournals(journal); // save the new note on the file 
-      Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("Journal note saved successfully.");
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("Only personnel can create journal notes.");
     Console.WriteLine("Press ENTER to continue...");
-       Console.ForegroundColor = ConsoleColor.White;
-        Console.ReadLine();
+     Console.ForegroundColor = ConsoleColor.White;
+      Console.ReadLine();
+    return;
   }
-  public void AcceptPatient()
+
+  Personnel personnel = current_user as Personnel;
+  if (personnel == null || !personnel.HasPermission(Permission.Create_Journal_note))
+  {
+    Console.WriteLine("You do not have permission to create journal notes.");
+    return;
+  }
+
+  Console.Write("Enter patient's personal number: ");
+  string? personalNumber = Console.ReadLine();
+
+  Console.Write("Enter journal title: ");
+  string? title = Console.ReadLine();
+
+  Console.Write("Enter journal note: ");
+  string? note = Console.ReadLine();
+
+  DateTime createdDate = DateTime.Now;
+  string? author = personnel.Username;
+
+  Patient_Journal journal = new Patient_Journal(personalNumber, author, title, note, createdDate);
+  journals.Add(journal); // adding the new note to the current list
+
+
+  JournalDataManager.SaveJournals(journal); // save the new note on the file 
+    Console.ForegroundColor = ConsoleColor.Red;
+  Console.WriteLine("Journal note saved successfully.");
+  Console.WriteLine("Press ENTER to continue...");
+     Console.ForegroundColor = ConsoleColor.White;
+      Console.ReadLine();
+}*/
+public void AcceptPatient()
+{
+
+  foreach (RequestRegistration user in request_registrations)
   {
 
-    foreach (RequestRegistration user in request_registrations)
+    if (user.Status != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
     {
+      System.Console.WriteLine(user.PatientName + user.PatientEmail + user.Patient_Phone_Number + user.PersonalNumber);
+      Console.WriteLine("do you want to accept this person type yes");
+      string Admin_input = Console.ReadLine()!;
 
-      if (user.Status != RegistrationStatus.Accept && user.Status != RegistrationStatus.Deny)
+      if (Admin_input == "yes")
       {
-        System.Console.WriteLine(user.PatientName + user.PatientEmail + user.Patient_Phone_Number + user.PersonalNumber);
-        Console.WriteLine("do you want to accept this person type yes");
-        string Admin_input = Console.ReadLine()!;
 
-        if (Admin_input == "yes")
-        {
+        var dateTime = DateTime.Now;
+        var time = dateTime.ToString("ddd, dd MMM yyyy h:mm");
+        string username = user.PatientName!;
+        string password = user.PatientPassword!;
+        Role role = Role.Patient;
+        user.Status = RegistrationStatus.Accept;
+        string line = $"{username},{password},{role}";
+        File.AppendAllLines(FilePath, new[] { line });
+        File.AppendAllLines("Users_log.txt", new[] { line });
+        string lines = $"{username},{password},{role},{dateTime}";
+        File.AppendAllLines("Users_log.txt", new[] { lines });
+           Console.ForegroundColor = ConsoleColor.Green;
+       Console.WriteLine("you have accepted this request, press enter to continue", Console.ForegroundColor);
+      Console.ForegroundColor = ConsoleColor.White;
+      Console.ReadLine();
 
-          var dateTime = DateTime.Now;
-          var time = dateTime.ToString("ddd, dd MMM yyyy h:mm");
-          string username = user.PatientName!;
-          string password = user.PatientPassword!;
-          Role role = Role.Patient;
-          user.Status = RegistrationStatus.Accept;
-          string line = $"{username},{password},{role}";
-          File.AppendAllLines(FilePath, new[] { line });
-          File.AppendAllLines("Users_log.txt", new[] { line });
-          string lines = $"{username},{password},{role},{dateTime}";
-          File.AppendAllLines("Users_log.txt", new[] { lines });
-             Console.ForegroundColor = ConsoleColor.Green;
-         Console.WriteLine("you have accepted this request, press enter to continue", Console.ForegroundColor);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.ReadLine();
-    
 
-        }
-        else
-        {
-          Console.WriteLine("OK the request is denied");
-        }
-
+      }
+      else
+      {
+        Console.WriteLine("OK the request is denied");
       }
 
     }
-    Console.WriteLine("ther is no more Requests, press ENTER to continue");
-    Console.ReadLine();
-
-
-
 
   }
-
-  public void Create_personell_accounts()
-  {
-    System.Console.WriteLine("Write username to the account");
-    string username = Console.ReadLine()!;
-    Console.Clear();
-    System.Console.WriteLine("Write password to the account");
-    string password = Console.ReadLine()!;
-    Role role = Role.Personnel;
-    users.Add(new Personnel(username, password));
-    string line = $"{username},{password},{role}";
-    File.AppendAllLines(FilePath, new[] { line });
-    System.Console.WriteLine("you have accepted this request, press enter to continue");
-    Console.ReadLine();
+  Console.WriteLine("ther is no more Requests, press ENTER to continue");
+  Console.ReadLine();
 
 
 
-  }
 
-  public void false_input()
-  {
-   Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("Invalid choice. Press ENTER to continue........", Console.ForegroundColor);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.ReadLine();
+}
+
+public void Create_personell_accounts()
+{
+  System.Console.WriteLine("Write username to the account");
+  string username = Console.ReadLine()!;
+  Console.Clear();
+  System.Console.WriteLine("Write password to the account");
+  string password = Console.ReadLine()!;
+  Role role = Role.Personnel;
+  users.Add(new Personnel(username, password));
+  string line = $"{username},{password},{role}";
+  File.AppendAllLines(FilePath, new[] { line });
+  System.Console.WriteLine("you have accepted this request, press enter to continue");
+  Console.ReadLine();
 
 
 
-  }
+}
+
+public void false_input()
+{
+ Console.ForegroundColor = ConsoleColor.Red;
+  Console.WriteLine("Invalid choice. Press ENTER to continue........", Console.ForegroundColor);
+      Console.ForegroundColor = ConsoleColor.White;
+      Console.ReadLine();
+
+
+
+}
 
 public void NO_permissions()
-  {
-        Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("You dont have permissions to do this, Press Enter to continue....", Console.ForegroundColor);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.ReadLine();
-        
+{
+      Console.ForegroundColor = ConsoleColor.Red;
+  Console.WriteLine("You dont have permissions to do this, Press Enter to continue....", Console.ForegroundColor);
+      Console.ForegroundColor = ConsoleColor.White;
+      Console.ReadLine();
 
-    }
+
+  }
 
 }
 

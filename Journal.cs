@@ -21,7 +21,7 @@ class Patient_Journal
   // a function to mark or add entries
   public void AddEntry(Patient_Journal entry)
   {
-    if (entry.GetUseName() == UserName)
+    if (entry.GetUserName() == UserName)
     {
       Entries.Add(entry);
       System.Console.WriteLine("Note was successfully added");
@@ -46,7 +46,7 @@ class Patient_Journal
   }
 
 
-  public string? GetUseName() => UserName;
+  public string? GetUserName() => UserName;
   public string? GetAuthor() => Author;
   public string? GetNote() => Notes;
   public DateTime? GetDate() => Created_Date;
